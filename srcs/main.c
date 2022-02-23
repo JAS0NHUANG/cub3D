@@ -9,7 +9,7 @@ int	main(int ac, char **av)
 
 	fd = open(av[1], O_RDONLY);
 	ret = get_next_line(fd, &line);
-	while (ret)
+	while (ret > 0)
 	{
 		printf("%s\n", line);
 		free(line);
