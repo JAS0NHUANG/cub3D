@@ -14,12 +14,12 @@ typedef struct s_cub3d
 typedef struct s_dot_cub
 {
 	char	**map;
-	char	*no_path;
-	char	*so_path;
-	char	*we_path;
-	char	*ea_path;
-	char	*f_color;
-	char	*c_color;
+	char	*no;
+	char	*so;
+	char	*we;
+	char	*ea;
+	char	*f;
+	char	*c;
 }	t_dot_cub;
 
 #endif
