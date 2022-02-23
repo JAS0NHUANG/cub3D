@@ -26,6 +26,9 @@ SRCS_DIR	=	srcs
 INCS_DIR	=	incs
 
 SRCS		=	main.c \
+				parser/ft_get_info.c \
+				parser/ft_get_map.c \
+				parser/ft_check_map.c \
 
 INCS		=	cub3d.h \
 

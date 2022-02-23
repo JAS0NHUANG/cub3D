@@ -6,20 +6,30 @@
 
 # include "../libft/libft.h"
 
+enum	map_err
+{
+	ERR_MAP_NULL = 1,
+	ERR_MAP_OPEN,
+};
+
 typedef struct s_cub3d
 {
-	struct s_dot_cub	*dot_cub;
+	char			**map;
+	struct s_info	*info;
 }	t_cub3d;
 
-typedef struct s_dot_cub
+typedef struct s_info
 {
-	char	**map;
 	char	*no;
 	char	*so;
 	char	*we;
 	char	*ea;
 	char	*f;
 	char	*c;
-}	t_dot_cub;
+}	t_info;
+
+int	ft_get_info(int fd, t_cub3d **cub3d);
+int	ft_get_map(int fd, t_cub3d **cub3d);
+int	ft_check_map(char **map);
 
 #endif
