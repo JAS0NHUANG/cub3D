@@ -6,7 +6,7 @@
 /*   By: jahuang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 14:49:21 by jahuang           #+#    #+#             */
-/*   Updated: 2022/02/23 15:03:35 by jahuang          ###   ########.fr       */
+/*   Updated: 2022/02/28 17:16:33 by jahuang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,5 +49,10 @@ int	ft_get_map(int fd, t_cub3d **cub3d)
 		ret = get_next_line(fd, &line);
 	}
 	(*cub3d)->map = map;
+	if (ft_check_map((*cub3d)->map))
+	{
+		ft_putstr_fd("Map error\n", 1);
+		return (1);
+	}
 	return (0);
 }

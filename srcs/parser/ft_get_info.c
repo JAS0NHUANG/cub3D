@@ -6,7 +6,7 @@
 /*   By: jahuang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 14:55:08 by jahuang           #+#    #+#             */
-/*   Updated: 2022/02/28 15:35:03 by jahuang          ###   ########.fr       */
+/*   Updated: 2022/02/28 17:05:07 by jahuang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,5 +101,7 @@ int	ft_get_info(int fd, t_cub3d **cub3d)
 	if (ft_init_info(cub3d) != 0)
 		return (1);
 	ft_put_info_in_cub3d(info_array, (*cub3d)->info);
+	if (ft_check_info((*cub3d)->info) != 0)
+		return (1);
 	return (0);
 }

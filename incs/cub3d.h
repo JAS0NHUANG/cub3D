@@ -5,32 +5,13 @@
 # include <stdio.h>
 
 # include "../libft/libft.h"
+# include "./structs.h"
+# include "./parser.h"
 
 enum	map_err
 {
 	ERR_MAP_NULL = 1,
 	ERR_MAP_OPEN,
 };
-
-typedef struct s_cub3d
-{
-	char			**map;
-	struct s_info	*info;
-}	t_cub3d;
-
-typedef struct s_info
-{
-	char	*no;
-	char	*so;
-	char	*we;
-	char	*ea;
-	int		*f;
-	int		*c;
-}	t_info;
-
-int		ft_get_info(int fd, t_cub3d **cub3d);
-int		ft_get_map(int fd, t_cub3d **cub3d);
-int		ft_check_map(char **map);
-void	ft_print_struct(t_cub3d *cub_3d);
 
 #endif

@@ -1,24 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_check_info.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jahuang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/28 14:50:11 by jahuang           #+#    #+#             */
-/*   Updated: 2022/02/28 17:16:31 by jahuang          ###   ########.fr       */
+/*   Created: 2022/02/28 16:12:49 by jahuang           #+#    #+#             */
+/*   Updated: 2022/02/28 17:08:04 by jahuang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	main(int ac, char **av)
+int	ft_check_info(t_info *info)
 {
-	t_cub3d	*cub3d;
-
-	if (ac != 2)
+	if (!info->no || !info->so || !info->we || !info->ea || \
+			!info->f || !info->c)
 		return (1);
-	ft_parser(av[1], &cub3d);
-	ft_print_struct(cub3d);
 	return (0);
 }
