@@ -24,12 +24,13 @@ typedef struct s_info
 	char	*so;
 	char	*we;
 	char	*ea;
-	char	*f;
-	char	*c;
+	int		*f;
+	int		*c;
 }	t_info;
 
-int	ft_get_info(int fd, t_cub3d **cub3d);
-int	ft_get_map(int fd, t_cub3d **cub3d);
-int	ft_check_map(char **map);
+int		ft_get_info(int fd, t_cub3d **cub3d);
+int		ft_get_map(int fd, t_cub3d **cub3d);
+int		ft_check_map(char **map);
+void	ft_print_struct(t_cub3d *cub_3d);
 
 #endif

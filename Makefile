@@ -29,6 +29,7 @@ SRCS		=	main.c \
 				parser/ft_get_info.c \
 				parser/ft_get_map.c \
 				parser/ft_check_map.c \
+				debug/ft_print_struct.c \
 
 INCS		=	cub3d.h \
 

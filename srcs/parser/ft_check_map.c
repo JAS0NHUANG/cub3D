@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_check_map.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jahuang <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/02/28 14:51:34 by jahuang           #+#    #+#             */
+/*   Updated: 2022/02/28 14:59:09 by jahuang          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 
 static int	ft_is_empty(char **map, int x, int y)
@@ -6,7 +18,7 @@ static int	ft_is_empty(char **map, int x, int y)
 		return (1);
 	if (map[x][y])
 	{
-		if(map[x][y] == ' ')
+		if (map[x][y] == ' ')
 			return (1);
 	}
 	return (0);
