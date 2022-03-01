@@ -6,11 +6,28 @@
 /*   By: jahuang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 14:50:11 by jahuang           #+#    #+#             */
-/*   Updated: 2022/03/01 17:08:18 by jahuang          ###   ########.fr       */
+/*   Updated: 2022/03/01 18:32:15 by jahuang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+int	ft_run_cub3d(t_cub3d *cub3d)
+{
+	cub3d->mlx_ptr = mlx_init();
+	if (!cub3d->mlx_ptr)
+		return (ERR_MLX);
+	cub3d->win_ptr = mlx_new_window(cub3d->mlx_ptr, 1024, 768,
+			"cub3d");
+	if (!cub3d->win_ptr)
+		return (ERR_MLX);
+	/*
+	ft_print_map_to_window(so_long);
+	mlx_key_hook(so_long->win_ptr, &ft_key_event, so_long);
+	mlx_hook(so_long->win_ptr, 17, 1l << 0, &ft_close, so_long);
+	*/
+	mlx_loop(cub3d->mlx_ptr);
+}
 
 int	main(int ac, char **av)
 {
@@ -21,6 +38,9 @@ int	main(int ac, char **av)
 	if (ac != 2)
 		return (ERR_ARGS);
 	ret = ft_parser(av[1], &cub3d);
+	if (ret != 0)
+		return (ft_return(ret, cub3d));
 	ft_print_struct(cub3d);
+	ft_run_cub3d(cub3d);
 	return (ft_return(ret, cub3d));
 }

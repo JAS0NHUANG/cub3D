@@ -6,7 +6,19 @@ typedef struct s_cub3d
 	char			**map;
 	struct s_info	*info;
 	struct s_player	*player;
+	void			*mlx_ptr;
+	void			*win_ptr;
+	struct s_images	*images;
 }	t_cub3d;
+
+typedef struct s_images
+{
+	t_img		window_img;
+	t_img		no_texture;
+	t_img		so_texture;
+	t_img		we_texture;
+	t_img		ea_texture;
+}	t_images;
 
 typedef struct s_info
 {

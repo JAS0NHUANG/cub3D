@@ -18,6 +18,13 @@ READLINE	=	-lreadline
 TERMCAP		=	-ltermcap
 FSAN		=	-fsanitize=address
 DEBUG		=	-g3
+OS			=	$(shell uname)
+
+ifeq ($(OS), Linux)
+	MLX_FLAGS	=	-L mlx -l mlx -L /usr/lib -l Xext -l X11 -l m
+else
+	MLX_FLAGS	=	-L mlx -l mlx -framework OpenGL -framework AppKit
+endif
 
 # **************************************************************************** #
 #       SOURCES                                                                #
@@ -42,6 +49,9 @@ INCS		=	cub3d.h \
 LIBFT_A			=	libft.a
 LIBFT_DIR		=	libft
 
+LIBMLX_A		=	libmlx.a
+LIBMLX_DIR		=	mlx
+
 # **************************************************************************** #
 #       RULES                                                                  #
 # **************************************************************************** #
@@ -50,12 +60,15 @@ OBJS		=	$(addprefix $(SRCS_DIR)/,$(SRCS:.c=.o))
 %.o			:	%.c
 			$(CC) $(CFLAGS) -I $(INCS_DIR) -c $< -o $@
 
-$(NAME)		:	$(OBJS) $(LIBFT_A)
-			$(CC) -o $@ $(OBJS) -I $(INCS_DIR) $(LIBFT_A)
+$(NAME)		:	$(OBJS) $(LIBFT_A) $(LIBMLX_A)
+			$(CC) -o $@ $(OBJS) -I $(INCS_DIR) $(LIBFT_A) $(MLX_FLAGS) 
 
 $(LIBFT_A)		:
 					make -C $(LIBFT_DIR) $(LIBFT_FLAGS)
 					mv $(LIBFT_DIR)/$(LIBFT_A) .
+
+$(LIBMLX_A)		:
+					make -C $(LIBMLX_DIR) $(MLX_FLAGS)
 
 all			:	$(NAME)
 

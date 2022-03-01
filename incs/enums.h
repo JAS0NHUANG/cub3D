@@ -7,6 +7,7 @@ enum	map_err
 	ERR_FILE,
 	ERR_ACCESS,
 	ERR_GNL,
+	ERR_MLX,
 	ERR_MALLOC,
 	ERR_INFO,
 	ERR_MAP_NULL,

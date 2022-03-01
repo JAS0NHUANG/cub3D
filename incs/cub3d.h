@@ -4,6 +4,7 @@
 # include <fcntl.h>
 # include <stdio.h>
 
+# include <mlx.h>
 # include "../libft/libft.h"
 # include "./structs.h"
 # include "./enums.h"
