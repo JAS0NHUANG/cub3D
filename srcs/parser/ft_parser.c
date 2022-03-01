@@ -6,7 +6,7 @@
 /*   By: jahuang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 16:54:30 by jahuang           #+#    #+#             */
-/*   Updated: 2022/03/01 11:56:13 by jahuang          ###   ########.fr       */
+/*   Updated: 2022/03/01 17:21:27 by jahuang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 int	ft_check_file_type(char *map_file)
 {
-	int	str_len;
-	char *holder;
+	int		str_len;
+	char	*holder;
 
 	str_len = ft_strlen(map_file);
 	if (str_len <= 4)
@@ -41,6 +41,8 @@ int	ft_parser(char *map_file, t_cub3d **cub3d)
 	*cub3d = malloc(sizeof(t_cub3d));
 	if (!cub3d)
 		return (ERR_MALLOC);
+	(*cub3d)->info = NULL;
+	(*cub3d)->map = NULL;
 	ft_get_info(fd, cub3d);
 	ret = ft_check_info((*cub3d)->info);
 	if (ret != 0)

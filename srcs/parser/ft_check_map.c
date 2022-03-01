@@ -6,22 +6,33 @@
 /*   By: jahuang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 14:51:34 by jahuang           #+#    #+#             */
-/*   Updated: 2022/03/01 12:05:59 by jahuang          ###   ########.fr       */
+/*   Updated: 2022/03/01 16:29:12 by jahuang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static int	ft_is_empty(char **map, int x, int y)
+static int	ft_is_surrounded(char **map, int x, int y, int array_len)
 {
-	if (!map[x][y])
-		return (1);
-	if (map[x][y])
+	int	str_len;
+
+	if (!map[x])
+		return (0);
+	str_len = ft_strlen(map[x]);
+	if (x == 0 || y == 0 || x == array_len -1 || y == str_len - 1)
 	{
-		if (map[x][y] == ' ')
-			return (1);
+		if (map[x][y] != '1' && map[x][y] != ' ')
+			return (0);
 	}
-	return (0);
+	if (map[x][y] == '0')
+	{
+		if (!map[x + 1][y] || !map[x - 1] || !map[x][y + 1] || !map[x][y - 1])
+			return (0);
+		if (map[x + 1][y] == ' ' || map[x - 1][y] == ' ' || \
+				map[x][y + 1] == ' ' || map[x][y - 1] == ' ')
+			return (0);
+	}
+	return (1);
 }
 
 static int	ft_check_close(char **map, int array_len)
@@ -37,19 +48,8 @@ static int	ft_check_close(char **map, int array_len)
 		str_len = ft_strlen(map[i]);
 		while (j < str_len - 1)
 		{
-			if (i == 0 || j == 0 || i == array_len -1 || j == str_len - 1)
-			{
-				if (map[i][j] != '1' && map[i][j] != ' ')
-					return (ERR_MAP_OPEN);
-			}
-			else if (map[i][j] == '0')
-			{
-				if (ft_is_empty(map, i + 1, j) || \
-						ft_is_empty(map, i - 1, j) || \
-						ft_is_empty(map, i, j + 1) || \
-						ft_is_empty(map, i, j - 1))
-					return (ERR_MAP_OPEN);
-			}
+			if (!ft_is_surrounded(map, i, j, array_len))
+				return (ERR_MAP_OPEN);
 			j++;
 		}
 		i++;
@@ -59,8 +59,8 @@ static int	ft_check_close(char **map, int array_len)
 
 int	ft_check_char(char **map)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	i = 0;
 	while (map[i])

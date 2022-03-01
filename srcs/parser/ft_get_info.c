@@ -6,7 +6,7 @@
 /*   By: jahuang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 14:55:08 by jahuang           #+#    #+#             */
-/*   Updated: 2022/03/01 12:16:53 by jahuang          ###   ########.fr       */
+/*   Updated: 2022/03/01 17:52:37 by jahuang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,11 @@ int	*ft_get_colors(char **line)
 		j = 0;
 		while (holder[j])
 		{
+			if (colors_i >= 4)
+			{
+				free(colors);
+				return (NULL);
+			}
 			colors[colors_i] = ft_atoi(holder[j]);
 			colors_i++;
 			j++;
@@ -79,29 +84,24 @@ int	ft_init_info(t_cub3d **cub3d)
 int	ft_get_info(int fd, t_cub3d **cub3d)
 {
 	char	*line;
-	int		ret;
 	int		index;
 	char	**info_array;
 
 	info_array = malloc(sizeof(char *) * 7);
 	if (!info_array)
 		return (ERR_MALLOC);
-	ret = get_next_line(fd, &line);
 	index = 0;
-	while (ret > 0 && index < 6)
+	while (get_next_line(fd, &line) > 0 && index < 6)
 	{
-		if (line[0] != '\0')
+		if (line && line[0] != '\0')
 		{
 			info_array[index] = line;
 			index++;
 		}
-		ret = get_next_line(fd, &line);
 	}
 	info_array[index] = NULL;
 	if (ft_init_info(cub3d) != 0)
-		return (1);
-	ft_put_info_in_cub3d(info_array, (*cub3d)->info);
-	if (ft_check_info((*cub3d)->info) != 0)
 		return (ERR_INFO);
-	return (0);
+	ft_put_info_in_cub3d(info_array, (*cub3d)->info);
+	return (ft_check_info((*cub3d)->info));
 }

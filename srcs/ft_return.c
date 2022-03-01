@@ -6,7 +6,7 @@
 /*   By: jahuang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 11:42:13 by jahuang           #+#    #+#             */
-/*   Updated: 2022/03/01 12:07:05 by jahuang          ###   ########.fr       */
+/*   Updated: 2022/03/01 16:50:30 by jahuang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ int	ft_return(int ret_code, t_cub3d *cub3d)
 		ft_putstr_fd("Error\nWrong amount of argument(s)\n", 1);
 	if (ret_code == ERR_FILE || ret_code == ERR_GNL)
 		ft_putstr_fd("Error\nFailed reading the map file\n", 1);
+	if (ret_code == ERR_ACCESS)
+		ft_putstr_fd("Error\nTexture file not accecible\n", 1);
 	if (ret_code == ERR_MALLOC)
 		ft_putstr_fd("Error\nFailed allocating memory\n", 1);
 	if (ret_code == ERR_INFO)

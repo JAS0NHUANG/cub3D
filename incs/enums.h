@@ -5,6 +5,7 @@ enum	map_err
 {
 	ERR_ARGS = 1,
 	ERR_FILE,
+	ERR_ACCESS,
 	ERR_GNL,
 	ERR_MALLOC,
 	ERR_INFO,
