@@ -6,7 +6,7 @@
 /*   By: jahuang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 14:49:21 by jahuang           #+#    #+#             */
-/*   Updated: 2022/02/28 17:16:33 by jahuang          ###   ########.fr       */
+/*   Updated: 2022/03/01 11:45:41 by jahuang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,25 +34,23 @@ static char	**ft_add_to_array(char **str_array, char *str)
 
 int	ft_get_map(int fd, t_cub3d **cub3d)
 {
-	char	*line;
 	int		ret;
-	int		index;
+	int		gnl_ret;
+	char	*line;
 	char	**map;
 
+	ret = 0;
 	map = NULL;
-	ret = get_next_line(fd, &line);
-	index = 0;
-	while (ret > 0)
+	gnl_ret = get_next_line(fd, &line);
+	while (gnl_ret > 0)
 	{
 		if (line[0] != '\0')
 			map = ft_add_to_array(map, line);
-		ret = get_next_line(fd, &line);
+		gnl_ret = get_next_line(fd, &line);
 	}
+	if (gnl_ret < 0)
+		return (ERR_GNL);
 	(*cub3d)->map = map;
-	if (ft_check_map((*cub3d)->map))
-	{
-		ft_putstr_fd("Map error\n", 1);
-		return (1);
-	}
-	return (0);
+	ret = ft_check_map((*cub3d)->map);
+	return (ret);
 }

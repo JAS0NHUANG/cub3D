@@ -6,12 +6,9 @@
 
 # include "../libft/libft.h"
 # include "./structs.h"
+# include "./enums.h"
 # include "./parser.h"
 
-enum	map_err
-{
-	ERR_MAP_NULL = 1,
-	ERR_MAP_OPEN,
-};
+int	ft_return(int ret_code, t_cub3d *cub3d);
 
 #endif

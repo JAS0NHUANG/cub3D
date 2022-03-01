@@ -6,7 +6,7 @@
 /*   By: jahuang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 14:51:34 by jahuang           #+#    #+#             */
-/*   Updated: 2022/02/28 14:59:09 by jahuang          ###   ########.fr       */
+/*   Updated: 2022/03/01 12:05:59 by jahuang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,50 +24,75 @@ static int	ft_is_empty(char **map, int x, int y)
 	return (0);
 }
 
-static int	ft_check_line(char **map, int index, int array_len)
+static int	ft_check_close(char **map, int array_len)
 {
+	int	i;
 	int	j;
 	int	str_len;
 
-	j = 0;
-	str_len = ft_strlen(map[index]);
-	while (map[index][j])
+	i = 0;
+	while (i < array_len)
 	{
-		if (index == 0 || index == array_len - 1 || j == 0 || j == str_len - 1)
+		j = 0;
+		str_len = ft_strlen(map[i]);
+		while (j < str_len - 1)
 		{
-			if (map[index][j] != ' ' && map[index][j] != '1')
-				return (ERR_MAP_OPEN);
+			if (i == 0 || j == 0 || i == array_len -1 || j == str_len - 1)
+			{
+				if (map[i][j] != '1' && map[i][j] != ' ')
+					return (ERR_MAP_OPEN);
+			}
+			else if (map[i][j] == '0')
+			{
+				if (ft_is_empty(map, i + 1, j) || \
+						ft_is_empty(map, i - 1, j) || \
+						ft_is_empty(map, i, j + 1) || \
+						ft_is_empty(map, i, j - 1))
+					return (ERR_MAP_OPEN);
+			}
+			j++;
 		}
-		if (map[index][j] == '0')
+		i++;
+	}
+	return (0);
+}
+
+int	ft_check_char(char **map)
+{
+	int i;
+	int j;
+
+	i = 0;
+	while (map[i])
+	{
+		j = 0;
+		while (map[i][j])
 		{
-			if (ft_is_empty(map, index + 1, j) || \
-					ft_is_empty(map, index - 1, j) || \
-					ft_is_empty(map, index, j + 1) || \
-					ft_is_empty(map, index, j - 1))
-				return (ERR_MAP_OPEN);
+			if (map[i][j] != '0' && map[i][j] != '1' && map[i][j] != 'N' && \
+				map[i][j] != 'W' && map[i][j] != 'E' && map[i][j] != 'S' && \
+				map[i][j] != ' ')
+				return (ERR_MAP_CHAR);
+			j++;
 		}
-		j++;
+		i++;
 	}
 	return (0);
 }
 
 int	ft_check_map(char **map)
 {
-	int	i;
 	int	array_len;
 	int	ret;
 
 	if (!map)
 		return (ERR_MAP_NULL);
-	i = 0;
 	array_len = ft_arraylen(map);
 	ret = 0;
-	while (i < array_len)
-	{
-		ret = ft_check_line(map, i, array_len);
-		if (ret != 0)
-			return (ret);
-		i++;
-	}
+	ret = ft_check_char(map);
+	if (ret != 0)
+		return (ret);
+	ret = ft_check_close(map, array_len);
+	if (ret != 0)
+		return (ret);
 	return (0);
 }

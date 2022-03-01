@@ -6,7 +6,7 @@
 /*   By: jahuang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 16:12:49 by jahuang           #+#    #+#             */
-/*   Updated: 2022/02/28 17:08:04 by jahuang          ###   ########.fr       */
+/*   Updated: 2022/03/01 11:55:49 by jahuang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,6 @@ int	ft_check_info(t_info *info)
 {
 	if (!info->no || !info->so || !info->we || !info->ea || \
 			!info->f || !info->c)
-		return (1);
+		return (ERR_INFO);
 	return (0);
 }

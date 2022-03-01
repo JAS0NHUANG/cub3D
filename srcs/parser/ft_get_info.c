@@ -6,7 +6,7 @@
 /*   By: jahuang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 14:55:08 by jahuang           #+#    #+#             */
-/*   Updated: 2022/02/28 17:05:07 by jahuang          ###   ########.fr       */
+/*   Updated: 2022/03/01 12:16:53 by jahuang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int	ft_init_info(t_cub3d **cub3d)
 {
 	(*cub3d)->info = malloc(sizeof(t_info));
 	if (!(*cub3d)->info)
-		return (1);
+		return (ERR_MALLOC);
 	(*cub3d)->info->no = NULL;
 	(*cub3d)->info->so = NULL;
 	(*cub3d)->info->we = NULL;
@@ -85,7 +85,7 @@ int	ft_get_info(int fd, t_cub3d **cub3d)
 
 	info_array = malloc(sizeof(char *) * 7);
 	if (!info_array)
-		return (1);
+		return (ERR_MALLOC);
 	ret = get_next_line(fd, &line);
 	index = 0;
 	while (ret > 0 && index < 6)
@@ -102,6 +102,6 @@ int	ft_get_info(int fd, t_cub3d **cub3d)
 		return (1);
 	ft_put_info_in_cub3d(info_array, (*cub3d)->info);
 	if (ft_check_info((*cub3d)->info) != 0)
-		return (1);
+		return (ERR_INFO);
 	return (0);
 }
