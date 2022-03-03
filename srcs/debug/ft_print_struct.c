@@ -6,7 +6,7 @@
 /*   By: jahuang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 14:49:27 by jahuang           #+#    #+#             */
-/*   Updated: 2022/03/01 17:19:49 by jahuang          ###   ########.fr       */
+/*   Updated: 2022/03/03 18:07:00 by jahuang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,16 @@ void	ft_print_info(t_info *info)
 	return ;
 }
 
+void	ft_print_player(t_player *player)
+{
+	ft_putstr_fd("player pos_x: ", 1);
+	ft_putnbr_fd(player->pos_x, 1);
+	ft_putstr_fd("\n", 1);
+	ft_putstr_fd("player pos_y: ", 1);
+	ft_putnbr_fd(player->pos_y, 1);
+	ft_putstr_fd("\n", 1);
+}
+
 void	ft_print_struct(t_cub3d *cub_3d)
 {
 	if (!cub_3d)
@@ -72,5 +82,9 @@ void	ft_print_struct(t_cub3d *cub_3d)
 		ft_putstr_fd("No info.\n", 1);
 	else
 		ft_print_info(cub_3d->info);
+	if (!cub_3d->player)
+		ft_putstr_fd("No player.\n", 1);
+	else
+		ft_print_player(cub_3d->player);
 	return ;
 }

@@ -6,7 +6,7 @@
 /*   By: jahuang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 14:49:21 by jahuang           #+#    #+#             */
-/*   Updated: 2022/03/01 17:18:57 by jahuang          ###   ########.fr       */
+/*   Updated: 2022/03/03 16:19:04 by jahuang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,10 @@ static char	**ft_add_to_array(char **str_array, char *str)
 
 int	ft_get_map(int fd, t_cub3d **cub3d)
 {
-	int		ret;
 	int		gnl_ret;
 	char	*line;
 	char	**map;
 
-	ret = 0;
 	map = NULL;
 	gnl_ret = get_next_line(fd, &line);
 	while (gnl_ret > 0)
@@ -50,7 +48,8 @@ int	ft_get_map(int fd, t_cub3d **cub3d)
 	}
 	if (gnl_ret < 0)
 		return (ERR_GNL);
+	if (line)
+		free(line);
 	(*cub3d)->map = map;
-	ret = ft_check_map((*cub3d)->map);
-	return (ret);
+	return(ft_check_map((*cub3d)->map));
 }

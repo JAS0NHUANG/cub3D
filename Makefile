@@ -1,47 +1,49 @@
 # **************************************************************************** #
 #       COMANDS                                                                #
 # **************************************************************************** #
-CC			=	gcc
-RM			=	rm -rf
-AR			=	ar rcs
+CC				=	gcc
+RM				=	rm -rf
+AR				=	ar rcs
 
 # **************************************************************************** #
 #       TITLE                                                                  #
 # **************************************************************************** #
-NAME		=	cub3D
+NAME			=	cub3D
 
 # **************************************************************************** #
 #       FLAGS                                                                  #
 # **************************************************************************** #
-CFLAGS		=	-Wall -Wextra -Werror
-READLINE	=	-lreadline
-TERMCAP		=	-ltermcap
-FSAN		=	-fsanitize=address
-DEBUG		=	-g3
-OS			=	$(shell uname)
+OS				=	$(shell uname)
+CFLAGS			=	-Wall -Wextra -Werror
+FSAN			=	-fsanitize=address
+DEBUG			=	-g3
 
 ifeq ($(OS), Linux)
-	MLX_FLAGS	=	-L mlx -l mlx -L /usr/lib -l Xext -l X11 -l m
+MLX_FLAGS		+=	-Lmlx -lmlx -L/usr/lib -lXext -lX11 -lm
 else
-	MLX_FLAGS	=	-L mlx -l mlx -framework OpenGL -framework AppKit
+MLX_FLAGS		+=	-Lmlx -lmlx -framework OpenGL -framework AppKit
 endif
 
 # **************************************************************************** #
 #       SOURCES                                                                #
 # **************************************************************************** #
-SRCS_DIR	=	srcs
-INCS_DIR	=	incs
+SRCS_DIR		=	srcs
+INCS_DIR		=	incs
 
-SRCS		=	main.c \
-				ft_return.c \
-				parser/ft_parser.c \
-				parser/ft_get_info.c \
-				parser/ft_check_info.c \
-				parser/ft_get_map.c \
-				parser/ft_check_map.c \
-				debug/ft_print_struct.c \
+SRCS			=	main.c \
+					utils/ft_return.c \
+					utils/ft_free_cub3d.c \
+					parser/ft_parser.c \
+					parser/ft_get_info.c \
+					parser/ft_check_info.c \
+					parser/ft_get_map.c \
+					parser/ft_check_map.c \
+					parser/ft_set_player.c \
+					events/ft_close.c \
+					events/ft_key_event.c \
+					debug/ft_print_struct.c \
 
-INCS		=	cub3d.h \
+INCS			=	cub3d.h \
 
 # **************************************************************************** #
 #       LIBRARIES                                                              #
@@ -55,13 +57,18 @@ LIBMLX_DIR		=	mlx
 # **************************************************************************** #
 #       RULES                                                                  #
 # **************************************************************************** #
-OBJS		=	$(addprefix $(SRCS_DIR)/,$(SRCS:.c=.o))
+OBJS			=	$(addprefix $(SRCS_DIR)/,$(SRCS:.c=.o))
 
-%.o			:	%.c
-			$(CC) $(CFLAGS) -I $(INCS_DIR) -c $< -o $@
+%.o				:	%.c
+					$(CC) $(CFLAGS) -I $(INCS_DIR) -c $< -o $@
 
-$(NAME)		:	$(OBJS) $(LIBFT_A) $(LIBMLX_A)
-			$(CC) -o $@ $(OBJS) -I $(INCS_DIR) $(LIBFT_A) $(MLX_FLAGS) 
+ifeq ($(OS), Linux)
+$(NAME)			:	$(OBJS) $(LIBFT_A) $(LIBMLX_A)
+					$(CC) -o $@ $(OBJS) -I $(INCS_DIR) $(LIBFT_A) $(MLX_FLAGS)
+else
+$(NAME)			:	$(OBJS) $(LIBFT_A)
+					$(CC) -o $@ $(OBJS) -I $(INCS_DIR) $(LIBFT_A) $(MLX_FLAGS)
+endif
 
 $(LIBFT_A)		:
 					make -C $(LIBFT_DIR) $(LIBFT_FLAGS)
@@ -70,19 +77,19 @@ $(LIBFT_A)		:
 $(LIBMLX_A)		:
 					make -C $(LIBMLX_DIR) $(MLX_FLAGS)
 
-all			:	$(NAME)
+all				:	$(NAME)
 
-clean		:
-			$(RM) $(OBJS) $(LIBFT_A)
-			make clean -C $(LIBFT_DIR)
+clean			:
+					$(RM) $(OBJS) $(LIBFT_A)
+					make clean -C $(LIBFT_DIR)
 
-fclean		:	clean
-			$(RM) $(NAME)
-			make fclean -C $(LIBFT_DIR)
+fclean			:	clean
+					$(RM) $(NAME)
+					make fclean -C $(LIBFT_DIR)
 
-re			:	fclean all
+re				:	fclean all
 
 # **************************************************************************** #
 #       PHONY                                                                  #
 # **************************************************************************** #
-.PHONY		:	all bonus clean fclean re
+.PHONY			:	all bonus clean fclean re

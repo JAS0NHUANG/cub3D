@@ -1,15 +1,28 @@
 #ifndef STRUCT_H
 # define STRUCT_H
 
+# include <mlx.h>
+
 typedef struct s_cub3d
 {
 	char			**map;
-	struct s_info	*info;
-	struct s_player	*player;
 	void			*mlx_ptr;
 	void			*win_ptr;
 	struct s_images	*images;
+	struct s_info	*info;
+	struct s_player	*player;
 }	t_cub3d;
+
+typedef struct s_img
+{
+	void	*img_ptr;
+	char	*img_addr;
+	int		bpp;
+	int		size;
+	int		endian;
+	int		width;
+	int		height;
+}	t_img;
 
 typedef struct s_images
 {
@@ -40,8 +53,6 @@ typedef struct s_player
 	double	plane_x;
 	double	plane_y;
 	double	cam_height;
-	double	move_dist;
-	double	rot_speed;
 }	t_player;
 
 #endif

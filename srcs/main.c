@@ -6,7 +6,7 @@
 /*   By: jahuang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 14:50:11 by jahuang           #+#    #+#             */
-/*   Updated: 2022/03/01 18:32:15 by jahuang          ###   ########.fr       */
+/*   Updated: 2022/03/03 16:16:55 by jahuang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,11 @@ int	ft_run_cub3d(t_cub3d *cub3d)
 		return (ERR_MLX);
 	/*
 	ft_print_map_to_window(so_long);
-	mlx_key_hook(so_long->win_ptr, &ft_key_event, so_long);
-	mlx_hook(so_long->win_ptr, 17, 1l << 0, &ft_close, so_long);
 	*/
+	mlx_key_hook(cub3d->win_ptr, &ft_key_event, cub3d);
+	mlx_hook(cub3d->win_ptr, 17, 1l << 0, &ft_close, cub3d);
 	mlx_loop(cub3d->mlx_ptr);
+	return (0);
 }
 
 int	main(int ac, char **av)

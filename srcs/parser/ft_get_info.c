@@ -6,7 +6,7 @@
 /*   By: jahuang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 14:55:08 by jahuang           #+#    #+#             */
-/*   Updated: 2022/03/01 17:52:37 by jahuang          ###   ########.fr       */
+/*   Updated: 2022/03/03 16:14:21 by jahuang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ int	*ft_get_colors(char **line)
 		{
 			if (colors_i >= 4)
 			{
+				ft_free_strarray(holder);
 				free(colors);
 				return (NULL);
 			}
@@ -38,6 +39,7 @@ int	*ft_get_colors(char **line)
 			colors_i++;
 			j++;
 		}
+		ft_free_strarray(holder);
 		i++;
 	}
 	return (colors);
@@ -51,18 +53,19 @@ int	ft_put_info_in_cub3d(char **info_array, t_info *info_struct)
 	{
 		line = ft_split(*info_array, ' ');
 		if (ft_strcmp(line[0], "NO") == 0)
-			info_struct->no = line[1];
+			info_struct->no = ft_strdup(line[1]);
 		else if (ft_strcmp(line[0], "SO") == 0)
-			info_struct->so = line[1];
+			info_struct->so = ft_strdup(line[1]);
 		else if (ft_strcmp(line[0], "WE") == 0)
-			info_struct->we = line[1];
+			info_struct->we = ft_strdup(line[1]);
 		else if (ft_strcmp(line[0], "EA") == 0)
-			info_struct->ea = line[1];
+			info_struct->ea = ft_strdup(line[1]);
 		else if (ft_strcmp(line[0], "C") == 0)
 			info_struct->c = ft_get_colors(line);
 		else if (ft_strcmp(line[0], "F") == 0)
 			info_struct->f = ft_get_colors(line);
 		info_array++;
+		ft_free_strarray(line);
 	}
 	return (0);
 }
@@ -103,5 +106,6 @@ int	ft_get_info(int fd, t_cub3d **cub3d)
 	if (ft_init_info(cub3d) != 0)
 		return (ERR_INFO);
 	ft_put_info_in_cub3d(info_array, (*cub3d)->info);
+	ft_free_strarray(info_array);
 	return (ft_check_info((*cub3d)->info));
 }
