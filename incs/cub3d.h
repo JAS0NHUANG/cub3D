@@ -3,7 +3,6 @@
 
 # ifdef __linux__
 #  include "../mlx/mlx.h"
-#  include "../mlx/mlx_int.h"
 # else
 #  include <mlx.h>
 # endif

@@ -1,8 +1,6 @@
 #ifndef STRUCT_H
 # define STRUCT_H
 
-# include <mlx.h>
-
 typedef struct s_cub3d
 {
 	char			**map;

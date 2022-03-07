@@ -19,7 +19,7 @@ FSAN			=	-fsanitize=address
 DEBUG			=	-g3
 
 ifeq ($(OS), Linux)
-MLX_FLAGS		+=	-Lmlx -lmlx -L/usr/lib -lXext -lX11 -lm
+MLX_FLAGS		+=	-Lmlx -lmlx -lbsd -lXext -lX11 -lm
 else
 MLX_FLAGS		+=	-Lmlx -lmlx -framework OpenGL -framework AppKit
 endif
@@ -82,10 +82,12 @@ all				:	$(NAME)
 clean			:
 					$(RM) $(OBJS) $(LIBFT_A)
 					make clean -C $(LIBFT_DIR)
+					make clean -C $(LIBMLX_DIR)
 
 fclean			:	clean
 					$(RM) $(NAME)
 					make fclean -C $(LIBFT_DIR)
+
 
 re				:	fclean all
 
