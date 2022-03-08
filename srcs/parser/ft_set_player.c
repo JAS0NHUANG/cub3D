@@ -30,5 +30,9 @@ void	ft_set_player(t_cub3d *cub3d)
 	if (!(cub3d->player))
 		return ;
 	ft_set_position(cub3d);
-
+	/*
+	ft_set_direction(cub3d);
+	ft_set_plane(cub3d);
+	cub3d->player->cam_height =
+	*/
 }

@@ -45,7 +45,6 @@ typedef struct s_info
 
 typedef struct s_player
 {
-	char	direction;
 	double	pos_x;
 	double	pos_y;
 	double	dir_x;
