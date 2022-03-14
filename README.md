@@ -6,14 +6,14 @@ The 3D world inside a childhood memory.
 2. [DDA](https://en.wikipedia.org/wiki/Digital_differential_analyzer_(graphics_algorithm\)), [Rotation Matrix](https://en.wikipedia.org/wiki/Rotation_matrixhttps://en.wikipedia.org/wiki/Rotation_matrix), [Cartesian coordinate system](https://en.wikipedia.org/wiki/Cartesian_coordinate_system)), [Euclidean Distance](https://en.wikipedia.org/wiki/Euclidean_distance)
 
 ### Some Videos:
-[Wolfenstein 3D's map renderer](https://www.youtube.com/watch?v=eOCQfxRQ2pY)
-[Make Your Own Raycaster Part 1](https://www.youtube.com/watch?v=gYRrGTC7GtA)
-[Coding Challenge #145: 2D Raycasting](https://www.youtube.com/watch?v=TOEi6T2mtHo)
-[Super Fast Ray Casting in Tiled Worlds using DDA](https://www.youtube.com/watch?v=NbSee-XM7WA)
-[Ray Casting versus Ray Tracing](https://www.youtube.com/watch?v=ll4_79zKapU)
+[Wolfenstein 3D's map renderer](https://www.youtube.com/watch?v=eOCQfxRQ2pY)  
+[Make Your Own Raycaster Part 1](https://www.youtube.com/watch?v=gYRrGTC7GtA)  
+[Coding Challenge #145: 2D Raycasting](https://www.youtube.com/watch?v=TOEi6T2mtHo)  
+[Super Fast Ray Casting in Tiled Worlds using DDA](https://www.youtube.com/watch?v=NbSee-XM7WA)  
+[Ray Casting versus Ray Tracing](https://www.youtube.com/watch?v=ll4_79zKapU)  
 
-[Raycasting engine in Factorio](https://www.youtube.com/watch?v=7lVAFcDX4eM)
-[Writing my First Ray Casting Game using C++ and SFML - SFML Tutorial](https://www.youtube.com/watch?v=LUYxLjic0Bc)
+[Raycasting engine in Factorio](https://www.youtube.com/watch?v=7lVAFcDX4eM)  
+[Writing my First Ray Casting Game using C++ and SFML - SFML Tutorial](https://www.youtube.com/watch?v=LUYxLjic0Bc)  
 
 # Steps:
 1. Create `t_cub3d` struct type to store all information.  
