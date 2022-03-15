@@ -18,3 +18,14 @@ The 3D world inside a childhood memory.
 			Check if all texture file can be opened.(to be done)  
 			Check color code >= 0 and  <= 255.(to be done)  
 			Check if there is exactly 3 numbers for celling and floor.(to be done)  
+
+# Ray Casting
+	posX posY		// player's position
+	dirX dirY		// player's direction
+	planeX planeY	// camera plane
+	// put above information in `t_player` struct.
+
+	for each x(in window's width)
+		- get the x point in the camera space (-1 ~ 1): cameraX = 2 * x / double(screen_width) - 1  
+			then use this information to calculate the `rayDirection` vector: rayDirectionX = dirX + planeX * cameraX; rayDirectionY = dirY + planeY * cameraX;
+
