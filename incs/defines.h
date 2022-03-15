@@ -1,6 +1,9 @@
 #ifndef DEFINES_H
 # define DEFINES_H
 
+# define ROT_SPEED 0.05
+# define MOVE_DIST 0.15
+
 # ifdef __linux__
 #  define XK_Escape 0xff1b
 #  define XK_w 0x0077
@@ -19,7 +22,18 @@
 #  define XK_Right 124
 # endif
 
-# define ROT_SPEED 0.05
-# define MOVE_DIST 0.15
+enum	err_codes
+{
+	ERR_ARGS = 1,
+	ERR_FILE,
+	ERR_ACCESS,
+	ERR_GNL,
+	ERR_MLX,
+	ERR_MALLOC,
+	ERR_INFO,
+	ERR_MAP_NULL,
+	ERR_MAP_OPEN,
+	ERR_MAP_CHAR,
+};
 
 #endif

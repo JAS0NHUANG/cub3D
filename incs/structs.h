@@ -52,4 +52,8 @@ typedef struct s_player
 	double	cam_height;
 }	t_player;
 
+typedef struct s_ray
+{
+}	t_ray;
+
 #endif
