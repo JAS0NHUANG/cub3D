@@ -29,3 +29,15 @@ The 3D world inside a childhood memory.
 		- get the x point in the camera space (-1 ~ 1): cameraX = 2 * x / double(screen_width) - 1  
 			then use this information to calculate the `rayDirection` vector: rayDirectionX = dirX + planeX * cameraX; rayDirectionY = dirY + planeY * cameraX;
 
+
+## Trigonometric Functions
+/ˌtrɪɡ.ə.nəˈmet.rik/
+
+Calculate the point while rotate R [radian](https://en.wikipedia.org/wiki/Radian):
+```
+oldPointX = pointX;
+pointX = pointX * cos(R) - dirY * sin(R);
+pointY = oldPointX * sin(R) - dirY * cos(R);
+```
+
+

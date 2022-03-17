@@ -1,8 +1,8 @@
 #ifndef DEFINES_H
 # define DEFINES_H
 
-# define ROT_SPEED 0.05
-# define MOVE_DIST 0.15
+# define ROT_SPEED 0.10
+# define MOVE_DIST 0.10
 
 # ifdef __linux__
 #  define XK_Escape 0xff1b

@@ -6,7 +6,7 @@
 /*   By: jahuang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 14:50:11 by jahuang           #+#    #+#             */
-/*   Updated: 2022/03/15 18:09:54 by jahuang          ###   ########.fr       */
+/*   Updated: 2022/03/17 16:41:22 by jahuang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,49 +27,56 @@ void	*ft_memcpy(void *dst, const void *src, size_t n)
 	return (dst);
 }
 
+
+t_img	*ft_create_tile(t_cub3d *cub3d, unsigned int color, int size)
+{
+	t_img	*img_holder;
+	int		i;
+	int		j;
+	char	*pixel;
+
+	img_holder = malloc(sizeof(t_img));
+	img_holder->img_ptr = mlx_new_image(cub3d->mlx_ptr, size, size);
+	img_holder->img_addr = mlx_get_data_addr(img_holder->img_ptr, &(img_holder->bpp), &(img_holder->size), &(img_holder->endian));
+	i = 0;
+	while (i < size)
+	{
+		j = 0;
+		while (j < size)
+		{
+			pixel = img_holder->img_addr + (i * img_holder->size) + j * (img_holder->bpp / 8);
+			ft_memcpy(pixel, &color, sizeof(unsigned int));
+			j++;
+		}
+		i++;
+	}
+	return (img_holder);
+}
+
 int	ft_print_minimap(t_cub3d *cub3d)
 {
 	int		i;
 	int		j;
 	t_img	*mini_map_img;
-	unsigned int color = 0x00FF00;
-	char	*pixel;
+	t_img	*player_img;
 
-	printf("ok here\n");
-	if(cub3d)
-	{
-		mini_map_img = malloc(sizeof(mini_map_img));
-		printf("ok in\n");
-	}
-	printf("w: %d, h: %d\n",(int)ft_strlen((cub3d->map)[0]), ft_arraylen(cub3d->map));
-
-	if (cub3d->map)
-	{
-		printf("ok map\n");
-		mini_map_img->img_ptr = mlx_new_image(cub3d->mlx_ptr, ft_strlen((cub3d->map)[0]), ft_arraylen(cub3d->map));
-		mini_map_img->img_addr = mlx_get_data_addr(mini_map_img->img_ptr, &(mini_map_img->bpp), &(mini_map_img->size), &(mini_map_img->endian));
-	}
+	printf("still ok\n");
+	mini_map_img = ft_create_tile(cub3d, 0x00AAAAAA, 10);
+	player_img = ft_create_tile(cub3d, 0x009F0000, 5);
 	i = 0;
 	while (i < ft_arraylen(cub3d->map))
 	{
 		j = 0;
 		while (j < (int)ft_strlen((cub3d->map)[i]))
 		{
-			printf("w: %d, h: %d, char: %c\n",i, j, cub3d->map[i][j]);
 			if (cub3d->map[i][j] == '1')
-			{
-				/*c
-				*(int *)(mini_map_img->img_addr + i + j) = color;
-				*/
-				pixel = mini_map_img->img_addr + (i * mini_map_img->size) + (j * mini_map_img->bpp / 8);
-				ft_memcpy(pixel ,&color, sizeof(unsigned int));
-				printf("pixel color: %d\n", *pixel);
-			}
+				mlx_put_image_to_window(cub3d->mlx_ptr, cub3d->win_ptr, mini_map_img->img_ptr, j * 10 + 20, i * 10 + 20 );
+			if (cub3d->map[i][j] == 'W')
+				mlx_put_image_to_window(cub3d->mlx_ptr, cub3d->win_ptr, player_img->img_ptr, j * 10 + 20 + 2 , i * 10 + 20 + 2);
 			j++;
 		}
 		i++;
 	}
-	mlx_put_image_to_window(cub3d->mlx_ptr, cub3d->win_ptr, mini_map_img, 100, 100);
 	printf("print put image\n");
 	return (0);
 }
@@ -97,11 +104,7 @@ int	main(int ac, char **av)
 	int		ret;
 	t_cub3d	*cub3d;
 
-	printf("cos: %f\n", 1 * cos(-3) - 0 * sin(-3));
-	printf("cos: %f\n", 1 * cos(-6) - 0 * sin(-6));
-	printf("cos: %f\n", 1 * cos(-9) - 0 * sin(-9));
-	printf("cos: %f\n", 1 * cos(-12) - 0 * sin(-12));
-	ret = 0;
+	ret = -1;
 	if (ac != 2)
 		return (ERR_ARGS);
 	ret = ft_parser(av[1], &cub3d);

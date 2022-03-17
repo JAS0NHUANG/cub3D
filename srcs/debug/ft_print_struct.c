@@ -6,7 +6,7 @@
 /*   By: jahuang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 14:49:27 by jahuang           #+#    #+#             */
-/*   Updated: 2022/03/03 18:07:00 by jahuang          ###   ########.fr       */
+/*   Updated: 2022/03/17 15:40:59 by jahuang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,11 +55,14 @@ void	ft_print_info(t_info *info)
 void	ft_print_player(t_player *player)
 {
 	ft_putstr_fd("player pos_x: ", 1);
-	ft_putnbr_fd(player->pos_x, 1);
-	ft_putstr_fd("\n", 1);
+	printf("%f\n", player->pos_x);
 	ft_putstr_fd("player pos_y: ", 1);
-	ft_putnbr_fd(player->pos_y, 1);
-	ft_putstr_fd("\n", 1);
+	printf("%f\n", player->pos_y);
+
+	ft_putstr_fd("player dir_x: ", 1);
+	printf("%f\n", player->dir_x);
+	ft_putstr_fd("player dir_y: ", 1);
+	printf("%f\n", player->dir_y);
 }
 
 void	ft_print_struct(t_cub3d *cub_3d)
