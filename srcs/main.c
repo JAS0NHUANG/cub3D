@@ -6,7 +6,7 @@
 /*   By: jahuang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 14:50:11 by jahuang           #+#    #+#             */
-/*   Updated: 2022/03/17 16:41:22 by jahuang          ###   ########.fr       */
+/*   Updated: 2022/03/18 15:20:58 by jahuang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,10 +59,15 @@ int	ft_print_minimap(t_cub3d *cub3d)
 	int		j;
 	t_img	*mini_map_img;
 	t_img	*player_img;
+	t_img	*floor_img;
 
-	printf("still ok\n");
+	if (cub3d->images && cub3d->images->minimap_img != NULL)
+		mlx_destroy_image(cub3d->mlx_ptr, cub3d->images->minimap_img);
+	if (cub3d->images->player_img != NULL)
+		mlx_destroy_image(cub3d->mlx_ptr, cub3d->images->player_img);
 	mini_map_img = ft_create_tile(cub3d, 0x00AAAAAA, 10);
 	player_img = ft_create_tile(cub3d, 0x009F0000, 5);
+	floor_img = ft_create_tile(cub3d, 0x00000000, 10);
 	i = 0;
 	while (i < ft_arraylen(cub3d->map))
 	{
@@ -73,11 +78,15 @@ int	ft_print_minimap(t_cub3d *cub3d)
 				mlx_put_image_to_window(cub3d->mlx_ptr, cub3d->win_ptr, mini_map_img->img_ptr, j * 10 + 20, i * 10 + 20 );
 			if (cub3d->map[i][j] == 'W')
 				mlx_put_image_to_window(cub3d->mlx_ptr, cub3d->win_ptr, player_img->img_ptr, j * 10 + 20 + 2 , i * 10 + 20 + 2);
+			if (cub3d->map[i][j] == '0')
+				mlx_put_image_to_window(cub3d->mlx_ptr, cub3d->win_ptr, floor_img->img_ptr, j * 10 + 20, i * 10 + 20 );
 			j++;
 		}
 		i++;
 	}
 	printf("print put image\n");
+	cub3d->images->minimap_img = mini_map_img;
+	cub3d->images->player_img= player_img;
 	return (0);
 }
 
@@ -90,6 +99,10 @@ int	ft_run_cub3d(t_cub3d *cub3d)
 			"cub3d");
 	if (!cub3d->win_ptr)
 		return (ERR_MLX);
+	cub3d->images = malloc(sizeof(t_images));
+	cub3d->images->minimap_img = NULL;
+	cub3d->images->player_img = NULL;
+
 
 	ft_print_minimap(cub3d);
 

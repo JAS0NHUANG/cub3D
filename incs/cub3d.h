@@ -35,6 +35,7 @@ void	ft_set_player(t_cub3d *cub3d);
 /* Debug functions															  */
 /******************************************************************************/
 void	ft_print_struct(t_cub3d *cub_3d);
+int		ft_print_minimap(t_cub3d *cub_3d);
 
 /******************************************************************************/
 /* MLX Event functions														  */

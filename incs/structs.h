@@ -24,11 +24,13 @@ typedef struct s_img
 
 typedef struct s_images
 {
-	t_img		window_img;
-	t_img		no_texture;
-	t_img		so_texture;
-	t_img		we_texture;
-	t_img		ea_texture;
+	t_img		*window_img;
+	t_img		*minimap_img;
+	t_img		*player_img;
+	t_img		*no_texture;
+	t_img		*so_texture;
+	t_img		*we_texture;
+	t_img		*ea_texture;
 }	t_images;
 
 typedef struct s_info
