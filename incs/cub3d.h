@@ -4,7 +4,7 @@
 # ifdef __linux__
 #  include "../mlx/mlx.h"
 # else
-#  include <mlx.h>
+#  include "../mlx_mac/mlx.h"
 # endif
 
 # include <fcntl.h>
@@ -18,6 +18,7 @@
 /******************************************************************************/
 /* General functions														  */
 /******************************************************************************/
+int		ft_return(int ret_code, t_cub3d *cub3d);
 int		ft_return(int ret_code, t_cub3d *cub3d);
 void	ft_free_cub3d(t_cub3d *cub3d);
 

@@ -1,9 +1,9 @@
 # **************************************************************************** #
 #       COMANDS                                                                #
 # **************************************************************************** #
-CC				=	gcc
-RM				=	rm -rf
-AR				=	ar rcs
+CC			=	clang	
+RM			=	rm -rf
+AR			=	ar rcs
 
 # **************************************************************************** #
 #       TITLE                                                                  #
@@ -13,7 +13,7 @@ NAME			=	cub3D
 # **************************************************************************** #
 #       FLAGS                                                                  #
 # **************************************************************************** #
-OS				=	$(shell uname)
+OS			=	$(shell uname)
 CFLAGS			=	-Wall -Wextra -Werror
 FSAN			=	-fsanitize=address
 DEBUG			=	-g3
@@ -21,7 +21,7 @@ DEBUG			=	-g3
 ifeq ($(OS), Linux)
 MLX_FLAGS		+=	-Lmlx -lmlx -lbsd -lXext -lX11 -lm
 else
-MLX_FLAGS		+=	-Lmlx -lmlx -framework OpenGL -framework AppKit
+MLX_FLAGS		+=	-Lmlx_mac -lmlx_mac -framework OpenGL -framework AppKit
 endif
 
 # **************************************************************************** #
@@ -31,17 +31,17 @@ SRCS_DIR		=	srcs
 INCS_DIR		=	incs
 
 SRCS			=	main.c \
-					utils/ft_return.c \
-					utils/ft_free_cub3d.c \
-					parser/ft_parser.c \
-					parser/ft_get_info.c \
-					parser/ft_check_info.c \
-					parser/ft_get_map.c \
-					parser/ft_check_map.c \
-					parser/ft_set_player.c \
-					events/ft_close.c \
-					events/ft_key_event.c \
-					debug/ft_print_struct.c \
+				utils/ft_return.c \
+				utils/ft_free_cub3d.c \
+				parser/ft_parser.c \
+				parser/ft_get_info.c \
+				parser/ft_check_info.c \
+				parser/ft_get_map.c \
+				parser/ft_check_map.c \
+				parser/ft_set_player.c \
+				events/ft_close.c \
+				events/ft_key_event.c \
+				debug/ft_print_struct.c \
 
 INCS			=	cub3d.h \
 
@@ -51,8 +51,13 @@ INCS			=	cub3d.h \
 LIBFT_A			=	libft.a
 LIBFT_DIR		=	libft
 
+ifeq ($(OS), Linux)
 LIBMLX_A		=	libmlx.a
 LIBMLX_DIR		=	mlx
+else
+LIBMLX_A		=	libmlx.dylib
+LIBMLX_DIR		=	mlx_mac
+endif
 
 # **************************************************************************** #
 #       RULES                                                                  #
@@ -62,20 +67,16 @@ OBJS			=	$(addprefix $(SRCS_DIR)/,$(SRCS:.c=.o))
 %.o				:	%.c
 					$(CC) $(CFLAGS) -I $(INCS_DIR) -c $< -o $@
 
-ifeq ($(OS), Linux)
 $(NAME)			:	$(OBJS) $(LIBFT_A) $(LIBMLX_A)
-					$(CC) -o $@ $(OBJS) -I $(INCS_DIR) $(LIBFT_A) $(MLX_FLAGS)
-else
-$(NAME)			:	$(OBJS) $(LIBFT_A)
-					$(CC) -o $@ $(OBJS) -I $(INCS_DIR) $(LIBFT_A) $(MLX_FLAGS)
-endif
+					$(CC) -o $@ $(OBJS) -I $(INCS_DIR) $(LIBFT_A) $(LIBMLX_A)
 
 $(LIBFT_A)		:
 					make -C $(LIBFT_DIR) $(LIBFT_FLAGS)
 					mv $(LIBFT_DIR)/$(LIBFT_A) .
 
 $(LIBMLX_A)		:
-					make -C $(LIBMLX_DIR) $(MLX_FLAGS)
+					make -C $(LIBMLX_DIR)
+					mv $(LIBMLX_DIR)/$(LIBMLX_A) .
 
 all				:	$(NAME)
 
@@ -86,6 +87,8 @@ clean			:
 
 fclean			:	clean
 					$(RM) $(NAME)
+					$(RM) $(LIBFT_A)
+					$(RM) $(LIBMLX_A)
 					make fclean -C $(LIBFT_DIR)
 
 
