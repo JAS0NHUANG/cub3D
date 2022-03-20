@@ -61,10 +61,6 @@ int	ft_print_minimap(t_cub3d *cub3d)
 	t_img	*player_img;
 	t_img	*floor_img;
 
-	if (cub3d->images && cub3d->images->minimap_img != NULL)
-		mlx_destroy_image(cub3d->mlx_ptr, cub3d->images->minimap_img);
-	if (cub3d->images->player_img != NULL)
-		mlx_destroy_image(cub3d->mlx_ptr, cub3d->images->player_img);
 	mini_map_img = ft_create_tile(cub3d, 0x00AAAAAA, 10);
 	player_img = ft_create_tile(cub3d, 0x009F0000, 5);
 	floor_img = ft_create_tile(cub3d, 0x00000000, 10);
@@ -85,8 +81,6 @@ int	ft_print_minimap(t_cub3d *cub3d)
 		i++;
 	}
 	printf("print put image\n");
-	cub3d->images->minimap_img = mini_map_img;
-	cub3d->images->player_img= player_img;
 	return (0);
 }
 

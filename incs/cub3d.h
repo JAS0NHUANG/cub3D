@@ -4,7 +4,7 @@
 # ifdef __linux__
 #  include "../mlx/mlx.h"
 # else
-#  include <mlx.h>
+#  include "../mlx_mac/mlx.h"
 # endif
 
 # include <fcntl.h>
