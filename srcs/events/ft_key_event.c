@@ -73,11 +73,13 @@ int	ft_move_player(int key, t_cub3d *cub3d)
 	return (0);
 }
 
+/*
 int	ft_rotate_player(t_cub3d *cub3d)
 {
 
 
 }
+*/
 
 int	ft_key_event(int key, t_cub3d *cub3d)
 {
