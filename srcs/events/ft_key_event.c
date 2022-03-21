@@ -41,6 +41,7 @@ int	ft_move_player(int key, t_cub3d *cub3d)
 			cub3d->player->pos_y = player_to_y;
 			cub3d->map[(int)player_to_x][(int)player_to_y] = 'W';
 		}
+		clean_screen(cub3d);
 		ft_print_minimap(cub3d);
 		ft_print_struct(cub3d);
 	}
@@ -57,6 +58,7 @@ int	ft_move_player(int key, t_cub3d *cub3d)
 			cub3d->player->pos_y = player_to_y;
 			cub3d->map[(int)player_to_x][(int)player_to_y] = 'W';
 		}
+		clean_screen(cub3d);
 		ft_print_minimap(cub3d);
 		ft_print_struct(cub3d);
 	}
@@ -72,6 +74,7 @@ int	ft_move_player(int key, t_cub3d *cub3d)
 			cub3d->player->pos_x = player_to_x;
 			cub3d->player->pos_y = player_to_y;
 			cub3d->map[(int)player_to_x][(int)player_to_y] = 'W';
+			clean_screen(cub3d);
 			ft_print_minimap(cub3d);
 			ft_print_struct(cub3d);
 		}
@@ -88,6 +91,7 @@ int	ft_move_player(int key, t_cub3d *cub3d)
 			cub3d->player->pos_x = player_to_x;
 			cub3d->player->pos_y = player_to_y;
 			cub3d->map[(int)player_to_x][(int)player_to_y] = 'W';
+			clean_screen(cub3d);
 			ft_print_minimap(cub3d);
 			ft_print_struct(cub3d);
 		}
@@ -103,8 +107,10 @@ int	ft_rotate_player(t_cub3d *cub3d, int key)
 		cub3d->player->angle+=0.1;
 		if (cub3d->player->angle > 2 * PI)
 			cub3d->player->angle-= 2 * PI;
-		cub3d->player->dir_x = cos(cub3d->player->angle) * cub3d->player->pos_x;
-		cub3d->player->dir_y = sin(cub3d->player->angle) * cub3d->player->pos_y;
+		// cub3d->player->dir_x = cos(cub3d->player->angle) * cub3d->player->pos_x;
+		// cub3d->player->dir_y = sin(cub3d->player->angle) * cub3d->player->pos_y;
+		cub3d->player->dir_x = cos(cub3d->player->angle);
+		cub3d->player->dir_y = sin(cub3d->player->angle);
 		printf("here1, x=%f, y=%f\n",cub3d->player->dir_x,  cub3d->player->dir_y);
 	}
 	if (key == XK_Right)
@@ -112,8 +118,10 @@ int	ft_rotate_player(t_cub3d *cub3d, int key)
 		cub3d->player->angle-=0.1;
 		if (cub3d->player->angle < 0)
 			cub3d->player->angle+= 2 * PI;
-		cub3d->player->dir_x = cos(cub3d->player->angle) * cub3d->player->pos_x;
-		cub3d->player->dir_y = sin(cub3d->player->angle) * cub3d->player->pos_y;
+		cub3d->player->dir_x = cos(cub3d->player->angle);
+		cub3d->player->dir_y = sin(cub3d->player->angle);
+		// cub3d->player->dir_x = cos(cub3d->player->angle) * cub3d->player->pos_x;
+		// cub3d->player->dir_y = sin(cub3d->player->angle) * cub3d->player->pos_y;
 		printf("here2, x=%f, y=%f\n",cub3d->player->dir_x,  cub3d->player->dir_y);
 	}
 	clean_screen(cub3d);
