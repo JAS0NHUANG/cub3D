@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jahuang <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: ifeelbored <ifeelbored@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 14:50:11 by jahuang           #+#    #+#             */
-/*   Updated: 2022/03/18 15:20:58 by jahuang          ###   ########.fr       */
+/*   Updated: 2022/03/21 15:47:02 by ifeelbored       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,14 +72,21 @@ int	ft_print_minimap(t_cub3d *cub3d)
 		{
 			if (cub3d->map[i][j] == '1')
 				mlx_put_image_to_window(cub3d->mlx_ptr, cub3d->win_ptr, mini_map_img->img_ptr, j * 10 + 20, i * 10 + 20 );
-			if (cub3d->map[i][j] == 'W')
-				mlx_put_image_to_window(cub3d->mlx_ptr, cub3d->win_ptr, player_img->img_ptr, j * 10 + 20 + 2 , i * 10 + 20 + 2);
 			if (cub3d->map[i][j] == '0')
 				mlx_put_image_to_window(cub3d->mlx_ptr, cub3d->win_ptr, floor_img->img_ptr, j * 10 + 20, i * 10 + 20 );
+			if (cub3d->map[i][j] == 'W' || cub3d->map[i][j] == 'S' || cub3d->map[i][j] == 'A' || cub3d->map[i][j] == 'D')
+			{
+				mlx_put_image_to_window(cub3d->mlx_ptr, cub3d->win_ptr, player_img->img_ptr, j * 10 + 20 + 2 , i * 10 + 20 + 2);
+			}
+			// if (cub3d->map[i][j] == 'W')
+			// 	mlx_put_image_to_window(cub3d->mlx_ptr, cub3d->win_ptr, player_img->img_ptr, j * 10 + 20 + 2 , i * 10 + 20 + 2);
+			
 			j++;
 		}
 		i++;
 	}
+	mlx_put_image_to_window(cub3d->mlx_ptr, cub3d->win_ptr, player_img->img_ptr, cub3d->player->dir_x *10 +20, cub3d->player->dir_y*10+20);
+	printf("cub3d->player->dir_x :%f, cub3d->player->dir_y:%f\n",cub3d->player->dir_x, cub3d->player->dir_y);
 	printf("print put image\n");
 	return (0);
 }

@@ -4,23 +4,31 @@ void	ft_set_direction(t_cub3d *cub3d, char player_char)
 {
 	if (player_char == 'N')
 	{
-		cub3d->player->dir_x = -1;
-		cub3d->player->dir_y = 0;
+		cub3d->player->angle = PI / 2;
+		cub3d->player->dir_x = cub3d->player->pos_x -1;
+		cub3d->player->dir_y = cub3d->player->pos_y;
+		
 	}
 	else if (player_char == 'S')
 	{
-		cub3d->player->dir_x = 1;
-		cub3d->player->dir_y = 0;
+		cub3d->player->angle = 3 * PI / 2;
+		cub3d->player->dir_x = cub3d->player->pos_x + 1;
+		cub3d->player->dir_y = cub3d->player->pos_y;
+		
 	}
 	else if (player_char == 'W')
 	{
-		cub3d->player->dir_x = 0;
-		cub3d->player->dir_y = -1;
+		cub3d->player->angle = PI;
+		cub3d->player->dir_x = cub3d->player->pos_x;
+		cub3d->player->dir_y = cub3d->player->pos_y-1;
+		
 	}
 	else if (player_char == 'E')
 	{
-		cub3d->player->dir_x = 0;
-		cub3d->player->dir_y = 1;
+		cub3d->player->angle = 0;
+		cub3d->player->dir_x = cub3d->player->pos_x;
+		cub3d->player->dir_y = cub3d->player->pos_y+1;
+		
 	}
 	return ;
 }

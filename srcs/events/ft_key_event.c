@@ -1,4 +1,5 @@
 #include "cub3d.h"
+//#define PI 3.14159265359
 
 int	ft_move_player(int key, t_cub3d *cub3d)
 {
@@ -73,13 +74,31 @@ int	ft_move_player(int key, t_cub3d *cub3d)
 	return (0);
 }
 
-/*
-int	ft_rotate_player(t_cub3d *cub3d)
+
+int	ft_rotate_player(t_cub3d *cub3d, int key)
 {
+	if (key == XK_Left)
+	{
+		cub3d->player->angle+=0.1;
+		if (cub3d->player->angle > 2 * PI)
+			cub3d->player->angle-= 2 * PI;
+		cub3d->player->dir_x = cos(cub3d->player->angle) * cub3d->player->pos_x;
+		cub3d->player->dir_y = sin(cub3d->player->angle) * cub3d->player->pos_y;
+		printf("here1, x=%f, y=%f\n",cub3d->player->dir_x,  cub3d->player->dir_y);
+	}
+	if (key == XK_Right)
+	{
+		cub3d->player->angle-=0.1;
+		if (cub3d->player->angle < 0)
+			cub3d->player->angle+= 2 * PI;
+		cub3d->player->dir_x = cos(cub3d->player->angle) * cub3d->player->pos_x;
+		cub3d->player->dir_y = sin(cub3d->player->angle) * cub3d->player->pos_y;
+		printf("here2, x=%f, y=%f\n",cub3d->player->dir_x,  cub3d->player->dir_y);
+	}
 
-
+	return (0);
 }
-*/
+
 
 int	ft_key_event(int key, t_cub3d *cub3d)
 {
@@ -91,8 +110,9 @@ int	ft_key_event(int key, t_cub3d *cub3d)
 		ft_move_player(key, cub3d);
 	if (key == XK_Left || key == XK_Right)
 	{
-		ft_putstr_fd("rotate: ", 1);
-		ft_putnbr_fd(key, 1);
+		ft_rotate_player(cub3d, key);
+		// ft_putstr_fd("rotate: ", 1);
+		// ft_putnbr_fd(key, 1);
 	}
 	return (0);
 }

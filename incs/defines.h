@@ -20,6 +20,7 @@
 #  define XK_d 2
 #  define XK_Left 123
 #  define XK_Right 124
+#  define PI 3.14159265359
 # endif
 
 enum	err_codes

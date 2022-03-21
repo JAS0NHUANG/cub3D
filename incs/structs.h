@@ -49,6 +49,7 @@ typedef struct s_player
 	double	pos_y;
 	double	dir_x;
 	double	dir_y;
+	double	angle;
 	double	plane_x;
 	double	plane_y;
 	double	cam_height;
