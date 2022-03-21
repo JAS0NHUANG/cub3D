@@ -6,7 +6,7 @@
 /*   By: ifeelbored <ifeelbored@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 14:50:11 by jahuang           #+#    #+#             */
-/*   Updated: 2022/03/21 15:47:02 by ifeelbored       ###   ########.fr       */
+/*   Updated: 2022/03/21 16:32:01 by jahuang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,9 +60,11 @@ int	ft_print_minimap(t_cub3d *cub3d)
 	t_img	*mini_map_img;
 	t_img	*player_img;
 	t_img	*floor_img;
+	t_img	*dir_img;
 
 	mini_map_img = ft_create_tile(cub3d, 0x00AAAAAA, 10);
 	player_img = ft_create_tile(cub3d, 0x009F0000, 5);
+	dir_img = ft_create_tile(cub3d, 0x009F00FF, 5);
 	floor_img = ft_create_tile(cub3d, 0x00000000, 10);
 	i = 0;
 	while (i < ft_arraylen(cub3d->map))
@@ -80,12 +82,11 @@ int	ft_print_minimap(t_cub3d *cub3d)
 			}
 			// if (cub3d->map[i][j] == 'W')
 			// 	mlx_put_image_to_window(cub3d->mlx_ptr, cub3d->win_ptr, player_img->img_ptr, j * 10 + 20 + 2 , i * 10 + 20 + 2);
-			
 			j++;
 		}
 		i++;
 	}
-	mlx_put_image_to_window(cub3d->mlx_ptr, cub3d->win_ptr, player_img->img_ptr, cub3d->player->dir_x *10 +20, cub3d->player->dir_y*10+20);
+	mlx_put_image_to_window(cub3d->mlx_ptr, cub3d->win_ptr, dir_img->img_ptr, (cub3d->player->pos_y + cub3d->player->dir_y) * 10 + 20, (cub3d->player->pos_x - cub3d->player->dir_x) * 10 +20);
 	printf("cub3d->player->dir_x :%f, cub3d->player->dir_y:%f\n",cub3d->player->dir_x, cub3d->player->dir_y);
 	printf("print put image\n");
 	return (0);
