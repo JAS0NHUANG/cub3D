@@ -100,7 +100,7 @@ int	ft_run_cub3d(t_cub3d *cub3d)
 
 	ft_print_minimap(cub3d);
 
-	mlx_key_hook(cub3d->win_ptr, &ft_key_event, cub3d);
+	mlx_hook(cub3d->win_ptr, 2, 1l << 0, &ft_key_event, cub3d);
 	mlx_hook(cub3d->win_ptr, 17, 1l << 0, &ft_close, cub3d);
 	mlx_loop(cub3d->mlx_ptr);
 	return (0);

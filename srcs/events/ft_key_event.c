@@ -83,6 +83,7 @@ int	ft_rotate_player(t_cub3d *cub3d)
 
 int	ft_key_event(int key, t_cub3d *cub3d)
 {
+	
 	(void)cub3d;
 	if (key == XK_Escape)
 		ft_close(cub3d);
