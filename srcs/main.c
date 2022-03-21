@@ -6,7 +6,7 @@
 /*   By: ifeelbored <ifeelbored@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 14:50:11 by jahuang           #+#    #+#             */
-/*   Updated: 2022/03/21 16:32:01 by jahuang          ###   ########.fr       */
+/*   Updated: 2022/03/21 20:44:01 by ifeelbored       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,9 @@ int	ft_print_minimap(t_cub3d *cub3d)
 				mlx_put_image_to_window(cub3d->mlx_ptr, cub3d->win_ptr, floor_img->img_ptr, j * 10 + 20, i * 10 + 20 );
 			if (cub3d->map[i][j] == 'W' || cub3d->map[i][j] == 'S' || cub3d->map[i][j] == 'A' || cub3d->map[i][j] == 'D')
 			{
-				mlx_put_image_to_window(cub3d->mlx_ptr, cub3d->win_ptr, player_img->img_ptr, j * 10 + 20 + 2 , i * 10 + 20 + 2);
+				mlx_put_image_to_window(cub3d->mlx_ptr, cub3d->win_ptr, player_img->img_ptr, cub3d->player->pos_y * 10 + 20 , cub3d->player->pos_x * 10 + 20 );
+				printf("j:%d, i:%d, j * 10 + 20 + 2 :%d, i * 10 + 20 + 2:%d\n",j, i, j * 10 + 20 + 2, i * 10 + 20 + 2);
+				printf("cub3d->player->p_x:%f, cub3d->player->p_y:%f\n",cub3d->player->pos_x, cub3d->player->pos_y);
 			}
 			// if (cub3d->map[i][j] == 'W')
 			// 	mlx_put_image_to_window(cub3d->mlx_ptr, cub3d->win_ptr, player_img->img_ptr, j * 10 + 20 + 2 , i * 10 + 20 + 2);
@@ -86,8 +88,8 @@ int	ft_print_minimap(t_cub3d *cub3d)
 		}
 		i++;
 	}
-	mlx_put_image_to_window(cub3d->mlx_ptr, cub3d->win_ptr, dir_img->img_ptr, (cub3d->player->pos_y + cub3d->player->dir_y) * 10 + 20, (cub3d->player->pos_x - cub3d->player->dir_x) * 10 +20);
-	printf("cub3d->player->dir_x :%f, cub3d->player->dir_y:%f\n",cub3d->player->dir_x, cub3d->player->dir_y);
+	mlx_put_image_to_window(cub3d->mlx_ptr, cub3d->win_ptr, dir_img->img_ptr, (cub3d->player->pos_y + cub3d->player->dir_y)* 10 +20 -2 ,(cub3d->player->pos_x + cub3d->player->dir_x)* 10 + 20 -2) ;
+	//printf("cub3d->player->d_x :%f, cub3d->player->d_y:%f\n",(cub3d->player->pos_y + cub3d->player->dir_y) * 10 + 20 + 2, (cub3d->player->pos_x + cub3d->player->dir_x) * 10 +20 + 2);
 	printf("print put image\n");
 	return (0);
 }

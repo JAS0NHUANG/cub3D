@@ -1,6 +1,27 @@
 #include "cub3d.h"
 //#define PI 3.14159265359
 
+int clean_screen(t_cub3d *cub3d)
+{
+	t_img	*dark_img;
+	int i;
+	int j;
+
+	dark_img = ft_create_tile(cub3d, 0x00000000, 10);
+	i = 0;
+	while (i < ft_arraylen(cub3d->map))
+	{
+		j = 0;
+		while (j < (int)ft_strlen((cub3d->map)[i]))
+		{
+
+			mlx_put_image_to_window(cub3d->mlx_ptr, cub3d->win_ptr, dark_img->img_ptr, j * 10 + 20, i * 10 + 20 );
+			j++;
+		}
+		i++;
+	}
+	return (0);
+}
 int	ft_move_player(int key, t_cub3d *cub3d)
 {
 	float	player_to_x;
@@ -95,7 +116,8 @@ int	ft_rotate_player(t_cub3d *cub3d, int key)
 		cub3d->player->dir_y = sin(cub3d->player->angle) * cub3d->player->pos_y;
 		printf("here2, x=%f, y=%f\n",cub3d->player->dir_x,  cub3d->player->dir_y);
 	}
-
+	clean_screen(cub3d);
+	ft_print_minimap(cub3d);
 	return (0);
 }
 
