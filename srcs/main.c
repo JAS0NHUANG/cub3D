@@ -6,26 +6,11 @@
 /*   By: ifeelbored <ifeelbored@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 14:50:11 by jahuang           #+#    #+#             */
-/*   Updated: 2022/03/21 20:44:01 by ifeelbored       ###   ########.fr       */
+/*   Updated: 2022/03/22 16:30:48 by jahuang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-void	*ft_memcpy(void *dst, const void *src, size_t n)
-{
-	size_t	i;
-
-	i = 0;
-	if (!dst && !src)
-		return (NULL);
-	while (i < n)
-	{
-		((unsigned char *)dst)[i] = ((unsigned char *)src)[i];
-		i++;
-	}
-	return (dst);
-}
 
 
 t_img	*ft_create_tile(t_cub3d *cub3d, unsigned int color, int size)
@@ -76,21 +61,12 @@ int	ft_print_minimap(t_cub3d *cub3d)
 				mlx_put_image_to_window(cub3d->mlx_ptr, cub3d->win_ptr, mini_map_img->img_ptr, j * 10 + 20, i * 10 + 20 );
 			if (cub3d->map[i][j] == '0')
 				mlx_put_image_to_window(cub3d->mlx_ptr, cub3d->win_ptr, floor_img->img_ptr, j * 10 + 20, i * 10 + 20 );
-			if (cub3d->map[i][j] == 'W' || cub3d->map[i][j] == 'S' || cub3d->map[i][j] == 'A' || cub3d->map[i][j] == 'D')
-			{
-				mlx_put_image_to_window(cub3d->mlx_ptr, cub3d->win_ptr, player_img->img_ptr, cub3d->player->pos_y * 10 + 20 , cub3d->player->pos_x * 10 + 20 );
-				printf("j:%d, i:%d, j * 10 + 20 + 2 :%d, i * 10 + 20 + 2:%d\n",j, i, j * 10 + 20 + 2, i * 10 + 20 + 2);
-				printf("cub3d->player->p_x:%f, cub3d->player->p_y:%f\n",cub3d->player->pos_x, cub3d->player->pos_y);
-			}
-			// if (cub3d->map[i][j] == 'W')
-			// 	mlx_put_image_to_window(cub3d->mlx_ptr, cub3d->win_ptr, player_img->img_ptr, j * 10 + 20 + 2 , i * 10 + 20 + 2);
 			j++;
 		}
 		i++;
 	}
+	mlx_put_image_to_window(cub3d->mlx_ptr, cub3d->win_ptr, player_img->img_ptr, cub3d->player->pos_y * 10 + 20 - 2, cub3d->player->pos_x * 10 + 20 - 2);
 	mlx_put_image_to_window(cub3d->mlx_ptr, cub3d->win_ptr, dir_img->img_ptr, (cub3d->player->pos_y + cub3d->player->dir_y)* 10 +20 -2 ,(cub3d->player->pos_x + cub3d->player->dir_x)* 10 + 20 -2) ;
-	//printf("cub3d->player->d_x :%f, cub3d->player->d_y:%f\n",(cub3d->player->pos_y + cub3d->player->dir_y) * 10 + 20 + 2, (cub3d->player->pos_x + cub3d->player->dir_x) * 10 +20 + 2);
-	printf("print put image\n");
 	return (0);
 }
 
@@ -108,6 +84,7 @@ int	ft_run_cub3d(t_cub3d *cub3d)
 	cub3d->images->player_img = NULL;
 
 
+	ft_print_canvas(cub3d);
 	ft_print_minimap(cub3d);
 
 	mlx_hook(cub3d->win_ptr, 2, 1l << 0, &ft_key_event, cub3d);

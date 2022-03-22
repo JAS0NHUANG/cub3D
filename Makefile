@@ -31,6 +31,7 @@ SRCS_DIR		=	srcs
 INCS_DIR		=	incs
 
 SRCS			=	main.c \
+				ft_print_canvas.c \
 				utils/ft_return.c \
 				utils/ft_free_cub3d.c \
 				parser/ft_parser.c \

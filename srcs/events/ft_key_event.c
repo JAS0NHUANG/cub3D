@@ -42,8 +42,6 @@ int	ft_move_player(int key, t_cub3d *cub3d)
 			cub3d->map[(int)player_to_x][(int)player_to_y] = 'W';
 		}
 		clean_screen(cub3d);
-		ft_print_minimap(cub3d);
-		ft_print_struct(cub3d);
 	}
 	if (key == XK_s)
 	{
@@ -59,8 +57,6 @@ int	ft_move_player(int key, t_cub3d *cub3d)
 			cub3d->map[(int)player_to_x][(int)player_to_y] = 'W';
 		}
 		clean_screen(cub3d);
-		ft_print_minimap(cub3d);
-		ft_print_struct(cub3d);
 	}
 	if (key == XK_a)
 	{
@@ -75,8 +71,6 @@ int	ft_move_player(int key, t_cub3d *cub3d)
 			cub3d->player->pos_y = player_to_y;
 			cub3d->map[(int)player_to_x][(int)player_to_y] = 'W';
 			clean_screen(cub3d);
-			ft_print_minimap(cub3d);
-			ft_print_struct(cub3d);
 		}
 	}
 	if (key == XK_d)
@@ -92,10 +86,10 @@ int	ft_move_player(int key, t_cub3d *cub3d)
 			cub3d->player->pos_y = player_to_y;
 			cub3d->map[(int)player_to_x][(int)player_to_y] = 'W';
 			clean_screen(cub3d);
-			ft_print_minimap(cub3d);
-			ft_print_struct(cub3d);
 		}
 	}
+	ft_print_canvas(cub3d);
+	ft_print_minimap(cub3d);
 	return (0);
 }
 
@@ -125,6 +119,7 @@ int	ft_rotate_player(t_cub3d *cub3d, int key)
 		printf("here2, x=%f, y=%f\n",cub3d->player->dir_x,  cub3d->player->dir_y);
 	}
 	clean_screen(cub3d);
+	ft_print_canvas(cub3d);
 	ft_print_minimap(cub3d);
 	return (0);
 }

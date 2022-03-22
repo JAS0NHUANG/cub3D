@@ -37,6 +37,7 @@ void	ft_set_player(t_cub3d *cub3d);
 void	ft_print_struct(t_cub3d *cub_3d);
 t_img	*ft_create_tile(t_cub3d *cub3d, unsigned int color, int size);
 int		ft_print_minimap(t_cub3d *cub_3d);
+int		ft_print_canvas(t_cub3d *cub_3d);
 
 /******************************************************************************/
 /* MLX Event functions														  */

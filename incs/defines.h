@@ -3,6 +3,7 @@
 
 # define ROT_SPEED 0.10
 # define MOVE_DIST 0.10
+#  define PI 3.14159265359
 
 # ifdef __linux__
 #  define XK_Escape 0xff1b
@@ -20,7 +21,6 @@
 #  define XK_d 2
 #  define XK_Left 123
 #  define XK_Right 124
-#  define PI 3.14159265359
 # endif
 
 enum	err_codes
