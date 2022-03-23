@@ -1,5 +1,17 @@
-#ifndef STRUCT_H
-# define STRUCT_H
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   structs.h                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ifeelbored <ifeelbored@student.42.fr>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/03/23 21:32:52 by ifeelbored        #+#    #+#             */
+/*   Updated: 2022/03/23 21:33:44 by ifeelbored       ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#ifndef STRUCTS_H
+# define STRUCTS_H
 
 typedef struct s_cub3d
 {

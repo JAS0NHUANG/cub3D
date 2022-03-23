@@ -14,7 +14,7 @@ NAME			=	cub3D
 #       FLAGS                                                                  #
 # **************************************************************************** #
 OS			=	$(shell uname)
-CFLAGS			=	-Wall -Wextra -Werror
+CFLAGS			=	-Wall -Wextra -Werror 
 FSAN			=	-fsanitize=address
 DEBUG			=	-g3
 
@@ -66,10 +66,10 @@ endif
 OBJS			=	$(addprefix $(SRCS_DIR)/,$(SRCS:.c=.o))
 
 %.o				:	%.c
-					$(CC) $(CFLAGS) -I $(INCS_DIR) -c $< -o $@
+					$(CC) $(CFLAGS) -I $(INCS_DIR) -c $< -o $@ 
 
 $(NAME)			:	$(OBJS) $(LIBFT_A) $(LIBMLX_A)
-					$(CC) -o $@ $(OBJS) -I $(INCS_DIR) $(LIBFT_A) $(LIBMLX_A)
+					$(CC) -o $@ $(OBJS) -I $(INCS_DIR) $(LIBFT_A) $(LIBMLX_A) $(FSAN) $(DEBUG)
 
 $(LIBFT_A)		:
 					make -C $(LIBFT_DIR) $(LIBFT_FLAGS)

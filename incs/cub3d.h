@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cub3d.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ifeelbored <ifeelbored@student.42.fr>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/03/23 21:28:06 by ifeelbored        #+#    #+#             */
+/*   Updated: 2022/03/23 21:29:15 by ifeelbored       ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef CUB3D_H
 # define CUB3D_H
 
@@ -30,7 +42,6 @@ int		ft_check_info(t_info *info);
 int		ft_get_map(int fd, t_cub3d **cub3d);
 int		ft_check_map(char **map);
 void	ft_set_player(t_cub3d *cub3d);
-
 /******************************************************************************/
 /* Debug functions															  */
 /******************************************************************************/
@@ -42,7 +53,7 @@ int		ft_print_canvas(t_cub3d *cub_3d);
 /******************************************************************************/
 /* MLX Event functions														  */
 /******************************************************************************/
-int	ft_key_event(int key, t_cub3d *cub3d);
-int	ft_close(t_cub3d *cub3d);
+int		ft_key_event(int key, t_cub3d *cub3d);
+int		ft_close(t_cub3d *cub3d);
 
 #endif
