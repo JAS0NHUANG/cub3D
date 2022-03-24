@@ -6,7 +6,7 @@
 /*   By: ifeelbored <ifeelbored@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 14:50:11 by jahuang           #+#    #+#             */
-/*   Updated: 2022/03/22 16:30:48 by jahuang          ###   ########.fr       */
+/*   Updated: 2022/03/25 00:11:54 by ifeelbored       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,8 @@ int	ft_print_minimap(t_cub3d *cub3d)
 		}
 		i++;
 	}
-	mlx_put_image_to_window(cub3d->mlx_ptr, cub3d->win_ptr, player_img->img_ptr, cub3d->player->pos_y * 10 + 20 - 2, cub3d->player->pos_x * 10 + 20 - 2);
-	mlx_put_image_to_window(cub3d->mlx_ptr, cub3d->win_ptr, dir_img->img_ptr, (cub3d->player->pos_y + cub3d->player->dir_y)* 10 +20 -2 ,(cub3d->player->pos_x + cub3d->player->dir_x)* 10 + 20 -2) ;
+	mlx_put_image_to_window(cub3d->mlx_ptr, cub3d->win_ptr, player_img->img_ptr, cub3d->plr->p_y * 10 + 20 - 2, cub3d->plr->p_x * 10 + 20 - 2);
+	mlx_put_image_to_window(cub3d->mlx_ptr, cub3d->win_ptr, dir_img->img_ptr, (cub3d->plr->p_y + cub3d->plr->d_y)* 10 +20 -2 ,(cub3d->plr->p_x + cub3d->plr->d_x)* 10 + 20 -2);
 	return (0);
 }
 

@@ -6,7 +6,7 @@ int	ft_print_canvas(t_cub3d *cub3d)
 	t_img	*canvas;
 	t_player *player;
 
-	player = cub3d->player;
+	player = cub3d->plr;
 
 	canvas = malloc(sizeof(t_img));
 	canvas->img_ptr = mlx_new_image(cub3d->mlx_ptr, 1024, 768);
@@ -17,11 +17,11 @@ int	ft_print_canvas(t_cub3d *cub3d)
 	{
 		double camera_x = 2 * x / 1024 - 1;
 		printf("camera_x: %f\n", camera_x);
-		double ray_dir_x = player->dir_x + player->plane_x * camera_x;
-		double ray_dir_y = player->dir_y + player->plane_y * camera_x;
+		double ray_dir_x = player->d_x + player->pl_x * camera_x;
+		double ray_dir_y = player->d_y + player->pl_y * camera_x;
 
-		int	map_x = (int)(player->pos_x);
-		int	map_y = (int)(player->pos_y);
+		int	map_x = (int)(player->p_x);
+		int	map_y = (int)(player->p_y);
 
 		double side_dist_x;
 		double side_dist_y;
@@ -40,22 +40,22 @@ int	ft_print_canvas(t_cub3d *cub3d)
 		if (ray_dir_x < 0)
 		{
 			step_x = -1;
-			side_dist_x = (player->pos_x - map_x) * delta_dist_x;
+			side_dist_x = (player->p_x - map_x) * delta_dist_x;
 		}
 		else
 		{
 			step_x = 1;
-			side_dist_x = (map_x + 1.0 - player->pos_x) * delta_dist_x;
+			side_dist_x = (map_x + 1.0 - player->p_x) * delta_dist_x;
 		}
 		if (ray_dir_y < 0)
 		{
 			step_y = -1;
-			side_dist_y = (player->pos_y - map_y) * delta_dist_y;
+			side_dist_y = (player->p_y - map_y) * delta_dist_y;
 		}
 		else
 		{
 			step_y = 1;
-			side_dist_y = (map_y + 1.0 - player->pos_y) * delta_dist_y;
+			side_dist_y = (map_y + 1.0 - player->p_y) * delta_dist_y;
 		}
 
 		int	hit = 0;

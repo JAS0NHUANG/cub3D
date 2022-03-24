@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_print_struct.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jahuang <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: ifeelbored <ifeelbored@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 14:49:27 by jahuang           #+#    #+#             */
-/*   Updated: 2022/03/17 15:40:59 by jahuang          ###   ########.fr       */
+/*   Updated: 2022/03/25 00:11:50 by ifeelbored       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,14 +55,14 @@ void	ft_print_info(t_info *info)
 void	ft_print_player(t_player *player)
 {
 	ft_putstr_fd("player pos_x: ", 1);
-	printf("%f\n", player->pos_x);
+	printf("%f\n", player->p_x);
 	ft_putstr_fd("player pos_y: ", 1);
-	printf("%f\n", player->pos_y);
+	printf("%f\n", player->p_y);
 
 	ft_putstr_fd("player dir_x: ", 1);
-	printf("%f\n", player->dir_x);
+	printf("%f\n", player->d_x);
 	ft_putstr_fd("player dir_y: ", 1);
-	printf("%f\n", player->dir_y);
+	printf("%f\n", player->d_y);
 }
 
 void	ft_print_struct(t_cub3d *cub_3d)
@@ -85,9 +85,9 @@ void	ft_print_struct(t_cub3d *cub_3d)
 		ft_putstr_fd("No info.\n", 1);
 	else
 		ft_print_info(cub_3d->info);
-	if (!cub_3d->player)
+	if (!cub_3d->plr)
 		ft_putstr_fd("No player.\n", 1);
 	else
-		ft_print_player(cub_3d->player);
+		ft_print_player(cub_3d->plr);
 	return ;
 }

@@ -6,7 +6,7 @@
 /*   By: ifeelbored <ifeelbored@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 21:32:52 by ifeelbored        #+#    #+#             */
-/*   Updated: 2022/03/23 21:33:44 by ifeelbored       ###   ########.fr       */
+/*   Updated: 2022/03/25 00:16:48 by ifeelbored       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ typedef struct s_cub3d
 	void			*win_ptr;
 	struct s_images	*images;
 	struct s_info	*info;
-	struct s_player	*player;
+	struct s_player	*plr;
 }	t_cub3d;
 
 typedef struct s_img
@@ -57,13 +57,13 @@ typedef struct s_info
 
 typedef struct s_player
 {
-	double	pos_x;
-	double	pos_y;
-	double	dir_x;
-	double	dir_y;
+	double	p_x;//pos
+	double	p_y;
+	double	d_x;//dir
+	double	d_y;
 	double	angle;
-	double	plane_x;
-	double	plane_y;
+	double	pl_x; //plane
+	double	pl_y;
 	double	cam_height;
 }	t_player;
 

@@ -44,7 +44,7 @@ void	ft_free_cub3d(t_cub3d *cub3d)
 	{
 		ft_free_map(cub3d->map);
 		ft_free_info(cub3d->info);
-		ft_free_player(cub3d->player);
+		ft_free_player(cub3d->plr);
 		ft_free_images(cub3d->images);
 		ft_free_mlx(cub3d);
 	}
