@@ -6,7 +6,7 @@
 /*   By: ifeelbored <ifeelbored@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 21:29:37 by ifeelbored        #+#    #+#             */
-/*   Updated: 2022/03/23 21:32:03 by ifeelbored       ###   ########.fr       */
+/*   Updated: 2022/03/26 10:56:58 by ifeelbored       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,11 @@
 #  define XK_D 2
 #  define XK_LEFT 123
 #  define XK_RIGHT 124
+
+#  define texWidth 64
+#  define texHeight 64
+#  define S_W 640
+#  define S_H 480
 # endif
 
 enum	e_err_codes

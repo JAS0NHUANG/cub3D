@@ -6,7 +6,7 @@
 /*   By: ifeelbored <ifeelbored@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 21:28:06 by ifeelbored        #+#    #+#             */
-/*   Updated: 2022/03/23 21:29:15 by ifeelbored       ###   ########.fr       */
+/*   Updated: 2022/03/26 22:45:36 by ifeelbored       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,4 +56,5 @@ int		ft_print_canvas(t_cub3d *cub_3d);
 int		ft_key_event(int key, t_cub3d *cub3d);
 int		ft_close(t_cub3d *cub3d);
 
+int init_texture(t_cub3d *cub);
 #endif

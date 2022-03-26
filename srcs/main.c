@@ -6,7 +6,7 @@
 /*   By: ifeelbored <ifeelbored@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 14:50:11 by jahuang           #+#    #+#             */
-/*   Updated: 2022/03/25 00:11:54 by ifeelbored       ###   ########.fr       */
+/*   Updated: 2022/03/26 23:27:35 by ifeelbored       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,13 +75,17 @@ int	ft_run_cub3d(t_cub3d *cub3d)
 	cub3d->mlx_ptr = mlx_init();
 	if (!cub3d->mlx_ptr)
 		return (ERR_MLX);
-	cub3d->win_ptr = mlx_new_window(cub3d->mlx_ptr, 1024, 768,
+	cub3d->win_ptr = mlx_new_window(cub3d->mlx_ptr, S_W, S_H,
 			"cub3d");
 	if (!cub3d->win_ptr)
 		return (ERR_MLX);
 	cub3d->images = malloc(sizeof(t_images));
 	cub3d->images->minimap_img = NULL;
 	cub3d->images->player_img = NULL;
+	// cub3d->images->no_texture = NULL;
+	// cub3d->images->so_texture = NULL;
+	// cub3d->images->we_texture = NULL;
+	// cub3d->images->ea_texture = NULL;
 
 
 	ft_print_canvas(cub3d);
@@ -106,6 +110,7 @@ int	main(int ac, char **av)
 		return (ft_return(ret, cub3d));
 
 	ft_print_struct(cub3d);
-	ft_run_cub3d(cub3d);
+	init_texture(cub3d);
+	// ft_run_cub3d(cub3d);
 	return (ft_return(ret, cub3d));
 }

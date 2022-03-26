@@ -9,13 +9,13 @@ int	ft_print_canvas(t_cub3d *cub3d)
 	player = cub3d->plr;
 
 	canvas = malloc(sizeof(t_img));
-	canvas->img_ptr = mlx_new_image(cub3d->mlx_ptr, 1024, 768);
+	canvas->img_ptr = mlx_new_image(cub3d->mlx_ptr, S_W, S_H);
 	canvas->img_addr = mlx_get_data_addr(canvas->img_ptr, &(canvas->bpp), &(canvas->size), &(canvas->endian));
 
 	x = 0.00;
-	while (x <= 1024)
+	while (x <= S_W)
 	{
-		double camera_x = 2 * x / 1024 - 1;
+		double camera_x = 2 * x / S_W - 1;
 		printf("camera_x: %f\n", camera_x);
 		double ray_dir_x = player->d_x + player->pl_x * camera_x;
 		double ray_dir_y = player->d_y + player->pl_y * camera_x;
@@ -94,9 +94,9 @@ int	ft_print_canvas(t_cub3d *cub3d)
 		char *pixel;
 		int color = 0x0000FF00;
 		int	color_1 = 0x0000AA00;
-		while (y <= 768)
+		while (y <= S_H)
 		{
-			if (y > 384 - (int)((768 / perp_wall_dist) / 2) && y < 384 + (int)((768 / perp_wall_dist) / 2))
+			if (y > S_H/2 - (int)((S_H / perp_wall_dist) / 2) && y < S_H/2 + (int)((S_H / perp_wall_dist) / 2))
 			{
 				pixel = canvas->img_addr + ((int)(y) * canvas->size) + (int)x * (canvas->bpp / 8);
 				if (side == 0)

@@ -43,6 +43,7 @@ SRCS			=	main.c \
 				events/ft_close.c \
 				events/ft_key_event.c \
 				debug/ft_print_struct.c \
+				texture.c \
 
 INCS			=	cub3d.h \
 
