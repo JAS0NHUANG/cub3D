@@ -6,7 +6,7 @@
 /*   By: ifeelbored <ifeelbored@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 21:29:37 by ifeelbored        #+#    #+#             */
-/*   Updated: 2022/03/26 10:56:58 by ifeelbored       ###   ########.fr       */
+/*   Updated: 2022/03/27 10:37:05 by ifeelbored       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 # define ROT_SPEED 0.10
 # define MOVE_DIST 0.10
-# define PI 3.14159265359
 
 # ifdef __LINUX__
 #  define XK_ESCAPE 0xff1b

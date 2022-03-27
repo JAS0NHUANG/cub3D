@@ -6,7 +6,7 @@
 /*   By: ifeelbored <ifeelbored@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 21:32:52 by ifeelbored        #+#    #+#             */
-/*   Updated: 2022/03/26 23:27:14 by ifeelbored       ###   ########.fr       */
+/*   Updated: 2022/03/27 10:37:10 by ifeelbored       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,9 @@ typedef struct s_img
 	int		endian;
 	int		width;
 	int		height;
-	int			x;
-	int			y;
+	// int			x;
+	// int			y;
+
 
 }	t_img;
 
@@ -49,10 +50,10 @@ typedef struct s_images
 	t_img		*window_img;
 	t_img		*minimap_img;
 	t_img		*player_img;
-	t_img		no_texture;
-	t_img		so_texture;
-	t_img		we_texture;
-	t_img		ea_texture;
+	t_img		*no_texture;
+	t_img		*so_texture;
+	t_img		*we_texture;
+	t_img		*ea_texture;
 }	t_images;
 
 typedef struct s_info

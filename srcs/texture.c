@@ -4,12 +4,16 @@ int init_texture(t_cub3d *cub)
 {
     int x;
     int y;
+    t_img	*no;
+    
+    no = malloc(sizeof(t_img));
     //void *p;
     printf("OK!00000\n");
     //printf("cub->images->no_texture:%p\n", cub->images->no_texture.img_ptr);
     printf("ad:%s\n",cub->info->no);
-    cub->images->no_texture.img_ptr = mlx_xpm_file_to_image(cub->mlx_ptr, cub->info->no, &x, &y);
+    no->img_ptr = mlx_xpm_file_to_image(cub->mlx_ptr, cub->info->no, &x, &y);
     printf("OK!1111\n");
+    cub->images->no_texture->img_ptr = no->img_ptr;
     // cub->images->so_texture = mlx_xpm_file_to_image(cub->mlx_ptr, cub->info->so, &cub->images->so_texture->x, &cub->images->so_texture->y);
     // cub->images->we_texture = mlx_xpm_file_to_image(cub->mlx_ptr, cub->info->we, &cub->images->we_texture->x, &cub->images->we_texture->y);
     // cub->images->ea_texture = mlx_xpm_file_to_image(cub->mlx_ptr, cub->info->ea, &cub->images->ea_texture->x, &cub->images->ea_texture->y);

@@ -6,7 +6,7 @@
 /*   By: ifeelbored <ifeelbored@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 14:50:11 by jahuang           #+#    #+#             */
-/*   Updated: 2022/03/26 23:27:35 by ifeelbored       ###   ########.fr       */
+/*   Updated: 2022/03/27 10:33:40 by ifeelbored       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,10 +82,10 @@ int	ft_run_cub3d(t_cub3d *cub3d)
 	cub3d->images = malloc(sizeof(t_images));
 	cub3d->images->minimap_img = NULL;
 	cub3d->images->player_img = NULL;
-	// cub3d->images->no_texture = NULL;
-	// cub3d->images->so_texture = NULL;
-	// cub3d->images->we_texture = NULL;
-	// cub3d->images->ea_texture = NULL;
+	cub3d->images->no_texture = malloc(sizeof(t_img));
+	cub3d->images->so_texture = malloc(sizeof(t_img));
+	cub3d->images->we_texture = malloc(sizeof(t_img));
+	cub3d->images->ea_texture = malloc(sizeof(t_img));
 
 
 	ft_print_canvas(cub3d);
@@ -111,6 +111,6 @@ int	main(int ac, char **av)
 
 	ft_print_struct(cub3d);
 	init_texture(cub3d);
-	// ft_run_cub3d(cub3d);
+	ft_run_cub3d(cub3d);
 	return (ft_return(ret, cub3d));
 }
