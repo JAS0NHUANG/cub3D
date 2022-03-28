@@ -140,11 +140,12 @@ int	ft_print_canvas(t_cub3d *cub3d)
 		char *pixel;
 		printf("here\n %d\n", texture->size);
 		printf("cub:%d\n", cub3d->images->so.size);
+		printf("img_ptr:%d\n", (int)cub3d->images->so.img_ptr);
 		while (y < drawEnd && y < S_W)
       	{
         	int texY = (int)texPos & (texture->h - 1);
-			printf("here1%p\n",texture->img_addr);
-			int color = ((int *)texture->img_addr)[(texture->size / 4) * texY + texX];
+			printf("here1%s\n",texture->img_addr);
+			int color = ((int *)texture->img_addr)[(256 / 4) * texY + texX];
 			printf("here2\n");
 			pixel = canvas->img_addr + ((int)(y) * canvas->size) + (int)x * (canvas->bpp / 8);
 			*(unsigned int *)pixel = color;
