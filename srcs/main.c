@@ -6,21 +6,21 @@
 /*   By: ifeelbored <ifeelbored@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 14:50:11 by jahuang           #+#    #+#             */
-/*   Updated: 2022/03/27 10:33:40 by ifeelbored       ###   ########.fr       */
+/*   Updated: 2022/03/28 15:25:13 by ifeelbored       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
 
-t_img	*ft_create_tile(t_cub3d *cub3d, unsigned int color, int size)
+t_my_img	*ft_create_tile(t_cub3d *cub3d, unsigned int color, int size)
 {
-	t_img	*img_holder;
+	t_my_img	*img_holder;
 	int		i;
 	int		j;
 	char	*pixel;
 
-	img_holder = malloc(sizeof(t_img));
+	img_holder = malloc(sizeof(t_my_img));
 	img_holder->img_ptr = mlx_new_image(cub3d->mlx_ptr, size, size);
 	img_holder->img_addr = mlx_get_data_addr(img_holder->img_ptr, &(img_holder->bpp), &(img_holder->size), &(img_holder->endian));
 	i = 0;
@@ -42,10 +42,10 @@ int	ft_print_minimap(t_cub3d *cub3d)
 {
 	int		i;
 	int		j;
-	t_img	*mini_map_img;
-	t_img	*player_img;
-	t_img	*floor_img;
-	t_img	*dir_img;
+	t_my_img	*mini_map_img;
+	t_my_img	*player_img;
+	t_my_img	*floor_img;
+	t_my_img	*dir_img;
 
 	mini_map_img = ft_create_tile(cub3d, 0x00AAAAAA, 10);
 	player_img = ft_create_tile(cub3d, 0x009F0000, 5);
@@ -72,7 +72,7 @@ int	ft_print_minimap(t_cub3d *cub3d)
 
 int	ft_run_cub3d(t_cub3d *cub3d)
 {
-	cub3d->mlx_ptr = mlx_init();
+	//cub3d->mlx_ptr = mlx_init();
 	if (!cub3d->mlx_ptr)
 		return (ERR_MLX);
 	cub3d->win_ptr = mlx_new_window(cub3d->mlx_ptr, S_W, S_H,
@@ -82,10 +82,6 @@ int	ft_run_cub3d(t_cub3d *cub3d)
 	cub3d->images = malloc(sizeof(t_images));
 	cub3d->images->minimap_img = NULL;
 	cub3d->images->player_img = NULL;
-	cub3d->images->no_texture = malloc(sizeof(t_img));
-	cub3d->images->so_texture = malloc(sizeof(t_img));
-	cub3d->images->we_texture = malloc(sizeof(t_img));
-	cub3d->images->ea_texture = malloc(sizeof(t_img));
 
 
 	ft_print_canvas(cub3d);
@@ -110,6 +106,7 @@ int	main(int ac, char **av)
 		return (ft_return(ret, cub3d));
 
 	ft_print_struct(cub3d);
+	cub3d->mlx_ptr = mlx_init();
 	init_texture(cub3d);
 	ft_run_cub3d(cub3d);
 	return (ft_return(ret, cub3d));

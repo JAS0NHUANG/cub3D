@@ -6,7 +6,7 @@
 /*   By: ifeelbored <ifeelbored@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 21:32:52 by ifeelbored        #+#    #+#             */
-/*   Updated: 2022/03/27 10:37:10 by ifeelbored       ###   ########.fr       */
+/*   Updated: 2022/03/28 22:15:16 by ifeelbored       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,11 @@ typedef struct s_img
 	int		bpp;
 	int		size;
 	int		endian;
-	int		width;
-	int		height;
+	int		w;
+	int		h;
 	// int			x;
 	// int			y;
-
-
-}	t_img;
+}	t_my_img;
 
 // typedef struct s_texture
 // {
@@ -47,13 +45,13 @@ typedef struct s_img
 
 typedef struct s_images
 {
-	t_img		*window_img;
-	t_img		*minimap_img;
-	t_img		*player_img;
-	t_img		*no_texture;
-	t_img		*so_texture;
-	t_img		*we_texture;
-	t_img		*ea_texture;
+	t_my_img		*window_img;
+	t_my_img		*minimap_img;
+	t_my_img		*player_img;
+	t_my_img		no;
+	t_my_img		so;
+	t_my_img		we;
+	t_my_img		ea;
 }	t_images;
 
 typedef struct s_info
@@ -78,8 +76,21 @@ typedef struct s_player
 	double	cam_height;
 }	t_player;
 
+
+
 typedef struct s_ray
 {
+	double	dir_x;
+	double	dir_y;
+	double	side_dist_x;
+	double	side_dist_y;
+	double	delta_dist_x;
+	double	delta_dist_y;
+	double		perp_wall_dist;
+	int			step_x;
+	int			step_y;
+	//int			real_line_h;
+	int			side;
+	double		wall_x;
 }	t_ray;
-
 #endif

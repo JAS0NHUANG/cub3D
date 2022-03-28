@@ -2,29 +2,26 @@
 
 int init_texture(t_cub3d *cub)
 {
-    int x;
-    int y;
-    t_img	*no;
-    
-    no = malloc(sizeof(t_img));
-    //void *p;
-    printf("OK!00000\n");
-    //printf("cub->images->no_texture:%p\n", cub->images->no_texture.img_ptr);
-    printf("ad:%s\n",cub->info->no);
-    no->img_ptr = mlx_xpm_file_to_image(cub->mlx_ptr, cub->info->no, &x, &y);
-    printf("OK!1111\n");
-    cub->images->no_texture->img_ptr = no->img_ptr;
-    // cub->images->so_texture = mlx_xpm_file_to_image(cub->mlx_ptr, cub->info->so, &cub->images->so_texture->x, &cub->images->so_texture->y);
-    // cub->images->we_texture = mlx_xpm_file_to_image(cub->mlx_ptr, cub->info->we, &cub->images->we_texture->x, &cub->images->we_texture->y);
-    // cub->images->ea_texture = mlx_xpm_file_to_image(cub->mlx_ptr, cub->info->ea, &cub->images->ea_texture->x, &cub->images->ea_texture->y);
-    // cub->images->no_texture->img_addr = mlx_get_data_addr(cub->images->no_texture, 
-	// 	&cub->images->no_texture->bpp, &cub->images->no_texture->size, &cub->images->no_texture->endian);
-    // cub->images->so_texture->img_addr = mlx_get_data_addr(cub->images->so_texture, 
-	// 	&cub->images->so_texture->bpp, &cub->images->so_texture->size, &cub->images->so_texture->endian);
-    // cub->images->we_texture->img_addr = mlx_get_data_addr(cub->images->we_texture, 
-	// 	&cub->images->we_texture->bpp, &cub->images->we_texture->size, &cub->images->we_texture->endian);
-    // cub->images->ea_texture->img_addr = mlx_get_data_addr(cub->images->ea_texture, 
-	// 	&cub->images->ea_texture->bpp, &cub->images->ea_texture->size, &cub->images->ea_texture->endian);
-    printf("OK!\n");
+    if (access(cub->info->no, F_OK) != 0)
+    {
+       printf("no no!\n");
+       return (1);
+    }
+    else
+        printf("can read!\n");
+    cub->images = malloc(sizeof(t_images));
+    cub->images->no.img_ptr = mlx_xpm_file_to_image(cub->mlx_ptr, cub->info->no, &cub->images->no.w, &cub->images->no.h);
+    cub->images->so.img_ptr = mlx_xpm_file_to_image(cub->mlx_ptr, cub->info->so, &cub->images->so.w, &cub->images->so.h);
+    cub->images->we.img_ptr = mlx_xpm_file_to_image(cub->mlx_ptr, cub->info->we, &cub->images->we.w, &cub->images->we.h);
+    cub->images->ea.img_ptr = mlx_xpm_file_to_image(cub->mlx_ptr, cub->info->ea, &cub->images->ea.w, &cub->images->ea.h);
+    cub->images->no.img_addr = mlx_get_data_addr(cub->images->no.img_ptr, 
+		&cub->images->no.bpp, &cub->images->no.size, &cub->images->no.endian);
+    cub->images->so.img_addr = mlx_get_data_addr(cub->images->so.img_ptr, 
+		&cub->images->so.bpp, &cub->images->so.size, &cub->images->so.endian);
+    cub->images->we.img_addr = mlx_get_data_addr(cub->images->we.img_ptr, 
+		&cub->images->we.bpp, &cub->images->we.size, &cub->images->we.endian);
+    cub->images->ea.img_addr = mlx_get_data_addr(cub->images->ea.img_ptr, 
+		&cub->images->ea.bpp, &cub->images->ea.size, &cub->images->ea.endian);
+    printf("size:%d, %d, %d,%d\n",cub->images->no.size, cub->images->so.size, cub->images->we.size, cub->images->ea.size );
     return (0);
 }

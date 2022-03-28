@@ -1,9 +1,8 @@
 #include "cub3d.h"
-//#define PI 3.14159265359
 
 int clean_screen(t_cub3d *cub3d)
 {
-	t_img	*dark_img;
+	t_my_img	*dark_img;
 	int i;
 	int j;
 

@@ -6,7 +6,7 @@
 /*   By: ifeelbored <ifeelbored@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 21:28:06 by ifeelbored        #+#    #+#             */
-/*   Updated: 2022/03/26 22:45:36 by ifeelbored       ###   ########.fr       */
+/*   Updated: 2022/03/28 14:40:37 by ifeelbored       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	ft_set_player(t_cub3d *cub3d);
 /* Debug functions															  */
 /******************************************************************************/
 void	ft_print_struct(t_cub3d *cub_3d);
-t_img	*ft_create_tile(t_cub3d *cub3d, unsigned int color, int size);
+t_my_img	*ft_create_tile(t_cub3d *cub3d, unsigned int color, int size);
 int		ft_print_minimap(t_cub3d *cub_3d);
 int		ft_print_canvas(t_cub3d *cub_3d);
 
