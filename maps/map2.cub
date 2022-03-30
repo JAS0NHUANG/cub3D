@@ -1,9 +1,9 @@
-NO     ./textures/barrel.xpm   
-SO ./textures/eagle.xpm
+NO     ./textures/bluestone.xpm   
+SO ./textures/greystone.xpm
 F  38,   26,  0   
 
 
-WE      ./textures/greenlight.xpm
+WE      ./textures/colorstone.xpm
 EA   ./textures/redbrick.xpm
 
 

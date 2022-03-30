@@ -6,7 +6,7 @@
 /*   By: ifeelbored <ifeelbored@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 14:50:11 by jahuang           #+#    #+#             */
-/*   Updated: 2022/03/28 15:25:13 by ifeelbored       ###   ########.fr       */
+/*   Updated: 2022/03/30 23:13:12 by ifeelbored       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ t_my_img	*ft_create_tile(t_cub3d *cub3d, unsigned int color, int size)
 	img_holder = malloc(sizeof(t_my_img));
 	img_holder->img_ptr = mlx_new_image(cub3d->mlx_ptr, size, size);
 	img_holder->img_addr = mlx_get_data_addr(img_holder->img_ptr, &(img_holder->bpp), &(img_holder->size), &(img_holder->endian));
+	printf("img_holder->img_ptr0:%s\n", img_holder->img_ptr);
+	printf("img_holder->img_addr0:%s\n", img_holder->img_addr);
 	i = 0;
 	while (i < size)
 	{

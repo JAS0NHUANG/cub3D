@@ -6,7 +6,7 @@
 /*   By: ifeelbored <ifeelbored@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 21:32:52 by ifeelbored        #+#    #+#             */
-/*   Updated: 2022/03/28 22:15:16 by ifeelbored       ###   ########.fr       */
+/*   Updated: 2022/03/30 18:18:16 by ifeelbored       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ typedef struct s_cub3d
 	struct s_player	*plr;
 }	t_cub3d;
 
-typedef struct s_img
+typedef struct s_my_img
 {
 	void	*img_ptr;
 	char	*img_addr;
