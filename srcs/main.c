@@ -23,8 +23,6 @@ t_my_img	*ft_create_tile(t_cub3d *cub3d, unsigned int color, int size)
 	img_holder = malloc(sizeof(t_my_img));
 	img_holder->img_ptr = mlx_new_image(cub3d->mlx_ptr, size, size);
 	img_holder->img_addr = mlx_get_data_addr(img_holder->img_ptr, &(img_holder->bpp), &(img_holder->size), &(img_holder->endian));
-	printf("img_holder->img_ptr0:%p\n", img_holder->img_ptr);
-	printf("img_holder->img_addr0:%p\n", img_holder->img_addr);
 	i = 0;
 	while (i < size)
 	{
@@ -85,6 +83,7 @@ int	ft_run_cub3d(t_cub3d *cub3d)
 	cub3d->images->player_img = NULL;
 
 
+	printf("okok\n");
 	ft_print_canvas(cub3d);
 	ft_print_minimap(cub3d);
 

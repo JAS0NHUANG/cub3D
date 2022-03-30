@@ -15,6 +15,10 @@
 
 # define ROT_SPEED 0.10
 # define MOVE_DIST 0.10
+# define texWidth 64
+# define texHeight 64
+# define S_W 1024 
+# define S_H 768
 
 # ifdef __linux__
 #  define XK_ESCAPE 0xff1b
@@ -33,11 +37,6 @@
 #  define XK_LEFT 123
 #  define XK_RIGHT 124
 # endif
-
-#  define texWidth 64
-#  define texHeight 64
-#  define S_W 640
-#  define S_H 480
 
 enum	e_err_codes
 {

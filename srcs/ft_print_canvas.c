@@ -9,61 +9,6 @@ int	convert_rgb_to_int(int *rgb)
 	return (color);
 }
 
-void draw_floor(t_cub3d *cub)
-{
-	int color;
-	int x;
-	int y;
-	char *pixel;
-	t_my_img	*canvas;
-
-
-	canvas = malloc(sizeof(t_my_img));
-	canvas->img_ptr = mlx_new_image(cub->mlx_ptr, S_W, S_H);
-	canvas->img_addr = mlx_get_data_addr(canvas->img_ptr, &(canvas->bpp), &(canvas->size), &(canvas->endian));
-	color = convert_rgb_to_int(cub->info->f);
-	y = S_H;
-	while (y > S_H / 2)
-	{
-		x = 0;
-		while (x < S_W )
-		{
-			pixel = canvas->img_addr + y * canvas->size + x * (canvas->bpp / 8);
-			*(unsigned int *)pixel = color;
-			x++;
-		}
-		y--;
-	}
-	mlx_put_image_to_window(cub->mlx_ptr, cub->win_ptr, canvas->img_ptr,0 ,0);
-}
-void draw_ceiling(t_cub3d *cub)
-{
-	int color;
-	int x;
-	int y;
-	char *pixel;
-		t_my_img	*canvas;
-
-
-	canvas = malloc(sizeof(t_my_img));
-	canvas->img_ptr = mlx_new_image(cub->mlx_ptr, S_W, S_H);
-	canvas->img_addr = mlx_get_data_addr(canvas->img_ptr, &(canvas->bpp), &(canvas->size), &(canvas->endian));
-	color = convert_rgb_to_int(cub->info->c);
-	y = 0;
-	while (y < S_H / 2)
-	{
-		x = 0;
-		while (x < S_W )
-		{
-			pixel = canvas->img_addr + y * canvas->size + x * (canvas->bpp / 8);
-			*(unsigned int *)pixel = color;
-			x++;
-		}
-		y++;
-	}
-	mlx_put_image_to_window(cub->mlx_ptr, cub->win_ptr, canvas->img_ptr,0 ,0);
-}
-
 t_my_img *select_texture(t_cub3d *cub, t_ray ray)
 {
 	if (ray.side)
@@ -91,24 +36,20 @@ int	ft_print_canvas(t_cub3d *cub3d)
 	t_ray	ray;
 	t_my_img *texture;
 
-	player = cub3d->plr;
 
+	player = cub3d->plr;
 	canvas = malloc(sizeof(t_my_img));
 	canvas->img_ptr = mlx_new_image(cub3d->mlx_ptr, S_W, S_H);
 	canvas->img_addr = mlx_get_data_addr(canvas->img_ptr, &(canvas->bpp), &(canvas->size), &(canvas->endian));
 
-	//draw_floor(cub3d);
-	//draw_ceiling(cub3d);
 	x = 0.00;
-	while (x <= S_W)
+	while (x < S_W)
 	{
 		double camera_x = 2 * x / S_W - 1;
 		ray.dir_x = player->d_x + player->pl_x * camera_x;
 		ray.dir_y = player->d_y + player->pl_y * camera_x;
 
 
-		// int	step_x;
-		// int	step_y;
 		int	map_x;
 		int	map_y;
 	
@@ -169,11 +110,7 @@ int	ft_print_canvas(t_cub3d *cub3d)
 		else
 			ray.perp_wall_dist = ray.side_dist_y - ray.delta_dist_y;
 
-		// printf("Ray_dir_x: %f, Ray_dir_y: %f", ray.dir_x, ray.dir_y);
-		// printf("mapx: %d, mapy: %d\n", map_x,map_y);
-		// printf("perp wall dist: %f\n", ray.perp_wall_dist);
-
-		//Calculate height of line to draw on screen
+	//Calculate height of line to draw on screen
       	int lineHeight = (int)(S_H / ray.perp_wall_dist);
 
       	//calculate lowest and highest pixel to fill in current stripe
@@ -182,7 +119,7 @@ int	ft_print_canvas(t_cub3d *cub3d)
       	int drawEnd = lineHeight / 2 + S_H / 2;
       	if(drawEnd >= S_H) drawEnd = S_H - 1;
 		
-		//double wallX; //where exactly the wall was hit
+	//double wallX; //where exactly the wall was hit
       	if (ray.side == 0)
 			ray.wall_x = player->p_y + ray.perp_wall_dist * ray.dir_y;
       	else
@@ -220,24 +157,7 @@ int	ft_print_canvas(t_cub3d *cub3d)
 			pixel = canvas->img_addr + ((int)(y) * canvas->size) + (int)x * (canvas->bpp / 8);
 			*(unsigned int *)pixel = color;
 			y++;
-     	}
-		// int	y = 0;
-		// char *pixel;
-		// int color = 0x0000FF00;
-		// int	color_1 = 0x0000AA00;
-		// while (y <= S_H)
-		// {
-		// 	if (y > S_H/2 - (int)((S_H / ray.perp_wall_dist) / 2) && y < S_H/2 + (int)((S_H / ray.perp_wall_dist) / 2))
-		// 	{
-		// 		pixel = canvas->img_addr + ((int)(y) * canvas->size) + (int)x * (canvas->bpp / 8);
-		// 		if (ray.side == 0)
-		// 			ft_memcpy(pixel, &color, sizeof(unsigned int));
-		// 		else
-		// 			ft_memcpy(pixel, &color_1, sizeof(unsigned int));
-		// 	}
-		// 	y++;
-		// }
-
+     		}
 		x++;
 	}
 	mlx_put_image_to_window(cub3d->mlx_ptr, cub3d->win_ptr, canvas->img_ptr,0 ,0) ;
