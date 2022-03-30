@@ -14,14 +14,14 @@ NAME			=	cub3D
 #       FLAGS                                                                  #
 # **************************************************************************** #
 OS			=	$(shell uname)
-CFLAGS			=	-Wall -Wextra -Werror 
+CFLAGS			=	-Wall -Wextra -Werror
 FSAN			=	-fsanitize=address
 DEBUG			=	-g3
 
 ifeq ($(OS), Linux)
-MLX_FLAGS		+=	-Lmlx -lmlx -lbsd -lXext -lX11 -lm
+MLX_FLAGS		=	-Lmlx -lbsd -lXext -lX11 -lm
 else
-MLX_FLAGS		+=	-Lmlx_mac -lmlx_mac -framework OpenGL -framework AppKit
+MLX_FLAGS		=
 endif
 
 # **************************************************************************** #
@@ -70,7 +70,7 @@ OBJS			=	$(addprefix $(SRCS_DIR)/,$(SRCS:.c=.o))
 					$(CC) $(CFLAGS) -I $(INCS_DIR) -c $< -o $@ 
 
 $(NAME)			:	$(OBJS) $(LIBFT_A) $(LIBMLX_A)
-					$(CC) -o $@ $(OBJS) -I $(INCS_DIR) $(LIBFT_A) $(LIBMLX_A) $(FSAN) $(DEBUG)
+					$(CC) -o $@ $(OBJS) -I $(INCS_DIR) $(LIBFT_A) $(LIBMLX_A) $(FSAN) $(DEBUG) $(MLX_FLAGS)
 
 $(LIBFT_A)		:
 					make -C $(LIBFT_DIR) $(LIBFT_FLAGS)

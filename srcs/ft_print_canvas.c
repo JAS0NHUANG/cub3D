@@ -14,7 +14,7 @@ t_my_img *select_texture(t_cub3d *cub, t_ray ray)
 			return (&cub->images->so);
 	}
 	else if (!ray.side) //x
-	{	
+	{
 		if (ray.dir_x > 0)
 			return (&cub->images->ea);
 		if (ray.dir_x < 0)
@@ -140,7 +140,7 @@ int	ft_print_canvas(t_cub3d *cub3d)
 		char *pixel;
 		printf("here\n %d\n", texture->size);
 		printf("cub:%d\n", cub3d->images->so.size);
-		printf("img_ptr:%d\n", (int)cub3d->images->so.img_ptr);
+		printf("img_ptr:%p\n", cub3d->images->so.img_ptr);
 		while (y < drawEnd && y < S_W)
       	{
         	int texY = (int)texPos & (texture->h - 1);

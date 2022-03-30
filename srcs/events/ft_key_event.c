@@ -40,6 +40,10 @@ int	ft_move_player(int key, t_cub3d *cub3d)
 			cub3d->plr->p_y = player_to_y;
 			cub3d->map[(int)player_to_x][(int)player_to_y] = 'W';
 		}
+		else if (cub3d->map[(int)cub3d->plr->p_x][(int)player_to_y] != '1')
+			cub3d->plr->p_y = player_to_y;
+		else if (cub3d->map[(int)player_to_x][(int)cub3d->plr->p_y] != '1')
+			cub3d->plr->p_x = player_to_x;
 		clean_screen(cub3d);
 	}
 	if (key == XK_S)
@@ -55,6 +59,10 @@ int	ft_move_player(int key, t_cub3d *cub3d)
 			cub3d->plr->p_y = player_to_y;
 			cub3d->map[(int)player_to_x][(int)player_to_y] = 'W';
 		}
+		else if (cub3d->map[(int)cub3d->plr->p_x][(int)player_to_y] != '1')
+			cub3d->plr->p_y = player_to_y;
+		else if (cub3d->map[(int)player_to_x][(int)cub3d->plr->p_y] != '1')
+			cub3d->plr->p_x = player_to_x;
 		clean_screen(cub3d);
 	}
 	if (key == XK_A)
@@ -69,8 +77,12 @@ int	ft_move_player(int key, t_cub3d *cub3d)
 			cub3d->plr->p_x = player_to_x;
 			cub3d->plr->p_y = player_to_y;
 			cub3d->map[(int)player_to_x][(int)player_to_y] = 'W';
-			clean_screen(cub3d);
 		}
+		else if (cub3d->map[(int)cub3d->plr->p_x][(int)player_to_y] != '1')
+			cub3d->plr->p_y = player_to_y;
+		else if (cub3d->map[(int)player_to_x][(int)cub3d->plr->p_y] != '1')
+			cub3d->plr->p_x = player_to_x;
+		clean_screen(cub3d);
 	}
 	if (key == XK_D)
 	{
@@ -84,8 +96,12 @@ int	ft_move_player(int key, t_cub3d *cub3d)
 			cub3d->plr->p_x = player_to_x;
 			cub3d->plr->p_y = player_to_y;
 			cub3d->map[(int)player_to_x][(int)player_to_y] = 'W';
-			clean_screen(cub3d);
 		}
+		else if (cub3d->map[(int)cub3d->plr->p_x][(int)player_to_y] != '1')
+			cub3d->plr->p_y = player_to_y;
+		else if (cub3d->map[(int)player_to_x][(int)cub3d->plr->p_y] != '1')
+			cub3d->plr->p_x = player_to_x;
+		clean_screen(cub3d);
 	}
 	ft_print_canvas(cub3d);
 	ft_print_minimap(cub3d);

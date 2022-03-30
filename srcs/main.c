@@ -79,7 +79,6 @@ int	ft_run_cub3d(t_cub3d *cub3d)
 			"cub3d");
 	if (!cub3d->win_ptr)
 		return (ERR_MLX);
-	cub3d->images = malloc(sizeof(t_images));
 	cub3d->images->minimap_img = NULL;
 	cub3d->images->player_img = NULL;
 
@@ -105,6 +104,7 @@ int	main(int ac, char **av)
 	if (ret != 0)
 		return (ft_return(ret, cub3d));
 
+	cub3d->images = malloc(sizeof(t_images));
 	ft_print_struct(cub3d);
 	cub3d->mlx_ptr = mlx_init();
 	init_texture(cub3d);
