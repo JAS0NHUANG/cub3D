@@ -101,20 +101,20 @@ int	ft_rotate_player(t_cub3d *cub3d, int key)
 	if (key == XK_LEFT)
 	{
 		oldDirX = cub3d->plr->d_x;
-		cub3d->plr->d_x = cub3d->plr->d_x * cos(0.3) - cub3d->plr->d_y * sin(0.3);
-		cub3d->plr->d_y = oldDirX * sin(0.3) + cub3d->plr->d_y * cos(0.3);
+		cub3d->plr->d_x = cub3d->plr->d_x * cos(ROT_SPEED) - cub3d->plr->d_y * sin(ROT_SPEED);
+		cub3d->plr->d_y = oldDirX * sin(ROT_SPEED) + cub3d->plr->d_y * cos(ROT_SPEED);
 		oldPlaneX = cub3d->plr->pl_x;
-		cub3d->plr->pl_x = cub3d->plr->pl_x * cos(0.3) - cub3d->plr->pl_y * sin(0.3);
-		cub3d->plr->pl_y = oldPlaneX * sin(0.3) + cub3d->plr->pl_y * cos(0.3);
+		cub3d->plr->pl_x = cub3d->plr->pl_x * cos(ROT_SPEED) - cub3d->plr->pl_y * sin(ROT_SPEED);
+		cub3d->plr->pl_y = oldPlaneX * sin(ROT_SPEED) + cub3d->plr->pl_y * cos(ROT_SPEED);
 	}
 	if (key == XK_RIGHT)
 	{
 		oldDirX = cub3d->plr->d_x;
-		cub3d->plr->d_x = cub3d->plr->d_x * cos(-0.3) - cub3d->plr->d_y * sin(-0.3);
-		cub3d->plr->d_y = oldDirX * sin(-0.3) + cub3d->plr->d_y * cos(-0.3);
+		cub3d->plr->d_x = cub3d->plr->d_x * cos(-ROT_SPEED) - cub3d->plr->d_y * sin(-ROT_SPEED);
+		cub3d->plr->d_y = oldDirX * sin(-ROT_SPEED) + cub3d->plr->d_y * cos(-ROT_SPEED);
 		oldPlaneX = cub3d->plr->pl_x;
-		cub3d->plr->pl_x = cub3d->plr->pl_x * cos(-0.3) - cub3d->plr->pl_y * sin(-0.3);
-		cub3d->plr->pl_y = oldPlaneX * sin(-0.3) + cub3d->plr->pl_y * cos(-0.3);
+		cub3d->plr->pl_x = cub3d->plr->pl_x * cos(-ROT_SPEED) - cub3d->plr->pl_y * sin(-ROT_SPEED);
+		cub3d->plr->pl_y = oldPlaneX * sin(-ROT_SPEED) + cub3d->plr->pl_y * cos(-ROT_SPEED);
 	}
 	clean_screen(cub3d);
 	ft_print_canvas(cub3d);

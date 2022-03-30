@@ -6,7 +6,6 @@ int	convert_rgb_to_int(int *rgb)
 	color = rgb[0];
 	color = (color << 8) | rgb[1];
 	color = (color << 8) | rgb[2];
-	printf("color:%d\n", color);
 	return (color);
 }
 
@@ -29,13 +28,8 @@ void draw_floor(t_cub3d *cub)
 		x = 0;
 		while (x < S_W )
 		{
-			printf("here1:%s\n", canvas->img_addr);
-			printf("here2:%d\n", y * canvas->size);
-			printf("here3:%d\n", x * (canvas->bpp / 8));
 			pixel = canvas->img_addr + y * canvas->size + x * (canvas->bpp / 8);
-			printf("here??\n");
 			*(unsigned int *)pixel = color;
-			printf("therere??\n");
 			x++;
 		}
 		y--;
@@ -103,8 +97,8 @@ int	ft_print_canvas(t_cub3d *cub3d)
 	canvas->img_ptr = mlx_new_image(cub3d->mlx_ptr, S_W, S_H);
 	canvas->img_addr = mlx_get_data_addr(canvas->img_ptr, &(canvas->bpp), &(canvas->size), &(canvas->endian));
 
-	draw_floor(cub3d);
-	draw_ceiling(cub3d);
+	//draw_floor(cub3d);
+	//draw_ceiling(cub3d);
 	x = 0.00;
 	while (x <= S_W)
 	{
@@ -204,18 +198,27 @@ int	ft_print_canvas(t_cub3d *cub3d)
 		//lineHeight = drawEnd - drawStart;
 		double step = 1.0 * texture->h / lineHeight;
 		double texPos = (drawStart - S_H / 2 + lineHeight / 2) * step;
-		int y = drawStart;
+		int y = 0;
 		char *pixel;
 		// printf("here\n %d\n", texture->size);
 		// printf("cub:%d\n", cub3d->images->so.size);
 		// printf("img_ptr:%p\n", cub3d->images->so.img_ptr);
-		while (y < drawEnd && y < S_W)
-      	{
-        	int texY = (int)texPos & (texture->h - 1);
-			int color = ((int *)texture->img_addr)[(256 / 4) * texY + texX];
+		int texY;
+		int color;
+		while (y < S_H)
+		{
+			if (y < drawStart)
+				color = convert_rgb_to_int(cub3d->info->c);
+			else if (y > drawEnd)
+				color = convert_rgb_to_int(cub3d->info->f);
+			else
+			{
+				texY = (int)texPos & (texture->h - 1);
+				color = ((int *)texture->img_addr)[(256 / 4) * texY + texX];
+				texPos += step;
+			}
 			pixel = canvas->img_addr + ((int)(y) * canvas->size) + (int)x * (canvas->bpp / 8);
 			*(unsigned int *)pixel = color;
-        	texPos += step;
 			y++;
      	}
 		// int	y = 0;
