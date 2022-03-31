@@ -6,7 +6,7 @@
 /*   By: jahuang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 16:12:49 by jahuang           #+#    #+#             */
-/*   Updated: 2022/03/01 17:59:01 by jahuang          ###   ########.fr       */
+/*   Updated: 2022/03/31 15:41:41 by jahuang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,19 +19,19 @@ int	ft_check_access(t_info *info)
 	if (!info->no || !info->so || !info->we || !info->ea)
 		return (ERR_ACCESS);
 	fd = open(info->no, O_RDONLY);
-	if (fd < 0)
+	if (fd <= 0)
 		return (ERR_ACCESS);
 	close(fd);
 	fd = open(info->so, O_RDONLY);
-	if (fd < 0)
+	if (fd <= 0)
 		return (ERR_ACCESS);
 	close(fd);
 	fd = open(info->we, O_RDONLY);
-	if (fd < 0)
+	if (fd <= 0)
 		return (ERR_ACCESS);
 	close(fd);
 	fd = open(info->ea, O_RDONLY);
-	if (fd < 0)
+	if (fd <= 0)
 		return (ERR_ACCESS);
 	close(fd);
 	return (0);
@@ -55,6 +55,8 @@ int	ft_check_colors(t_info *info)
 			return (1);
 		index++;
 	}
+	if (info->c[index])
+		return (1);
 	return (0);
 }
 

@@ -10,9 +10,17 @@ int init_texture(t_cub3d *cub)
     else
         printf("can read!\n");
     cub->images->no.img_ptr = mlx_xpm_file_to_image(cub->mlx_ptr, cub->info->no, &cub->images->no.w, &cub->images->no.h);
+	if (!cub->images->no.img_ptr)
+		return (1);
     cub->images->so.img_ptr = mlx_xpm_file_to_image(cub->mlx_ptr, cub->info->so, &cub->images->so.w, &cub->images->so.h);
+	if (!cub->images->so.img_ptr)
+		return (1);
     cub->images->we.img_ptr = mlx_xpm_file_to_image(cub->mlx_ptr, cub->info->we, &cub->images->we.w, &cub->images->we.h);
+	if (!cub->images->we.img_ptr)
+		return (1);
     cub->images->ea.img_ptr = mlx_xpm_file_to_image(cub->mlx_ptr, cub->info->ea, &cub->images->ea.w, &cub->images->ea.h);
+	if (!cub->images->ea.img_ptr)
+		return (1);
     cub->images->no.img_addr = mlx_get_data_addr(cub->images->no.img_ptr, 
 		&cub->images->no.bpp, &cub->images->no.size, &cub->images->no.endian);
     cub->images->so.img_addr = mlx_get_data_addr(cub->images->so.img_ptr, 

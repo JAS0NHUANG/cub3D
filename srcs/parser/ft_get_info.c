@@ -6,7 +6,7 @@
 /*   By: jahuang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 14:55:08 by jahuang           #+#    #+#             */
-/*   Updated: 2022/03/03 16:14:21 by jahuang          ###   ########.fr       */
+/*   Updated: 2022/03/31 16:41:38 by jahuang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,15 @@ int	*ft_get_colors(char **line)
 	colors_i = 0;
 	while (line[i])
 	{
+		printf("line: %s\n", line[i]);
 		holder = ft_split(line[i], ',');
+		if (i != 3 && line[i][ft_strlen(line[i]) - 1] != ',' && !holder[1])
+			return (NULL);
+		if (!holder[0])
+		{
+			free(colors);
+			return (NULL);
+		}
 		j = 0;
 		while (holder[j])
 		{
@@ -42,6 +50,8 @@ int	*ft_get_colors(char **line)
 		ft_free_strarray(holder);
 		i++;
 	}
+	if (colors[3])
+		return (NULL);
 	return (colors);
 }
 

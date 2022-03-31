@@ -6,7 +6,7 @@
 /*   By: ifeelbored <ifeelbored@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 21:29:37 by ifeelbored        #+#    #+#             */
-/*   Updated: 2022/03/27 10:37:05 by ifeelbored       ###   ########.fr       */
+/*   Updated: 2022/03/31 16:02:45 by jahuang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ enum	e_err_codes
 	ERR_MAP_NULL,
 	ERR_MAP_OPEN,
 	ERR_MAP_CHAR,
+	ERR_MAP_MULTIPLAYER,
 };
 
 #endif

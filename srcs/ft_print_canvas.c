@@ -49,10 +49,9 @@ int	ft_print_canvas(t_cub3d *cub3d)
 		ray.dir_x = player->d_x + player->pl_x * camera_x;
 		ray.dir_y = player->d_y + player->pl_y * camera_x;
 
-
 		int	map_x;
 		int	map_y;
-	
+
 		map_x= (int)(cub3d->plr->p_x);
 		map_y= (int)(cub3d->plr->p_y);
 		ray.delta_dist_x = 1000000;

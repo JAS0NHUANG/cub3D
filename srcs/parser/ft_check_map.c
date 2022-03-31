@@ -6,7 +6,7 @@
 /*   By: jahuang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 14:51:34 by jahuang           #+#    #+#             */
-/*   Updated: 2022/03/01 16:29:12 by jahuang          ###   ########.fr       */
+/*   Updated: 2022/03/31 16:10:13 by jahuang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,10 @@ static int	ft_check_close(char **map, int array_len)
 	i = 0;
 	while (i < array_len)
 	{
+		printf("map line:%s\n", map[i]);
 		j = 0;
 		str_len = ft_strlen(map[i]);
-		while (j < str_len - 1)
+		while (j < str_len)
 		{
 			if (!ft_is_surrounded(map, i, j, array_len))
 				return (ERR_MAP_OPEN);
@@ -61,13 +62,18 @@ int	ft_check_char(char **map)
 {
 	int	i;
 	int	j;
+	int player_count;
 
 	i = 0;
+	player_count = 0;
 	while (map[i])
 	{
 		j = 0;
 		while (map[i][j])
 		{
+			if (map[i][j] == 'W' || map[i][j] == 'E' || map[i][j] == 'S' || \
+					map[i][j] == 'N')
+				player_count++;
 			if (map[i][j] != '0' && map[i][j] != '1' && map[i][j] != 'N' && \
 				map[i][j] != 'W' && map[i][j] != 'E' && map[i][j] != 'S' && \
 				map[i][j] != ' ')
@@ -76,6 +82,9 @@ int	ft_check_char(char **map)
 		}
 		i++;
 	}
+	printf("player count :%d\n", player_count);
+	if (player_count != 1)
+		return (ERR_MAP_MULTIPLAYER);
 	return (0);
 }
 
