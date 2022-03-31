@@ -6,17 +6,15 @@
 /*   By: ifeelbored <ifeelbored@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 21:29:37 by ifeelbored        #+#    #+#             */
-/*   Updated: 2022/03/31 16:02:45 by jahuang          ###   ########.fr       */
+/*   Updated: 2022/04/01 00:11:41 by ifeelbored       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef DEFINES_H
 # define DEFINES_H
 
-# define ROT_SPEED 0.10
+# define SPD 0.10
 # define MOVE_DIST 0.10
-# define texWidth 64
-# define texHeight 64
 # define S_W 1024 
 # define S_H 768
 

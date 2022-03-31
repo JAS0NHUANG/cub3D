@@ -6,7 +6,7 @@
 /*   By: ifeelbored <ifeelbored@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 21:32:52 by ifeelbored        #+#    #+#             */
-/*   Updated: 2022/03/30 18:18:16 by ifeelbored       ###   ########.fr       */
+/*   Updated: 2022/03/31 22:52:27 by ifeelbored       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,16 +32,7 @@ typedef struct s_my_img
 	int		endian;
 	int		w;
 	int		h;
-	// int			x;
-	// int			y;
 }	t_my_img;
-
-// typedef struct s_texture
-// {
-// 	int			x;
-// 	int			y;
-// 	t_img		*img;
-// }			t_texture;
 
 typedef struct s_images
 {
@@ -66,30 +57,25 @@ typedef struct s_info
 
 typedef struct s_player
 {
-	double	p_x;//pos
+	double	p_x;
 	double	p_y;
-	double	d_x;//dir
+	double	d_x;
 	double	d_y;
-	double	angle;
-	double	pl_x; //plane
+	double	pl_x;
 	double	pl_y;
-	double	cam_height;
 }	t_player;
-
-
 
 typedef struct s_ray
 {
-	double	dir_x;
-	double	dir_y;
-	double	side_dist_x;
-	double	side_dist_y;
-	double	delta_dist_x;
-	double	delta_dist_y;
+	double		dir_x;
+	double		dir_y;
+	double		side_dist_x;
+	double		side_dist_y;
+	double		delta_dist_x;
+	double		delta_dist_y;
 	double		perp_wall_dist;
 	int			step_x;
 	int			step_y;
-	//int			real_line_h;
 	int			side;
 	double		wall_x;
 }	t_ray;

@@ -6,7 +6,7 @@
 /*   By: ifeelbored <ifeelbored@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 14:49:27 by jahuang           #+#    #+#             */
-/*   Updated: 2022/03/25 00:11:50 by ifeelbored       ###   ########.fr       */
+/*   Updated: 2022/03/31 23:20:26 by ifeelbored       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ void	ft_print_player(t_player *player)
 	printf("%f\n", player->p_x);
 	ft_putstr_fd("player pos_y: ", 1);
 	printf("%f\n", player->p_y);
-
 	ft_putstr_fd("player dir_x: ", 1);
 	printf("%f\n", player->d_x);
 	ft_putstr_fd("player dir_y: ", 1);

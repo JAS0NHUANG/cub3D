@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_get_map.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jahuang <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: ifeelbored <ifeelbored@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 14:49:21 by jahuang           #+#    #+#             */
-/*   Updated: 2022/03/03 16:19:04 by jahuang          ###   ########.fr       */
+/*   Updated: 2022/03/31 17:32:38 by ifeelbored       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,5 +51,5 @@ int	ft_get_map(int fd, t_cub3d **cub3d)
 	if (line)
 		free(line);
 	(*cub3d)->map = map;
-	return(ft_check_map((*cub3d)->map));
+	return (ft_check_map((*cub3d)->map));
 }

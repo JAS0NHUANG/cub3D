@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_set_player.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ifeelbored <ifeelbored@student.42.fr>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/03/31 17:28:14 by ifeelbored        #+#    #+#             */
+/*   Updated: 2022/03/31 17:35:53 by ifeelbored       ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 
 void	ft_set_plane(t_cub3d *cub3d, char player_char)
@@ -84,7 +96,4 @@ void	ft_set_player(t_cub3d *cub3d)
 	if (!(cub3d->plr))
 		return ;
 	ft_set_player_info(cub3d);
-	/*
-	cub3d->plr->cam_height =
-	*/
 }

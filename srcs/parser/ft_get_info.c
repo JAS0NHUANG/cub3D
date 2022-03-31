@@ -3,52 +3,58 @@
 /*                                                        :::      ::::::::   */
 /*   ft_get_info.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jahuang <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: ifeelbored <ifeelbored@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 14:55:08 by jahuang           #+#    #+#             */
-/*   Updated: 2022/03/31 16:41:38 by jahuang          ###   ########.fr       */
+/*   Updated: 2022/03/31 23:19:51 by ifeelbored       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
+int	*ft_get_colors_lp(char	**holder, int *colors, int	*colors_i)
+{
+	int	j;
+
+	j = 0;
+	while (holder[j])
+	{
+		if (*colors_i >= 4)
+		{
+			ft_free_strarray(holder);
+			free(colors);
+			return (NULL);
+		}
+		colors[*colors_i] = ft_atoi(holder[j]);
+		(*colors_i) = (*colors_i) + 1;
+		j++;
+	}
+	return (colors);
+}
+
 int	*ft_get_colors(char **line)
 {
 	int		i;
-	int		j;
 	int		*colors;
 	int		colors_i;
 	char	**holder;
 
-	i = 1;
+	i = 0;
 	colors = malloc(sizeof(int) * 3);
 	colors_i = 0;
-	while (line[i])
+	while (line[++i])
 	{
-		printf("line: %s\n", line[i]);
 		holder = ft_split(line[i], ',');
-		if (i != 3 && line[i][ft_strlen(line[i]) - 1] != ',' && !holder[1])
-			return (NULL);
-		if (!holder[0])
+		if ((i != 3 && line[i][ft_strlen(line[i]) - 1] != ',' && !holder[1]) || \
+			!holder[0])
 		{
 			free(colors);
 			return (NULL);
 		}
-		j = 0;
-		while (holder[j])
-		{
-			if (colors_i >= 4)
-			{
-				ft_free_strarray(holder);
-				free(colors);
-				return (NULL);
-			}
-			colors[colors_i] = ft_atoi(holder[j]);
-			colors_i++;
-			j++;
-		}
+		colors = ft_get_colors_lp(holder, colors, &colors_i);
+		if (!colors)
+			return (NULL);
 		ft_free_strarray(holder);
-		i++;
 	}
 	if (colors[3])
 		return (NULL);

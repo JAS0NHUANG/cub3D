@@ -1,145 +1,134 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_key_event.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ifeelbored <ifeelbored@student.42.fr>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/04/01 00:02:56 by ifeelbored        #+#    #+#             */
+/*   Updated: 2022/04/01 00:17:37 by ifeelbored       ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 
-int clean_screen(t_cub3d *cub3d)
+void	ft_move_w(t_cub3d *cub)
 {
-	t_my_img	*dark_img;
-	int i;
-	int j;
+	float	plr_t_x;
+	float	plr_t_y;
 
-	dark_img = ft_create_tile(cub3d, 0x00000000, 10);
-	i = 0;
-	while (i < ft_arraylen(cub3d->map))
+	printf("player x: %f, y: %f\n", cub->plr->p_x, cub->plr->p_y);
+	plr_t_x = cub->plr->p_x + cub->plr->d_x * MOVE_DIST;
+	plr_t_y = cub->plr->p_y + cub->plr->d_y * MOVE_DIST;
+	if (cub->map[(int)plr_t_x][(int)plr_t_y] != '1')
 	{
-		j = 0;
-		while (j < (int)ft_strlen((cub3d->map)[i]))
-		{
-
-			mlx_put_image_to_window(cub3d->mlx_ptr, cub3d->win_ptr, dark_img->img_ptr, j * 10 + 20, i * 10 + 20 );
-			j++;
-		}
-		i++;
+		cub->map[(int)cub->plr->p_x][(int)cub->plr->p_y] = '0';
+		cub->plr->p_x = plr_t_x;
+		cub->plr->p_y = plr_t_y;
 	}
-	return (0);
-}
-int	ft_move_player(int key, t_cub3d *cub3d)
-{
-	float	player_to_x;
-	float	player_to_y;
-
-
-	if (key == XK_W)
-	{
-		printf("player x: %f, y: %f\n", cub3d->plr->p_x, cub3d->plr->p_y);
-		player_to_x = cub3d->plr->p_x + cub3d->plr->d_x * MOVE_DIST;
-		player_to_y = cub3d->plr->p_y + cub3d->plr->d_y * MOVE_DIST;
-		if (cub3d->map[(int)player_to_x][(int)player_to_y] != '1')
-		{
-			cub3d->map[(int)cub3d->plr->p_x][(int)cub3d->plr->p_y] = '0';
-			cub3d->plr->p_x = player_to_x;
-			cub3d->plr->p_y = player_to_y;
-			cub3d->map[(int)player_to_x][(int)player_to_y] = 'W';
-		}
-               else if (cub3d->map[(int)cub3d->plr->p_x][(int)player_to_y] != '1')
-                       cub3d->plr->p_y = player_to_y;
-               else if (cub3d->map[(int)player_to_x][(int)cub3d->plr->p_y] != '1')
-                       cub3d->plr->p_x = player_to_x;
-	}
-	if (key == XK_S)
-	{
-		player_to_x = cub3d->plr->p_x - cub3d->plr->d_x * MOVE_DIST;
-		player_to_y = cub3d->plr->p_y - cub3d->plr->d_y * MOVE_DIST;
-		if (cub3d->map[(int)player_to_x][(int)player_to_y] != '1')
-		{
-			cub3d->map[(int)cub3d->plr->p_x][(int)cub3d->plr->p_y] = '0';
-			cub3d->plr->p_x = player_to_x;
-			cub3d->plr->p_y = player_to_y;
-			cub3d->map[(int)player_to_x][(int)player_to_y] = 'W';
-		}
-               else if (cub3d->map[(int)cub3d->plr->p_x][(int)player_to_y] != '1')
-                       cub3d->plr->p_y = player_to_y;
-               else if (cub3d->map[(int)player_to_x][(int)cub3d->plr->p_y] != '1')
-                       cub3d->plr->p_x = player_to_x;
-	}
-	if (key == XK_A)
-	{
-		player_to_x = cub3d->plr->p_x - cub3d->plr->d_y * MOVE_DIST;
-		player_to_y = cub3d->plr->p_y + cub3d->plr->d_x * MOVE_DIST;
-		if (cub3d->map[(int)player_to_x][(int)player_to_y] != '1')
-		{
-			cub3d->map[(int)cub3d->plr->p_x][(int)cub3d->plr->p_y] = '0';
-			cub3d->plr->p_x = player_to_x;
-			cub3d->plr->p_y = player_to_y;
-			cub3d->map[(int)player_to_x][(int)player_to_y] = 'W';
-		}
-               else if (cub3d->map[(int)cub3d->plr->p_x][(int)player_to_y] != '1')
-                       cub3d->plr->p_y = player_to_y;
-               else if (cub3d->map[(int)player_to_x][(int)cub3d->plr->p_y] != '1')
-                       cub3d->plr->p_x = player_to_x;
-	}
-	if (key == XK_D)
-	{
-		player_to_x = cub3d->plr->p_x + cub3d->plr->d_y * MOVE_DIST;
-		player_to_y = cub3d->plr->p_y - cub3d->plr->d_x * MOVE_DIST;
-		if (cub3d->map[(int)player_to_x][(int)player_to_y] != '1')
-		{
-			cub3d->map[(int)cub3d->plr->p_x][(int)cub3d->plr->p_y] = '0';
-			cub3d->plr->p_x = player_to_x;
-			cub3d->plr->p_y = player_to_y;
-			cub3d->map[(int)player_to_x][(int)player_to_y] = 'W';
-		}
-               else if (cub3d->map[(int)cub3d->plr->p_x][(int)player_to_y] != '1')
-                       cub3d->plr->p_y = player_to_y;
-               else if (cub3d->map[(int)player_to_x][(int)cub3d->plr->p_y] != '1')
-                       cub3d->plr->p_x = player_to_x;
-	}
-	ft_print_canvas(cub3d);
-	ft_print_minimap(cub3d);
-	return (0);
+	else if (cub->map[(int)cub->plr->p_x][(int)plr_t_y] != '1')
+		cub->plr->p_y = plr_t_y;
+	else if (cub->map[(int)plr_t_x][(int)cub->plr->p_y] != '1')
+		cub->plr->p_x = plr_t_x;
 }
 
-
-int	ft_rotate_player(t_cub3d *cub3d, int key)
+void	ft_move_s(t_cub3d *cub)
 {
-	double oldDirX;
-	double oldPlaneX;
+	float	plr_t_x;
+	float	plr_t_y;
+
+	plr_t_x = cub->plr->p_x - cub->plr->d_x * MOVE_DIST;
+	plr_t_y = cub->plr->p_y - cub->plr->d_y * MOVE_DIST;
+	if (cub->map[(int)plr_t_x][(int)plr_t_y] != '1')
+	{
+		cub->map[(int)cub->plr->p_x][(int)cub->plr->p_y] = '0';
+		cub->plr->p_x = plr_t_x;
+		cub->plr->p_y = plr_t_y;
+	}
+	else if (cub->map[(int)cub->plr->p_x][(int)plr_t_y] != '1')
+		cub->plr->p_y = plr_t_y;
+	else if (cub->map[(int)plr_t_x][(int)cub->plr->p_y] != '1')
+		cub->plr->p_x = plr_t_x;
+}
+
+void	ft_move_a(t_cub3d *cub)
+{
+	float	plr_t_x;
+	float	plr_t_y;
+
+	plr_t_x = cub->plr->p_x - cub->plr->d_y * MOVE_DIST;
+	plr_t_y = cub->plr->p_y + cub->plr->d_x * MOVE_DIST;
+	if (cub->map[(int)plr_t_x][(int)plr_t_y] != '1')
+	{
+		cub->map[(int)cub->plr->p_x][(int)cub->plr->p_y] = '0';
+		cub->plr->p_x = plr_t_x;
+		cub->plr->p_y = plr_t_y;
+	}
+	else if (cub->map[(int)cub->plr->p_x][(int)plr_t_y] != '1')
+		cub->plr->p_y = plr_t_y;
+	else if (cub->map[(int)plr_t_x][(int)cub->plr->p_y] != '1')
+		cub->plr->p_x = plr_t_x;
+}
+
+void	ft_move_d(t_cub3d *cub)
+{
+	float	plr_t_x;
+	float	plr_t_y;
+
+	plr_t_x = cub->plr->p_x + cub->plr->d_y * MOVE_DIST;
+	plr_t_y = cub->plr->p_y - cub->plr->d_x * MOVE_DIST;
+	if (cub->map[(int)plr_t_x][(int)plr_t_y] != '1')
+	{
+		cub->map[(int)cub->plr->p_x][(int)cub->plr->p_y] = '0';
+		cub->plr->p_x = plr_t_x;
+		cub->plr->p_y = plr_t_y;
+	}
+	else if (cub->map[(int)cub->plr->p_x][(int)plr_t_y] != '1')
+		cub->plr->p_y = plr_t_y;
+	else if (cub->map[(int)plr_t_x][(int)cub->plr->p_y] != '1')
+		cub->plr->p_x = plr_t_x;
+}
+
+void	ft_rotate_player(t_cub3d *cb, int key)
+{
+	double	olddir_x;
+	double	oldplane_x;
 
 	if (key == XK_LEFT)
 	{
-		oldDirX = cub3d->plr->d_x;
-		cub3d->plr->d_x = cub3d->plr->d_x * cos(ROT_SPEED) - cub3d->plr->d_y * sin(ROT_SPEED);
-		cub3d->plr->d_y = oldDirX * sin(ROT_SPEED) + cub3d->plr->d_y * cos(ROT_SPEED);
-		oldPlaneX = cub3d->plr->pl_x;
-		cub3d->plr->pl_x = cub3d->plr->pl_x * cos(ROT_SPEED) - cub3d->plr->pl_y * sin(ROT_SPEED);
-		cub3d->plr->pl_y = oldPlaneX * sin(ROT_SPEED) + cub3d->plr->pl_y * cos(ROT_SPEED);
+		olddir_x = cb->plr->d_x;
+		cb->plr->d_x = cb->plr->d_x * cos(SPD) - cb->plr->d_y * sin(SPD);
+		cb->plr->d_y = olddir_x * sin(SPD) + cb->plr->d_y * cos(SPD);
+		oldplane_x = cb->plr->pl_x;
+		cb->plr->pl_x = cb->plr->pl_x * cos(SPD) - cb->plr->pl_y * sin(SPD);
+		cb->plr->pl_y = oldplane_x * sin(SPD) + cb->plr->pl_y * cos(SPD);
 	}
 	if (key == XK_RIGHT)
 	{
-		oldDirX = cub3d->plr->d_x;
-		cub3d->plr->d_x = cub3d->plr->d_x * cos(-ROT_SPEED) - cub3d->plr->d_y * sin(-ROT_SPEED);
-		cub3d->plr->d_y = oldDirX * sin(-ROT_SPEED) + cub3d->plr->d_y * cos(-ROT_SPEED);
-		oldPlaneX = cub3d->plr->pl_x;
-		cub3d->plr->pl_x = cub3d->plr->pl_x * cos(-ROT_SPEED) - cub3d->plr->pl_y * sin(-ROT_SPEED);
-		cub3d->plr->pl_y = oldPlaneX * sin(-ROT_SPEED) + cub3d->plr->pl_y * cos(-ROT_SPEED);
+		olddir_x = cb->plr->d_x;
+		cb->plr->d_x = cb->plr->d_x * cos(-SPD) - cb->plr->d_y * sin(-SPD);
+		cb->plr->d_y = olddir_x * sin(-SPD) + cb->plr->d_y * cos(-SPD);
+		oldplane_x = cb->plr->pl_x;
+		cb->plr->pl_x = cb->plr->pl_x * cos(-SPD) - cb->plr->pl_y * sin(-SPD);
+		cb->plr->pl_y = oldplane_x * sin(-SPD) + cb->plr->pl_y * cos(-SPD);
 	}
-	ft_print_canvas(cub3d);
-	ft_print_minimap(cub3d);
-	return (0);
 }
-
 
 int	ft_key_event(int key, t_cub3d *cub3d)
 {
-
-	(void)cub3d;
 	if (key == XK_ESCAPE)
 		ft_close(cub3d);
-	if (key == XK_A || key == XK_D || key == XK_W || key == XK_S)
-		ft_move_player(key, cub3d);
+	if (key == XK_W)
+		ft_move_w(cub3d);
+	if (key == XK_S)
+		ft_move_s(cub3d);
+	if (key == XK_A)
+		ft_move_a(cub3d);
+	if (key == XK_D)
+		ft_move_d(cub3d);
 	if (key == XK_LEFT || key == XK_RIGHT)
-	{
 		ft_rotate_player(cub3d, key);
-		// ft_putstr_fd("rotate: ", 1);
-		// ft_putnbr_fd(key, 1);
-	}
+	ft_print_canvas(cub3d);
+	ft_print_minimap(cub3d);
 	return (0);
 }
