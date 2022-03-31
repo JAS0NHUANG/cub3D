@@ -35,7 +35,6 @@ int	ft_move_player(int key, t_cub3d *cub3d)
 		if (cub3d->map[(int)player_to_x][(int)player_to_y] != '1')
 		{
 			cub3d->map[(int)cub3d->plr->p_x][(int)cub3d->plr->p_y] = '0';
-			printf("player to x: %f, y: %f\n", player_to_x, player_to_y);
 			cub3d->plr->p_x = player_to_x;
 			cub3d->plr->p_y = player_to_y;
 			cub3d->map[(int)player_to_x][(int)player_to_y] = 'W';
@@ -44,7 +43,6 @@ int	ft_move_player(int key, t_cub3d *cub3d)
                        cub3d->plr->p_y = player_to_y;
                else if (cub3d->map[(int)player_to_x][(int)cub3d->plr->p_y] != '1')
                        cub3d->plr->p_x = player_to_x;
-		//clean_screen(cub3d);
 	}
 	if (key == XK_S)
 	{
@@ -53,8 +51,6 @@ int	ft_move_player(int key, t_cub3d *cub3d)
 		if (cub3d->map[(int)player_to_x][(int)player_to_y] != '1')
 		{
 			cub3d->map[(int)cub3d->plr->p_x][(int)cub3d->plr->p_y] = '0';
-			printf("player x: %f, y: %f\n", cub3d->plr->p_x, cub3d->plr->p_y);
-			printf("player to x: %f, y: %f\n", player_to_x, player_to_y);
 			cub3d->plr->p_x = player_to_x;
 			cub3d->plr->p_y = player_to_y;
 			cub3d->map[(int)player_to_x][(int)player_to_y] = 'W';
@@ -63,7 +59,6 @@ int	ft_move_player(int key, t_cub3d *cub3d)
                        cub3d->plr->p_y = player_to_y;
                else if (cub3d->map[(int)player_to_x][(int)cub3d->plr->p_y] != '1')
                        cub3d->plr->p_x = player_to_x;
-		//clean_screen(cub3d);
 	}
 	if (key == XK_A)
 	{
@@ -72,12 +67,9 @@ int	ft_move_player(int key, t_cub3d *cub3d)
 		if (cub3d->map[(int)player_to_x][(int)player_to_y] != '1')
 		{
 			cub3d->map[(int)cub3d->plr->p_x][(int)cub3d->plr->p_y] = '0';
-			printf("player x: %f, y: %f\n", cub3d->plr->p_x, cub3d->plr->p_y);
-			printf("player to x: %f, y: %f\n", player_to_x, player_to_y);
 			cub3d->plr->p_x = player_to_x;
 			cub3d->plr->p_y = player_to_y;
 			cub3d->map[(int)player_to_x][(int)player_to_y] = 'W';
-			//clean_screen(cub3d);
 		}
                else if (cub3d->map[(int)cub3d->plr->p_x][(int)player_to_y] != '1')
                        cub3d->plr->p_y = player_to_y;
@@ -91,12 +83,9 @@ int	ft_move_player(int key, t_cub3d *cub3d)
 		if (cub3d->map[(int)player_to_x][(int)player_to_y] != '1')
 		{
 			cub3d->map[(int)cub3d->plr->p_x][(int)cub3d->plr->p_y] = '0';
-			printf("player x: %f, y: %f\n", cub3d->plr->p_x, cub3d->plr->p_y);
-			printf("player to x: %f, y: %f\n", player_to_x, player_to_y);
 			cub3d->plr->p_x = player_to_x;
 			cub3d->plr->p_y = player_to_y;
 			cub3d->map[(int)player_to_x][(int)player_to_y] = 'W';
-			//clean_screen(cub3d);
 		}
                else if (cub3d->map[(int)cub3d->plr->p_x][(int)player_to_y] != '1')
                        cub3d->plr->p_y = player_to_y;
@@ -132,7 +121,6 @@ int	ft_rotate_player(t_cub3d *cub3d, int key)
 		cub3d->plr->pl_x = cub3d->plr->pl_x * cos(-ROT_SPEED) - cub3d->plr->pl_y * sin(-ROT_SPEED);
 		cub3d->plr->pl_y = oldPlaneX * sin(-ROT_SPEED) + cub3d->plr->pl_y * cos(-ROT_SPEED);
 	}
-//	clean_screen(cub3d);
 	ft_print_canvas(cub3d);
 	ft_print_minimap(cub3d);
 	return (0);
@@ -141,7 +129,7 @@ int	ft_rotate_player(t_cub3d *cub3d, int key)
 
 int	ft_key_event(int key, t_cub3d *cub3d)
 {
-	
+
 	(void)cub3d;
 	if (key == XK_ESCAPE)
 		ft_close(cub3d);

@@ -6,7 +6,7 @@
 /*   By: jahuang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 11:42:13 by jahuang           #+#    #+#             */
-/*   Updated: 2022/03/01 16:50:30 by jahuang          ###   ########.fr       */
+/*   Updated: 2022/03/31 16:10:08 by jahuang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,7 @@ int	ft_return(int ret_code, t_cub3d *cub3d)
 		ft_putstr_fd("Error\nMap not surrounded by walls\n", 1);
 	if (ret_code == ERR_MAP_CHAR)
 		ft_putstr_fd("Error\nMap contains invalid charecter(s)\n", 1);
+	if (ret_code == ERR_MAP_MULTIPLAYER)
+		ft_putstr_fd("Error\nMust have one and only one player.\n", 1);
 	return (ret_code);
 }
