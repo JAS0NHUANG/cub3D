@@ -6,7 +6,7 @@
 /*   By: ifeelbored <ifeelbored@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 17:28:14 by ifeelbored        #+#    #+#             */
-/*   Updated: 2022/03/31 17:35:53 by ifeelbored       ###   ########.fr       */
+/*   Updated: 2022/04/01 16:18:55 by ifeelbored       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,12 @@ void	ft_set_plane(t_cub3d *cub3d, char player_char)
 	if (player_char == 'N')
 	{
 		cub3d->plr->pl_x = 0;
-		cub3d->plr->pl_y = -0.66;
+		cub3d->plr->pl_y = 0.66;
 	}
 	else if (player_char == 'S')
 	{
 		cub3d->plr->pl_x = 0;
-		cub3d->plr->pl_y = 0.66;
+		cub3d->plr->pl_y = -0.66;
 	}
 	else if (player_char == 'W')
 	{

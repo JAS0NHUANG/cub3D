@@ -6,37 +6,36 @@
 /*   By: ifeelbored <ifeelbored@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 16:12:49 by jahuang           #+#    #+#             */
-/*   Updated: 2022/04/01 12:25:40 by ifeelbored       ###   ########.fr       */
+/*   Updated: 2022/04/01 16:13:54 by ifeelbored       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-char	*ft_strchr_ex(const char *s, int c)
+char	*ft_strrchr(const char *s, int c)
 {
-	unsigned char	*ch_s;
+	int	i;
 
-	ch_s = (unsigned char *)s;
-	while (*ch_s)
-	{
-		if ((*ch_s) == (unsigned char)c)
-			return ((char *)ch_s);
-		ch_s++;
+	i = 0;
+	while (*(s + i))
+		++i;
+	while (i >= 0)
+	{	
+		if (*(s + i) == (char)c)
+			return (((char *)s + i));
+		--i;
 	}
-	if ((*ch_s) == '\0' && c == '\0')
-		return ((char *)ch_s);
-	return (0);
+	return (NULL);
 }
 
 int	check_extension(char *path)
 {
 	char	*str;
 
-	str = ft_strchr_ex(path, '.');
+	str = ft_strrchr(path, '.');
 	if (!str)
 		return (1);
 	str++;
-	printf("str:%s\n", str);
 	if (ft_strcmp(str, "xpm"))
 		return (1);
 	return (0);
