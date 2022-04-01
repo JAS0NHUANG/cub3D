@@ -6,7 +6,7 @@
 /*   By: ifeelbored <ifeelbored@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/01 16:43:38 by ifeelbored        #+#    #+#             */
-/*   Updated: 2022/04/02 00:04:22 by ifeelbored       ###   ########.fr       */
+/*   Updated: 2022/04/02 00:45:51 by ifeelbored       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void if_hit_wall(t_cub3d *cub, t_ray *ray)
 	}
 }
 
-void init_ray_val(t_cub3d *cub, int x, t_ray *ray)
+void init_ray_val(t_cub3d *cub, double x, t_ray *ray)
 {
 	double camera_x;
 	int	map_x;
@@ -78,7 +78,6 @@ void init_ray_val(t_cub3d *cub, int x, t_ray *ray)
 	camera_x = 2 * x / S_W - 1;
 	ray->dir_x = cub->plr->d_x + cub->plr->pl_x * camera_x;
 	ray->dir_y = cub->plr->d_y + cub->plr->pl_y * camera_x;
-	printf("ray->dir_x:%f\n", ray->dir_x);
 	map_x= (int)(cub->plr->p_x);
 	map_y= (int)(cub->plr->p_y);
 	ray->delta_dist_x = 1000000;
@@ -119,75 +118,11 @@ int	ft_print_canvas(t_cub3d *cub)
 	canvas = malloc(sizeof(t_my_img));
 	canvas->img_ptr = mlx_new_image(cub->mlx_ptr, S_W, S_H);
 	canvas->img_addr = mlx_get_data_addr(canvas->img_ptr, &(canvas->bpp), &(canvas->size), &(canvas->endian));
-
 	x = 0.00;
 	while (x < S_W)
 	{
-		// double camera_x;
-		// int	map_x;
-		// int	map_y;
-
-		// camera_x = 2 * x / S_W - 1;
-		// ray.dir_x = cub->plr->d_x + cub->plr->pl_x * camera_x;
-		// ray.dir_y = cub->plr->d_y + cub->plr->pl_y * camera_x;
-		// map_x= (int)(cub->plr->p_x);
-		// map_y= (int)(cub->plr->p_y);
-		// ray.delta_dist_x = 1000000;
-		// ray.delta_dist_y = 1000000;
-		// if (ray.dir_x != 0)
-		// 	ray.delta_dist_x = fabs(1 / ray.dir_x);
-		// if (ray.dir_y != 0)
-		// 	ray.delta_dist_y = fabs(1 / ray.dir_y);
-		// if (ray.dir_x < 0)
-		// {
-		// 	ray.step_x = -1;
-		// 	ray.side_dist_x = (cub->plr->p_x - map_x) * ray.delta_dist_x;
-		// }
-		// else
-		// {
-		// 	ray.step_x = 1;
-		// 	ray.side_dist_x = (map_x + 1.0 - cub->plr->p_x) * ray.delta_dist_x;
-		// }
-		// if (ray.dir_y < 0)
-		// {
-		// 	ray.step_y = -1;
-		// 	ray.side_dist_y = (cub->plr->p_y - map_y) * ray.delta_dist_y;
-		// }
-		// else
-		// {
-		// 	ray.step_y = 1;
-		// 	ray.side_dist_y = (map_y + 1.0 - cub->plr->p_y) * ray.delta_dist_y;
-		// }
-
 		init_ray_val(cub, x, &ray);
-		// int hit = 0;
-		// // int map_x= (int)(cub->plr->p_x);
-		// // int map_y= (int)(cub->plr->p_y);	
-		// while (hit == 0)
-		// {
-		// 	if (ray.side_dist_x < ray.side_dist_y)
-		// 	{
-		// 		ray.side_dist_x += ray.delta_dist_x;
-		// 		map_x += ray.step_x;
-		// 		ray.side = 0;
-		// 	}
-		// 	else
-		// 	{
-		// 		ray.side_dist_y += ray.delta_dist_y;
-		// 		map_y += ray.step_y;
-		// 		ray.side = 1;
-		// 	}
-		// 	if (cub->map[map_x][map_y] == '1')
-		// 		hit = 1;
-		// }
-		// printf("ray1:%f\n", ray.side_dist_x);
-		
-		// printf("ray2:%f\n", ray.side_dist_x);
 		if_hit_wall(cub, &ray);
-		// printf("ray3:%f\n", ray.side_dist_x);
-		// if (x == 3.00)
-		// 	exit(1);
-		//double perp_wall_dist;
 		if (ray.side == 0)
 			ray.perp_wall_dist = ray.side_dist_x - ray.delta_dist_x;
 		else
@@ -220,9 +155,6 @@ int	ft_print_canvas(t_cub3d *cub)
 		double texPos = (drawStart - S_H / 2 + lineHeight / 2) * step;
 		int y = 0;
 		char *pixel;
-		// printf("here\n %d\n", texture->size);
-		// printf("cub:%d\n", cub3d->images->so.size);
-		// printf("img_ptr:%p\n", cub3d->images->so.img_ptr);
 		int texY;
 		int color;
 		while (y < S_H)
@@ -240,7 +172,7 @@ int	ft_print_canvas(t_cub3d *cub)
 			pixel = canvas->img_addr + ((int)(y) * canvas->size) + (int)x * (canvas->bpp / 8);
 			*(unsigned int *)pixel = color;
 			y++;
-     		}
+     	}
 		x++;
 	}
 	mlx_put_image_to_window(cub->mlx_ptr, cub->win_ptr, canvas->img_ptr,0 ,0) ;
