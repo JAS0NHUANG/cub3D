@@ -3,7 +3,7 @@ SO ./textures/greystone.xpm
 F  38,   26,  0   
 
 
-WE      ./textures/colorstone.xpm
+WE      ./srcs/main.c
 EA   ./textures/redbrick.xpm
 
 

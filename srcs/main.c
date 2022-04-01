@@ -6,30 +6,31 @@
 /*   By: ifeelbored <ifeelbored@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 14:50:11 by jahuang           #+#    #+#             */
-/*   Updated: 2022/03/31 15:39:01 by jahuang          ###   ########.fr       */
+/*   Updated: 2022/04/01 11:40:14 by ifeelbored       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-
 t_my_img	*ft_create_tile(t_cub3d *cub3d, unsigned int color, int size)
 {
 	t_my_img	*img_holder;
-	int		i;
-	int		j;
-	char	*pixel;
+	int			i;
+	int			j;
+	char		*pixel;
 
 	img_holder = malloc(sizeof(t_my_img));
 	img_holder->img_ptr = mlx_new_image(cub3d->mlx_ptr, size, size);
-	img_holder->img_addr = mlx_get_data_addr(img_holder->img_ptr, &(img_holder->bpp), &(img_holder->size), &(img_holder->endian));
+	img_holder->img_addr = mlx_get_data_addr(img_holder->img_ptr, \
+		&(img_holder->bpp), &(img_holder->size), &(img_holder->endian));
 	i = 0;
 	while (i < size)
 	{
 		j = 0;
 		while (j < size)
 		{
-			pixel = img_holder->img_addr + (i * img_holder->size) + j * (img_holder->bpp / 8);
+			pixel = img_holder->img_addr + \
+				(i * img_holder->size) + j * (img_holder->bpp / 8);
 			ft_memcpy(pixel, &color, sizeof(unsigned int));
 			j++;
 		}
@@ -38,41 +39,55 @@ t_my_img	*ft_create_tile(t_cub3d *cub3d, unsigned int color, int size)
 	return (img_holder);
 }
 
-int	ft_print_minimap(t_cub3d *cub3d)
+void	ft_minimap_lp(t_cub3d *cub, t_my_img *map, t_my_img *floor, int i)
 {
-	int		i;
-	int		j;
+	int	j;
+
+	j = 0;
+	while (j < (int)ft_strlen((cub->map)[i]))
+	{
+		if (cub->map[i][j] == '1')
+		{
+			mlx_put_image_to_window(cub->mlx_ptr, cub->win_ptr, map->img_ptr, \
+				j * 10 + 20, i * 10 + 20);
+		}
+		if (cub->map[i][j] == '0')
+		{
+			mlx_put_image_to_window(cub->mlx_ptr, cub->win_ptr, floor->img_ptr, \
+				j * 10 + 20, i * 10 + 20);
+		}
+		j++;
+	}
+}
+
+int	ft_print_minimap(t_cub3d *cub)
+{
+	int			i;
 	t_my_img	*mini_map_img;
 	t_my_img	*player_img;
 	t_my_img	*floor_img;
 	t_my_img	*dir_img;
 
-	mini_map_img = ft_create_tile(cub3d, 0x00AAAAAA, 10);
-	player_img = ft_create_tile(cub3d, 0x009F0000, 5);
-	dir_img = ft_create_tile(cub3d, 0x009F00FF, 5);
-	floor_img = ft_create_tile(cub3d, 0x00000000, 10);
+	mini_map_img = ft_create_tile(cub, 0x00AAAAAA, 10);
+	player_img = ft_create_tile(cub, 0x009F0000, 5);
+	dir_img = ft_create_tile(cub, 0x009F00FF, 5);
+	floor_img = ft_create_tile(cub, 0x00000000, 10);
 	i = 0;
-	while (i < ft_arraylen(cub3d->map))
+	while (i < ft_arraylen(cub->map))
 	{
-		j = 0;
-		while (j < (int)ft_strlen((cub3d->map)[i]))
-		{
-			if (cub3d->map[i][j] == '1')
-				mlx_put_image_to_window(cub3d->mlx_ptr, cub3d->win_ptr, mini_map_img->img_ptr, j * 10 + 20, i * 10 + 20 );
-			if (cub3d->map[i][j] == '0')
-				mlx_put_image_to_window(cub3d->mlx_ptr, cub3d->win_ptr, floor_img->img_ptr, j * 10 + 20, i * 10 + 20 );
-			j++;
-		}
+		ft_minimap_lp(cub, mini_map_img, floor_img, i);
 		i++;
 	}
-	mlx_put_image_to_window(cub3d->mlx_ptr, cub3d->win_ptr, player_img->img_ptr, cub3d->plr->p_y * 10 + 20 - 2, cub3d->plr->p_x * 10 + 20 - 2);
-	mlx_put_image_to_window(cub3d->mlx_ptr, cub3d->win_ptr, dir_img->img_ptr, (cub3d->plr->p_y + cub3d->plr->d_y)* 10 +20 -2 ,(cub3d->plr->p_x + cub3d->plr->d_x)* 10 + 20 -2);
+	mlx_put_image_to_window(cub->mlx_ptr, cub->win_ptr, player_img->img_ptr, \
+		cub->plr->p_y * 10 + 20 - 2, cub->plr->p_x * 10 + 20 - 2);
+	mlx_put_image_to_window(cub->mlx_ptr, cub->win_ptr, dir_img->img_ptr, \
+		(cub->plr->p_y + cub->plr->d_y) * 10 + 20 - 2, \
+		(cub->plr->p_x + cub->plr->d_x) * 10 + 20 - 2);
 	return (0);
 }
 
 int	ft_run_cub3d(t_cub3d *cub3d)
 {
-	//cub3d->mlx_ptr = mlx_init();
 	if (!cub3d->mlx_ptr)
 		return (ERR_MLX);
 	cub3d->win_ptr = mlx_new_window(cub3d->mlx_ptr, S_W, S_H,
@@ -81,12 +96,8 @@ int	ft_run_cub3d(t_cub3d *cub3d)
 		return (ERR_MLX);
 	cub3d->images->minimap_img = NULL;
 	cub3d->images->player_img = NULL;
-
-
-	printf("okok\n");
 	ft_print_canvas(cub3d);
 	ft_print_minimap(cub3d);
-
 	mlx_hook(cub3d->win_ptr, 2, 1l << 0, &ft_key_event, cub3d);
 	mlx_hook(cub3d->win_ptr, 17, 1l << 0, &ft_close, cub3d);
 	mlx_loop(cub3d->mlx_ptr);
