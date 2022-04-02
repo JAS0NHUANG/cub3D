@@ -6,7 +6,7 @@
 /*   By: ifeelbored <ifeelbored@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 21:32:52 by ifeelbored        #+#    #+#             */
-/*   Updated: 2022/03/31 22:52:27 by ifeelbored       ###   ########.fr       */
+/*   Updated: 2022/04/02 12:02:23 by ifeelbored       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ typedef struct s_player
 
 typedef struct s_ray
 {
+	double		lp_x;
 	double		dir_x;
 	double		dir_y;
 	double		side_dist_x;
@@ -78,5 +79,17 @@ typedef struct s_ray
 	int			step_y;
 	int			side;
 	double		wall_x;
+	int			lign_h;
 }	t_ray;
+
+typedef struct s_text
+{
+	int		start;
+	int		end;
+	int		tex_x;
+	double step;
+	double tex_p;
+
+
+}	t_text;
 #endif

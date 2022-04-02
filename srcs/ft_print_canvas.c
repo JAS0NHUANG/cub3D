@@ -6,7 +6,7 @@
 /*   By: ifeelbored <ifeelbored@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/01 16:43:38 by ifeelbored        #+#    #+#             */
-/*   Updated: 2022/04/02 00:45:51 by ifeelbored       ###   ########.fr       */
+/*   Updated: 2022/04/02 12:15:40 by ifeelbored       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,15 +41,11 @@ t_my_img	*select_texture(t_cub3d *cub, t_ray ray)
 	return (0);
 }
 
-void if_hit_wall(t_cub3d *cub, t_ray *ray)
+void	dda(t_cub3d *cub, t_ray *ray, int map_x, int map_y)
 {
 	int	hit;
-	int	map_x;
-	int	map_y;
 
 	hit = 0;
-	map_x= (int)(cub->plr->p_x);
-	map_y= (int)(cub->plr->p_y);	
 	while (hit == 0)
 	{
 		if (ray->side_dist_x < ray->side_dist_y)
@@ -67,25 +63,15 @@ void if_hit_wall(t_cub3d *cub, t_ray *ray)
 		if (cub->map[map_x][map_y] == '1')
 			hit = 1;
 	}
+	if (ray->side == 0)
+		ray->perp_wall_dist = ray->side_dist_x - ray->delta_dist_x;
+	else
+		ray->perp_wall_dist = ray->side_dist_y - ray->delta_dist_y;
+	ray->lign_h = (int)(S_H / ray->perp_wall_dist);
 }
 
-void init_ray_val(t_cub3d *cub, double x, t_ray *ray)
+void	init_side_dist(t_cub3d *cub, t_ray *ray, int map_x, int map_y)
 {
-	double camera_x;
-	int	map_x;
-	int	map_y;
-
-	camera_x = 2 * x / S_W - 1;
-	ray->dir_x = cub->plr->d_x + cub->plr->pl_x * camera_x;
-	ray->dir_y = cub->plr->d_y + cub->plr->pl_y * camera_x;
-	map_x= (int)(cub->plr->p_x);
-	map_y= (int)(cub->plr->p_y);
-	ray->delta_dist_x = 1000000;
-	ray->delta_dist_y = 1000000;
-	if (ray->dir_x != 0)
-		ray->delta_dist_x = fabs(1 / ray->dir_x);
-	if (ray->dir_y != 0)
-		ray->delta_dist_y = fabs(1 / ray->dir_y);
 	if (ray->dir_x < 0)
 	{
 		ray->step_x = -1;
@@ -108,73 +94,93 @@ void init_ray_val(t_cub3d *cub, double x, t_ray *ray)
 	}
 }
 
+void	init_delta_dist(t_cub3d *cub, double x, t_ray *ray)
+{
+	double	camera_x;
+
+	camera_x = 2 * x / S_W - 1;
+	ray->dir_x = cub->plr->d_x + cub->plr->pl_x * camera_x;
+	ray->dir_y = cub->plr->d_y + cub->plr->pl_y * camera_x;
+	ray->delta_dist_x = 1000000;
+	ray->delta_dist_y = 1000000;
+	if (ray->dir_x != 0)
+		ray->delta_dist_x = fabs(1 / ray->dir_x);
+	if (ray->dir_y != 0)
+		ray->delta_dist_y = fabs(1 / ray->dir_y);
+}
+
+void	calcu_texture(t_cub3d *cub, t_ray *ray, t_text *tex, t_my_img *texture)
+{
+	if (ray->side == 0)
+		ray->wall_x = cub->plr->p_y + ray->perp_wall_dist * ray->dir_y;
+	else
+		ray->wall_x = cub->plr->p_x + ray->perp_wall_dist * ray->dir_x;
+	ray->wall_x -= floor((ray->wall_x));
+	tex->start = -ray->lign_h / 2 + S_H / 2;
+	if (tex->start < 0)
+		tex->start = 0;
+	tex->end = ray->lign_h / 2 + S_H / 2;
+	if (tex->end >= S_H)
+		tex->end = S_H - 1;
+	tex->tex_x = (int)(ray->wall_x * (double)(texture->w));
+	if ((ray->side == 0 && ray->dir_x > 0) || \
+		(ray->side == 1 && ray->dir_y < 0))
+		tex->tex_x = texture->w - tex->tex_x - 1;
+	tex->step = 1.0 * texture->h / ray->lign_h;
+	tex->tex_p = (tex->start - S_H / 2 + ray->lign_h / 2) * tex->step;
+}
+
+void	print_texture(t_cub3d *cub, t_ray *ray, t_my_img *t_ig, t_my_img *c_ig)
+{
+	t_text	tex;
+	int		y;
+	char	*pixel;
+	int		tex_y;
+	int		color;
+
+	calcu_texture(cub, ray, &tex, t_ig);
+	y = 0;
+	while (y < S_H)
+	{
+		if (y < tex.start)
+			color = convert_rgb_to_int(cub->info->c);
+		else if (y > tex.end)
+			color = convert_rgb_to_int(cub->info->f);
+		else
+		{
+			tex_y = (int)tex.tex_p & (t_ig->h - 1);
+			color = ((int *)t_ig->img_addr)[(256 / 4) * tex_y + tex.tex_x];
+			tex.tex_p += tex.step;
+		}
+		pixel = c_ig->img_addr + ((int)(y) *c_ig->size) + \
+			(int)ray->lp_x * (c_ig->bpp / 8);
+		*(unsigned int *)pixel = color;
+		y++;
+	}
+}
+
 int	ft_print_canvas(t_cub3d *cub)
 {
 	double		x;
 	t_my_img	*canvas;
-	t_ray	ray;
-	t_my_img *texture;
+	t_ray		ray;
+	t_my_img	*texture;
 
 	canvas = malloc(sizeof(t_my_img));
 	canvas->img_ptr = mlx_new_image(cub->mlx_ptr, S_W, S_H);
-	canvas->img_addr = mlx_get_data_addr(canvas->img_ptr, &(canvas->bpp), &(canvas->size), &(canvas->endian));
+	canvas->img_addr = mlx_get_data_addr(canvas->img_ptr, \
+		&(canvas->bpp), &(canvas->size), &(canvas->endian));
 	x = 0.00;
 	while (x < S_W)
 	{
-		init_ray_val(cub, x, &ray);
-		if_hit_wall(cub, &ray);
-		if (ray.side == 0)
-			ray.perp_wall_dist = ray.side_dist_x - ray.delta_dist_x;
-		else
-			ray.perp_wall_dist = ray.side_dist_y - ray.delta_dist_y;
-
-	//Calculate height of line to draw on screen
-      	int lineHeight = (int)(S_H / ray.perp_wall_dist);
-
-      	//calculate lowest and highest pixel to fill in current stripe
-      	int drawStart = -lineHeight / 2 + S_H / 2;
-      	if(drawStart < 0) drawStart = 0;
-      	int drawEnd = lineHeight / 2 + S_H / 2;
-      	if(drawEnd >= S_H) drawEnd = S_H - 1;
-		
-	//double wallX; //where exactly the wall was hit
-      	if (ray.side == 0)
-			ray.wall_x =  cub->plr->p_y + ray.perp_wall_dist * ray.dir_y;
-      	else
-		  	ray.wall_x = cub->plr->p_x + ray.perp_wall_dist * ray.dir_x;
-      	ray.wall_x -= floor((ray.wall_x));
-
-		// printf("ray.wall_x :%f\n", ray.wall_x);
-		texture = select_texture(cub, ray);	
-		int texX = (int)(ray.wall_x * (double)(texture->w));
-      	if(ray.side == 0 && ray.dir_x > 0) texX = texture->w - texX - 1;
-      	if(ray.side == 1 && ray.dir_y < 0) texX = texture->w - texX - 1;
-
-		//lineHeight = drawEnd - drawStart;
-		double step = 1.0 * texture->h / lineHeight;
-		double texPos = (drawStart - S_H / 2 + lineHeight / 2) * step;
-		int y = 0;
-		char *pixel;
-		int texY;
-		int color;
-		while (y < S_H)
-		{
-			if (y < drawStart)
-				color = convert_rgb_to_int(cub->info->c);
-			else if (y > drawEnd)
-				color = convert_rgb_to_int(cub->info->f);
-			else
-			{
-				texY = (int)texPos & (texture->h - 1);
-				color = ((int *)texture->img_addr)[(256 / 4) * texY + texX];
-				texPos += step;
-			}
-			pixel = canvas->img_addr + ((int)(y) * canvas->size) + (int)x * (canvas->bpp / 8);
-			*(unsigned int *)pixel = color;
-			y++;
-     	}
+		init_delta_dist(cub, x, &ray);
+		init_side_dist(cub, &ray, (int)(cub->plr->p_x), (int)(cub->plr->p_y));
+		dda(cub, &ray, (int)(cub->plr->p_x), (int)(cub->plr->p_y));
+		texture = select_texture(cub, ray);
+		ray.lp_x = x;
+		print_texture(cub, &ray, texture, canvas);
 		x++;
 	}
-	mlx_put_image_to_window(cub->mlx_ptr, cub->win_ptr, canvas->img_ptr,0 ,0) ;
+	mlx_put_image_to_window(cub->mlx_ptr, cub->win_ptr, canvas->img_ptr, 0, 0);
 	return (0);
 }
