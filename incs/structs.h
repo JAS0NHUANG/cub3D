@@ -6,7 +6,7 @@
 /*   By: ifeelbored <ifeelbored@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 21:32:52 by ifeelbored        #+#    #+#             */
-/*   Updated: 2022/04/02 12:02:23 by ifeelbored       ###   ########.fr       */
+/*   Updated: 2022/04/02 21:09:17 by ifeelbored       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,9 +87,7 @@ typedef struct s_text
 	int		start;
 	int		end;
 	int		tex_x;
-	double step;
-	double tex_p;
-
-
+	double	step;
+	double	tex_p;
 }	t_text;
 #endif

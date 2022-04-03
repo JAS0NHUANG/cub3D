@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_free_cub3d.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ifeelbored <ifeelbored@student.42.fr>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/04/02 21:21:49 by ifeelbored        #+#    #+#             */
+/*   Updated: 2022/04/03 05:16:18 by ifeelbored       ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 
 void	ft_free_mlx(t_cub3d *cub3d)
@@ -22,6 +34,14 @@ void	ft_free_info(t_info *info)
 {
 	if (info)
 	{
+		if (info->no)
+			free(info->no);
+		if (info->so)
+			free(info->so);
+		if (info->we)
+			free(info->we);
+		if (info->ea)
+			free(info->ea);
 		if (info->c)
 			free(info->c);
 		if (info->f)

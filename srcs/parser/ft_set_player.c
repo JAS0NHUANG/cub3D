@@ -6,7 +6,7 @@
 /*   By: ifeelbored <ifeelbored@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 17:28:14 by ifeelbored        #+#    #+#             */
-/*   Updated: 2022/04/01 16:18:55 by ifeelbored       ###   ########.fr       */
+/*   Updated: 2022/04/03 05:54:11 by ifeelbored       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,10 +90,11 @@ void	ft_set_player_info(t_cub3d *cub3d)
 	return ;
 }
 
-void	ft_set_player(t_cub3d *cub3d)
+int	ft_set_player(t_cub3d *cub3d)
 {
 	cub3d->plr = malloc(sizeof(t_player));
 	if (!(cub3d->plr))
-		return ;
+		return (1);
 	ft_set_player_info(cub3d);
+	return (0);
 }

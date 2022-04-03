@@ -6,7 +6,7 @@
 /*   By: ifeelbored <ifeelbored@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 14:50:11 by jahuang           #+#    #+#             */
-/*   Updated: 2022/04/01 11:40:14 by ifeelbored       ###   ########.fr       */
+/*   Updated: 2022/04/03 05:45:13 by ifeelbored       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,12 +114,18 @@ int	main(int ac, char **av)
 		return (ERR_ARGS);
 	ret = ft_parser(av[1], &cub3d);
 	if (ret != 0)
+	{
+		ft_free_cub3d(cub3d);
 		return (ft_return(ret, cub3d));
+	}
 	cub3d->images = malloc(sizeof(t_images));
 	ft_print_struct(cub3d);
-	cub3d->mlx_ptr = mlx_init();
+	cub3d->mlx_ptr = mlx_init(); // destory?
 	if (init_texture(cub3d) == 1)
+	{
+		ft_free_cub3d(cub3d);
 		return (ft_return(ERR_INFO, cub3d));
+	}
 	ft_run_cub3d(cub3d);
 	return (ft_return(ret, cub3d));
 }

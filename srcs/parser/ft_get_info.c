@@ -6,7 +6,7 @@
 /*   By: ifeelbored <ifeelbored@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 14:55:08 by jahuang           #+#    #+#             */
-/*   Updated: 2022/03/31 23:19:51 by ifeelbored       ###   ########.fr       */
+/*   Updated: 2022/04/03 05:41:06 by ifeelbored       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,14 @@ int	*ft_get_colors_lp(char	**holder, int *colors, int	*colors_i)
 	j = 0;
 	while (holder[j])
 	{
-		if (*colors_i >= 4)
+		colors[*colors_i] = ft_atoi_unsig(holder[j]);
+		if (*colors_i >= 4 || colors[*colors_i] > 255 || \
+			colors[*colors_i] < 0)
 		{
 			ft_free_strarray(holder);
 			free(colors);
 			return (NULL);
 		}
-		colors[*colors_i] = ft_atoi(holder[j]);
 		(*colors_i) = (*colors_i) + 1;
 		j++;
 	}
@@ -83,6 +84,8 @@ int	ft_put_info_in_cub3d(char **info_array, t_info *info_struct)
 		info_array++;
 		ft_free_strarray(line);
 	}
+	if (!info_struct->c || !info_struct->f)
+		return (1);
 	return (0);
 }
 
@@ -121,7 +124,8 @@ int	ft_get_info(int fd, t_cub3d **cub3d)
 	info_array[index] = NULL;
 	if (ft_init_info(cub3d) != 0)
 		return (ERR_INFO);
-	ft_put_info_in_cub3d(info_array, (*cub3d)->info);
+	if (ft_put_info_in_cub3d(info_array, (*cub3d)->info))
+		return (ERR_INFO);
 	ft_free_strarray(info_array);
 	return (ft_check_info((*cub3d)->info));
 }

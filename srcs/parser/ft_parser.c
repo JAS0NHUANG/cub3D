@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_parser.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jahuang <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: ifeelbored <ifeelbored@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 16:54:30 by jahuang           #+#    #+#             */
-/*   Updated: 2022/03/03 18:03:33 by jahuang          ###   ########.fr       */
+/*   Updated: 2022/04/03 05:53:23 by ifeelbored       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ int	ft_parser(char *map_file, t_cub3d **cub3d)
 	ret = ft_get_map(fd, cub3d);
 	if (ret != 0)
 		return (ret);
-	ft_set_player(*cub3d);
+	if (ft_set_player(*cub3d))
+		return (ERR_MALLOC);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: ifeelbored <ifeelbored@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 21:28:06 by ifeelbored        #+#    #+#             */
-/*   Updated: 2022/03/31 22:52:07 by ifeelbored       ###   ########.fr       */
+/*   Updated: 2022/04/03 05:52:55 by ifeelbored       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,19 +41,27 @@ int			ft_get_info(int fd, t_cub3d **cub3d);
 int			ft_check_info(t_info *info);
 int			ft_get_map(int fd, t_cub3d **cub3d);
 int			ft_check_map(char **map);
-void		ft_set_player(t_cub3d *cub3d);
+int			ft_set_player(t_cub3d *cub3d);
+int			ft_atoi_unsig(const char *str);
 /******************************************************************************/
 /* Debug functions															  */
 /******************************************************************************/
 void		ft_print_struct(t_cub3d *cub_3d);
 t_my_img	*ft_create_tile(t_cub3d *cub3d, unsigned int color, int size);
 int			ft_print_minimap(t_cub3d *cub_3d);
-int			ft_print_canvas(t_cub3d *cub_3d);
-
+int			convert_rgb_to_int(int *rgb);
+t_my_img	*select_texture(t_cub3d *cub, t_ray ray);
+void		dda(t_cub3d *cub, t_ray *ray, int map_x, int map_y);
+void		init_side_dist(t_cub3d *cub, t_ray *ray, int map_x, int map_y);
+int			ft_print_canvas(t_cub3d *cub);
 /******************************************************************************/
 /* MLX Event functions														  */
 /******************************************************************************/
 int			ft_key_event(int key, t_cub3d *cub3d);
 int			ft_close(t_cub3d *cub3d);
 int			init_texture(t_cub3d *cub);
+void		ft_move_w(t_cub3d *cub);
+void		ft_move_s(t_cub3d *cub);
+void		ft_move_a(t_cub3d *cub);
+void		ft_move_d(t_cub3d *cub);
 #endif

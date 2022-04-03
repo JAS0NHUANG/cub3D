@@ -6,11 +6,40 @@
 /*   By: ifeelbored <ifeelbored@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 14:51:34 by jahuang           #+#    #+#             */
-/*   Updated: 2022/03/31 17:36:04 by ifeelbored       ###   ########.fr       */
+/*   Updated: 2022/04/03 05:52:06 by ifeelbored       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+int	ft_atoi_unsig(const char *str)
+{
+	int		negatif;
+	size_t	result;
+
+	negatif = 1;
+	result = 0;
+	while ((*str >= '\t' && *str <= '\r') || *str == ' ')
+		str++;
+	if (*str == '-' || *str == '+')
+	{
+		if (*str == '-')
+			negatif = -1;
+		str++;
+	}
+	while (*str >= '0' && *str <= '9')
+	{
+		result = (result * 10) + (*str - 48);
+		str++;
+	}
+	if (*str && (*str < '0' || *str > '9'))
+		return (-1);
+	if (negatif < 0 && result > 2147483648)
+		return (-1);
+	if (negatif > 0 && result > 2147483647)
+		return (-1);
+	return (result * negatif);
+}
 
 static int	ft_is_surrounded(char **map, int x, int y, int array_len)
 {
@@ -44,7 +73,6 @@ static int	ft_check_close(char **map, int array_len)
 	i = 0;
 	while (i < array_len)
 	{
-		printf("map line:%s\n", map[i]);
 		j = 0;
 		str_len = ft_strlen(map[i]);
 		while (j < str_len)

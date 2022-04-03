@@ -32,6 +32,7 @@ INCS_DIR		=	incs
 
 SRCS			=	main.c \
 				ft_print_canvas.c \
+				ft_init_canvas.c \
 				utils/ft_return.c \
 				utils/ft_free_cub3d.c \
 				parser/ft_parser.c \
@@ -41,6 +42,7 @@ SRCS			=	main.c \
 				parser/ft_check_map.c \
 				parser/ft_set_player.c \
 				events/ft_close.c \
+				events/ft_move.c \
 				events/ft_key_event.c \
 				debug/ft_print_struct.c \
 				texture.c \
