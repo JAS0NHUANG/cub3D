@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_return.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jahuang <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: ifeelbored <ifeelbored@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 11:42:13 by jahuang           #+#    #+#             */
-/*   Updated: 2022/03/31 16:10:08 by jahuang          ###   ########.fr       */
+/*   Updated: 2022/04/03 23:35:42 by ifeelbored       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	ft_return(int ret_code, t_cub3d *cub3d)
 {
-	(void)cub3d;
+	ft_free_cub3d(cub3d);
 	if (ret_code == ERR_ARGS)
 		ft_putstr_fd("Error\nWrong amount of argument(s)\n", 1);
 	if (ret_code == ERR_FILE || ret_code == ERR_GNL)

@@ -6,7 +6,7 @@
 /*   By: ifeelbored <ifeelbored@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 14:50:11 by jahuang           #+#    #+#             */
-/*   Updated: 2022/04/03 05:45:13 by ifeelbored       ###   ########.fr       */
+/*   Updated: 2022/04/03 23:46:35 by ifeelbored       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,44 +43,41 @@ void	ft_minimap_lp(t_cub3d *cub, t_my_img *map, t_my_img *floor, int i)
 {
 	int	j;
 
-	j = 0;
-	while (j < (int)ft_strlen((cub->map)[i]))
+	j = -1;
+	while (++j < (int)ft_strlen((cub->map)[i]))
 	{
 		if (cub->map[i][j] == '1')
 		{
 			mlx_put_image_to_window(cub->mlx_ptr, cub->win_ptr, map->img_ptr, \
 				j * 10 + 20, i * 10 + 20);
 		}
-		if (cub->map[i][j] == '0')
+		if (cub->map[i][j] == '0' || cub->map[i][j] == 'W' || \
+			cub->map[i][j] == 'E' || cub->map[i][j] == 'N' || \
+			cub->map[i][j] == 'S')
 		{
 			mlx_put_image_to_window(cub->mlx_ptr, cub->win_ptr, floor->img_ptr, \
 				j * 10 + 20, i * 10 + 20);
 		}
-		j++;
 	}
 }
 
-int	ft_print_minimap(t_cub3d *cub)
+int	ft_print_minimap(t_cub3d *cub, t_images *ig)
 {
 	int			i;
-	t_my_img	*mini_map_img;
-	t_my_img	*player_img;
-	t_my_img	*floor_img;
-	t_my_img	*dir_img;
 
-	mini_map_img = ft_create_tile(cub, 0x00AAAAAA, 10);
-	player_img = ft_create_tile(cub, 0x009F0000, 5);
-	dir_img = ft_create_tile(cub, 0x009F00FF, 5);
-	floor_img = ft_create_tile(cub, 0x00000000, 10);
+	ig->minimp = ft_create_tile(cub, 0x00AAAAAA, 10);
+	ig->plr = ft_create_tile(cub, 0x009F0000, 5);
+	ig->dir = ft_create_tile(cub, 0x009F00FF, 5);
+	ig->flr = ft_create_tile(cub, 0x00000000, 10);
 	i = 0;
 	while (i < ft_arraylen(cub->map))
 	{
-		ft_minimap_lp(cub, mini_map_img, floor_img, i);
+		ft_minimap_lp(cub, ig->minimp, ig->flr, i);
 		i++;
 	}
-	mlx_put_image_to_window(cub->mlx_ptr, cub->win_ptr, player_img->img_ptr, \
+	mlx_put_image_to_window(cub->mlx_ptr, cub->win_ptr, ig->plr->img_ptr, \
 		cub->plr->p_y * 10 + 20 - 2, cub->plr->p_x * 10 + 20 - 2);
-	mlx_put_image_to_window(cub->mlx_ptr, cub->win_ptr, dir_img->img_ptr, \
+	mlx_put_image_to_window(cub->mlx_ptr, cub->win_ptr, ig->dir->img_ptr, \
 		(cub->plr->p_y + cub->plr->d_y) * 10 + 20 - 2, \
 		(cub->plr->p_x + cub->plr->d_x) * 10 + 20 - 2);
 	return (0);
@@ -94,10 +91,12 @@ int	ft_run_cub3d(t_cub3d *cub3d)
 			"cub3d");
 	if (!cub3d->win_ptr)
 		return (ERR_MLX);
-	cub3d->images->minimap_img = NULL;
-	cub3d->images->player_img = NULL;
+	cub3d->imgs->minimp = NULL;
+	cub3d->imgs->plr = NULL;
+	cub3d->imgs->dir = NULL;
+	cub3d->imgs->flr = NULL;
 	ft_print_canvas(cub3d);
-	ft_print_minimap(cub3d);
+	ft_print_minimap(cub3d, cub3d->imgs);
 	mlx_hook(cub3d->win_ptr, 2, 1l << 0, &ft_key_event, cub3d);
 	mlx_hook(cub3d->win_ptr, 17, 1l << 0, &ft_close, cub3d);
 	mlx_loop(cub3d->mlx_ptr);
@@ -114,18 +113,13 @@ int	main(int ac, char **av)
 		return (ERR_ARGS);
 	ret = ft_parser(av[1], &cub3d);
 	if (ret != 0)
-	{
-		ft_free_cub3d(cub3d);
 		return (ft_return(ret, cub3d));
-	}
-	cub3d->images = malloc(sizeof(t_images));
+	cub3d->imgs = malloc(sizeof(t_images));
 	ft_print_struct(cub3d);
-	cub3d->mlx_ptr = mlx_init(); // destory?
-	if (init_texture(cub3d) == 1)
-	{
-		ft_free_cub3d(cub3d);
+	cub3d->mlx_ptr = mlx_init();
+	if (init_texture(cub3d))
 		return (ft_return(ERR_INFO, cub3d));
-	}
-	ft_run_cub3d(cub3d);
-	return (ft_return(ret, cub3d));
+	if (ft_run_cub3d(cub3d))
+		return (ft_return(ERR_INFO, cub3d));
+	return (0);
 }

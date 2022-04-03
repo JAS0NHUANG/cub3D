@@ -6,7 +6,7 @@
 /*   By: ifeelbored <ifeelbored@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 21:32:52 by ifeelbored        #+#    #+#             */
-/*   Updated: 2022/04/02 21:09:17 by ifeelbored       ###   ########.fr       */
+/*   Updated: 2022/04/03 23:12:29 by ifeelbored       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ typedef struct s_cub3d
 	char			**map;
 	void			*mlx_ptr;
 	void			*win_ptr;
-	struct s_images	*images;
+	struct s_images	*imgs;
 	struct s_info	*info;
 	struct s_player	*plr;
 }	t_cub3d;
@@ -36,9 +36,10 @@ typedef struct s_my_img
 
 typedef struct s_images
 {
-	t_my_img		*window_img;
-	t_my_img		*minimap_img;
-	t_my_img		*player_img;
+	t_my_img		*minimp;
+	t_my_img		*plr;
+	t_my_img		*dir;
+	t_my_img		*flr;
 	t_my_img		no;
 	t_my_img		so;
 	t_my_img		we;

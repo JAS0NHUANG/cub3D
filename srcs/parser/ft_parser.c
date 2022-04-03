@@ -6,7 +6,7 @@
 /*   By: ifeelbored <ifeelbored@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 16:54:30 by jahuang           #+#    #+#             */
-/*   Updated: 2022/04/03 05:53:23 by ifeelbored       ###   ########.fr       */
+/*   Updated: 2022/04/03 23:03:45 by ifeelbored       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,12 @@ int	ft_parser(char *map_file, t_cub3d **cub3d)
 	if (fd <= 2)
 		return (ERR_FILE);
 	*cub3d = malloc(sizeof(t_cub3d));
-	if (!cub3d)
-		return (ERR_MALLOC);
 	(*cub3d)->info = NULL;
 	(*cub3d)->map = NULL;
+	(*cub3d)->mlx_ptr = NULL;
+	(*cub3d)->win_ptr = NULL;
+	(*cub3d)->imgs = NULL;
+	(*cub3d)->plr = NULL;
 	ret = ft_get_info(fd, cub3d);
 	if (ret != 0)
 		return (ret);

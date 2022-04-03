@@ -6,7 +6,7 @@
 /*   By: ifeelbored <ifeelbored@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 21:28:06 by ifeelbored        #+#    #+#             */
-/*   Updated: 2022/04/03 05:52:55 by ifeelbored       ###   ########.fr       */
+/*   Updated: 2022/04/03 23:24:07 by ifeelbored       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int			ft_atoi_unsig(const char *str);
 /******************************************************************************/
 void		ft_print_struct(t_cub3d *cub_3d);
 t_my_img	*ft_create_tile(t_cub3d *cub3d, unsigned int color, int size);
-int			ft_print_minimap(t_cub3d *cub_3d);
+int			ft_print_minimap(t_cub3d *cub_3d, t_images *ig);
 int			convert_rgb_to_int(int *rgb);
 t_my_img	*select_texture(t_cub3d *cub, t_ray ray);
 void		dda(t_cub3d *cub, t_ray *ray, int map_x, int map_y);

@@ -6,7 +6,7 @@
 /*   By: ifeelbored <ifeelbored@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/02 21:19:00 by ifeelbored        #+#    #+#             */
-/*   Updated: 2022/04/02 21:21:42 by ifeelbored       ###   ########.fr       */
+/*   Updated: 2022/04/03 23:31:44 by ifeelbored       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,16 +27,16 @@ t_my_img	*select_texture(t_cub3d *cub, t_ray ray)
 	if (ray.side)
 	{
 		if (ray.dir_y > 0)
-			return (&cub->images->no);
+			return (&cub->imgs->no);
 		if (ray.dir_y < 0)
-			return (&cub->images->so);
+			return (&cub->imgs->so);
 	}
 	else if (!ray.side)
 	{
 		if (ray.dir_x > 0)
-			return (&cub->images->ea);
+			return (&cub->imgs->ea);
 		if (ray.dir_x < 0)
-			return (&cub->images->we);
+			return (&cub->imgs->we);
 	}
 	return (0);
 }

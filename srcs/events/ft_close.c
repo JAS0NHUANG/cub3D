@@ -6,7 +6,7 @@
 /*   By: ifeelbored <ifeelbored@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/01 00:13:06 by ifeelbored        #+#    #+#             */
-/*   Updated: 2022/04/01 00:13:15 by ifeelbored       ###   ########.fr       */
+/*   Updated: 2022/04/03 23:47:15 by ifeelbored       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 int	ft_close(t_cub3d *cub3d)
 {
+	//(void)cub3d;
 	ft_free_cub3d(cub3d);
 	exit(0);
 }
