@@ -6,7 +6,7 @@
 /*   By: ifeelbored <ifeelbored@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 16:12:49 by jahuang           #+#    #+#             */
-/*   Updated: 2022/04/01 16:13:54 by ifeelbored       ###   ########.fr       */
+/*   Updated: 2022/04/04 23:34:13 by ifeelbored       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ int	ft_check_info(t_info *info)
 		return (ERR_INFO);
 	if (ft_check_access(info) != 0)
 		return (ERR_ACCESS);
-	if (ft_check_colors(info) != 0)
-		return (ERR_INFO);
+	// if (ft_check_colors(info) != 0)
+	// 	return (ERR_INFO);
 	return (0);
 }
