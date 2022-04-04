@@ -65,10 +65,14 @@ int	ft_print_minimap(t_cub3d *cub, t_images *ig)
 {
 	int			i;
 
-	ig->minimp = ft_create_tile(cub, 0x00AAAAAA, 10);
-	ig->plr = ft_create_tile(cub, 0x009F0000, 5);
-	ig->dir = ft_create_tile(cub, 0x009F00FF, 5);
-	ig->flr = ft_create_tile(cub, 0x00000000, 10);
+	if (!ig->minimp)
+		ig->minimp = ft_create_tile(cub, 0x00AAAAAA, 10);
+	if (!ig->plr)
+		ig->plr = ft_create_tile(cub, 0x009F0000, 5);
+	if (!ig->dir)
+		ig->dir = ft_create_tile(cub, 0x009F00FF, 5);
+	if (!ig->flr)
+		ig->flr = ft_create_tile(cub, 0x00000000, 10);
 	i = 0;
 	while (i < ft_arraylen(cub->map))
 	{
@@ -91,6 +95,7 @@ int	ft_run_cub3d(t_cub3d *cub3d)
 			"cub3d");
 	if (!cub3d->win_ptr)
 		return (ERR_MLX);
+	cub3d->imgs->canvas = NULL;
 	cub3d->imgs->minimp = NULL;
 	cub3d->imgs->plr = NULL;
 	cub3d->imgs->dir = NULL;

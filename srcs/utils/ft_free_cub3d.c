@@ -28,6 +28,11 @@ void	ft_free_images(t_cub3d *cub, t_images *imgs)
 {
 	if (!imgs)
 		return ;
+	if (imgs->canvas)
+	{
+		mlx_destroy_image(cub->mlx_ptr, imgs->canvas->img_ptr);
+		free(imgs->canvas);
+	}
 	if (imgs->plr)
 	{
 		mlx_destroy_image(cub->mlx_ptr, imgs->plr->img_ptr);

@@ -26,9 +26,10 @@ static char	**ft_add_to_array(char **str_array, char *str)
 		new_array[index] = str_array[index];
 		index++;
 	}
-	new_array[index] = str;
+	new_array[index] = ft_strdup(str);
 	new_array[index + 1] = NULL;
 	free(str_array);
+	free(str);
 	return (new_array);
 }
 
@@ -44,6 +45,8 @@ int	ft_get_map(int fd, t_cub3d **cub3d)
 	{
 		if (line[0] != '\0')
 			map = ft_add_to_array(map, line);
+		else
+			free(line);
 		gnl_ret = get_next_line(fd, &line);
 	}
 	if (gnl_ret < 0)

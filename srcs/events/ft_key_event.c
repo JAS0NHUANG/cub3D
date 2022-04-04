@@ -17,7 +17,6 @@ void	ft_move_w(t_cub3d *cub)
 	float	plr_t_x;
 	float	plr_t_y;
 
-	printf("player x: %f, y: %f\n", cub->plr->p_x, cub->plr->p_y);
 	plr_t_x = cub->plr->p_x + cub->plr->d_x * MOVE_DIST;
 	plr_t_y = cub->plr->p_y + cub->plr->d_y * MOVE_DIST;
 	if (cub->map[(int)plr_t_x][(int)plr_t_y] != '1')

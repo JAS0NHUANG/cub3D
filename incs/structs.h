@@ -36,6 +36,7 @@ typedef struct s_my_img
 
 typedef struct s_images
 {
+	t_my_img		*canvas;
 	t_my_img		*minimp;
 	t_my_img		*plr;
 	t_my_img		*dir;

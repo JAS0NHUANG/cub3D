@@ -84,10 +84,15 @@ int	ft_print_canvas(t_cub3d *cub)
 	t_ray		ray;
 	t_my_img	*texture;
 
-	canvas = malloc(sizeof(t_my_img));
-	canvas->img_ptr = mlx_new_image(cub->mlx_ptr, S_W, S_H);
-	canvas->img_addr = mlx_get_data_addr(canvas->img_ptr, \
-		&(canvas->bpp), &(canvas->size), &(canvas->endian));
+	if (!(cub->imgs->canvas))
+	{
+		canvas = malloc(sizeof(t_my_img));
+		canvas->img_ptr = mlx_new_image(cub->mlx_ptr, S_W, S_H);
+		canvas->img_addr = mlx_get_data_addr(canvas->img_ptr, \
+			&(canvas->bpp), &(canvas->size), &(canvas->endian));
+	}
+	else
+		canvas = cub->imgs->canvas;
 	x = 0.00;
 	while (x < S_W)
 	{
@@ -100,5 +105,6 @@ int	ft_print_canvas(t_cub3d *cub)
 		x++;
 	}
 	mlx_put_image_to_window(cub->mlx_ptr, cub->win_ptr, canvas->img_ptr, 0, 0);
+	cub->imgs->canvas = canvas;
 	return (0);
 }

@@ -117,10 +117,14 @@ int	ft_get_info(int fd, t_cub3d **cub3d)
 	{
 		if (line && line[0] != '\0')
 		{
-			info_array[index] = line;
+			info_array[index] = ft_strdup(line);
 			index++;
 		}
+		if (line)
+			free(line);
 	}
+	if (line)
+		free(line);
 	info_array[index] = NULL;
 	if (ft_init_info(cub3d) != 0)
 		return (ERR_INFO);
