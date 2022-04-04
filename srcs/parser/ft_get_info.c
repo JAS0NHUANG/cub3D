@@ -6,7 +6,7 @@
 /*   By: ifeelbored <ifeelbored@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 14:55:08 by jahuang           #+#    #+#             */
-/*   Updated: 2022/04/03 05:41:06 by ifeelbored       ###   ########.fr       */
+/*   Updated: 2022/04/04 22:21:27 by ifeelbored       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,12 @@ int	*ft_get_colors_lp(char	**holder, int *colors, int	*colors_i)
 			return (NULL);
 		}
 		(*colors_i) = (*colors_i) + 1;
+		if ((*colors_i) == 4)
+		{
+			ft_free_strarray(holder);
+			free(colors);
+			return (NULL);
+		}
 		j++;
 	}
 	return (colors);
