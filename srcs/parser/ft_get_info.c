@@ -6,7 +6,7 @@
 /*   By: ifeelbored <ifeelbored@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 14:55:08 by jahuang           #+#    #+#             */
-/*   Updated: 2022/04/04 23:40:01 by ifeelbored       ###   ########.fr       */
+/*   Updated: 2022/04/04 23:51:46 by ifeelbored       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,10 +69,12 @@ int	*ft_get_colors(char **line)
 int	ft_put_info_in_cub3d(char **info_array, t_info *info_struct)
 {
 	char	**line;
+	int 	i;
 
-	while (*info_array)
+	i = -1;
+	while (info_array[++i])
 	{
-		line = ft_split(*info_array, ' ');
+		line = ft_split(info_array[i], ' ');
 		if (ft_strcmp(line[0], "NO") == 0)
 			info_struct->no = ft_strdup(line[1]);
 		else if (ft_strcmp(line[0], "SO") == 0)
@@ -85,7 +87,6 @@ int	ft_put_info_in_cub3d(char **info_array, t_info *info_struct)
 			info_struct->c = ft_get_colors(line);
 		else if (ft_strcmp(line[0], "F") == 0)
 			info_struct->f = ft_get_colors(line);
-		info_array++;
 		ft_free_strarray(line);
 	}
 	if (!info_struct->c || !info_struct->f)
