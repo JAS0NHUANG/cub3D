@@ -6,31 +6,45 @@
 /*   By: ifeelbored <ifeelbored@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 14:55:08 by jahuang           #+#    #+#             */
-/*   Updated: 2022/04/03 05:41:06 by ifeelbored       ###   ########.fr       */
+/*   Updated: 2022/04/04 22:10:08 by ifeelbored       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	*ft_get_colors_lp(char	**holder, int *colors, int	*colors_i)
+int	ft_get_colors_lp(char	**holder, int **colors, int	*colors_i)
 {
 	int	j;
 
 	j = 0;
 	while (holder[j])
 	{
-		colors[*colors_i] = ft_atoi_unsig(holder[j]);
-		if (*colors_i >= 4 || colors[*colors_i] > 255 || \
-			colors[*colors_i] < 0)
+		(*colors)[*colors_i] = ft_atoi_unsig(holder[j]);
+		if (*colors_i >= 4 || (*colors)[*colors_i] > 255 || \
+			(*colors)[*colors_i] < 0)
 		{
-			ft_free_strarray(holder);
-			free(colors);
-			return (NULL);
+			//ft_free_strarray(holder);
+			//free(*colors);
+			return (1);
 		}
 		(*colors_i) = (*colors_i) + 1;
+		if ((*colors_i) == 4)
+			return (1);
 		j++;
 	}
-	return (colors);
+	return (0);
+}
+void printf_arr(char **s)
+{
+	int i;
+
+	i =0;
+	while (s[i])
+	{
+		printf("s:%s\n", s[i]);
+		i++;
+	}
+	printf("end\n");
 }
 
 int	*ft_get_colors(char **line)
@@ -46,19 +60,25 @@ int	*ft_get_colors(char **line)
 	while (line[++i])
 	{
 		holder = ft_split(line[i], ',');
+		//printf("line[i], holdre[0]:|%s|, |%s|\n", line[i],holder[0]);
 		if ((i != 3 && line[i][ft_strlen(line[i]) - 1] != ',' && !holder[1]) || \
 			!holder[0])
 		{
+			ft_free_strarray(holder);
 			free(colors);
 			return (NULL);
 		}
-		colors = ft_get_colors_lp(holder, colors, &colors_i);
+		if (ft_get_colors_lp(holder, &colors, &colors_i))
+		{
+			ft_free_strarray(holder);
+			free(colors);
+			return (NULL);
+		}
+		//free(holder);
+		ft_free_strarray(holder);
 		if (!colors)
 			return (NULL);
-		ft_free_strarray(holder);
 	}
-	if (colors[3])
-		return (NULL);
 	return (colors);
 }
 
@@ -122,10 +142,10 @@ int	ft_get_info(int fd, t_cub3d **cub3d)
 		}
 	}
 	info_array[index] = NULL;
-	if (ft_init_info(cub3d) != 0)
+	if (ft_init_info(cub3d) != 0 || ft_put_info_in_cub3d(info_array, (*cub3d)->info))
+	{
+		ft_free_strarray(info_array);
 		return (ERR_INFO);
-	if (ft_put_info_in_cub3d(info_array, (*cub3d)->info))
-		return (ERR_INFO);
-	ft_free_strarray(info_array);
+	}
 	return (ft_check_info((*cub3d)->info));
 }
