@@ -2,13 +2,13 @@
 The 3D world inside a childhood memory.
 
 # Notions:
-	1. The TUTO: [Lode's Computer Graphics Tutorial - Raycasting](https://lodev.org/cgtutor/raycasting.html)  
-	2. [DDA](https://en.wikipedia.org/wiki/Digital_differential_analyzer_(graphics_algorithm\)), [Rotation Matrix](https://en.wikipedia.org/wiki/Rotation_matrixhttps://en.wikipedia.org/wiki/Rotation_matrix), [Cartesian coordinate system](https://en.wikipedia.org/wiki/Cartesian_coordinate_system)), [Euclidean Distance](https://en.wikipedia.org/wiki/Euclidean_distance)
+1. The TUTO: [Lode's Computer Graphics Tutorial - Raycasting](https://lodev.org/cgtutor/raycasting.html)  
+2. [DDA](https://en.wikipedia.org/wiki/Digital_differential_analyzer_(graphics_algorithm\)), [Rotation Matrix](https://en.wikipedia.org/wiki/Rotation_matrixhttps://en.wikipedia.org/wiki/Rotation_matrix), [Cartesian coordinate system](https://en.wikipedia.org/wiki/Cartesian_coordinate_system)), [Euclidean Distance](https://en.wikipedia.org/wiki/Euclidean_distance)
 
 # Steps:
-	1. Create `t_cub3d` struct type to store all information.  
-	2. Create `t_info` to store texture, celling and floor colors.
-	3. Read the .cub(map) file and check its content.  
+1. Create `t_cub3d` struct type to store all information.  
+2. Create `t_info` to store texture, celling and floor colors.
+3. Read the .cub(map) file and check its content.  
 		- Check if the argument finished with ".cub"  c
 		- map:  
 			Check all the 0s and make sure that they are all surrounded by 0 or 1.  
@@ -20,14 +20,14 @@ The 3D world inside a childhood memory.
 			Check if there is exactly 3 numbers for celling and floor.(to be done)  
 
 # Ray Casting
-	posX posY		// player's position
-	dirX dirY		// player's direction
-	planeX planeY	// camera plane
-	// put above information in `t_player` struct.
+posX posY		// player's position
+dirX dirY		// player's direction
+planeX planeY	// camera plane
+// put above information in `t_player` struct.
 
-	for each x(in window's width)
-		- get the x point in the camera space (-1 ~ 1): cameraX = 2 * x / double(screen_width) - 1  
-			then use this information to calculate the `rayDirection` vector: rayDirectionX = dirX + planeX * cameraX; rayDirectionY = dirY + planeY * cameraX;
+for each x(in window's width)
+- get the x point in the camera space (-1 ~ 1): cameraX = 2 * x / double(screen_width) - 1  
+then use this information to calculate the `rayDirection` vector: rayDirectionX = dirX + planeX * cameraX; rayDirectionY = dirY + planeY * cameraX;
 
 
 ## Trigonometric Functions
