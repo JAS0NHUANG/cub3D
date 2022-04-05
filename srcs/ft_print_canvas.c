@@ -6,7 +6,7 @@
 /*   By: ifeelbored <ifeelbored@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/01 16:43:38 by ifeelbored        #+#    #+#             */
-/*   Updated: 2022/04/02 21:20:23 by ifeelbored       ###   ########.fr       */
+/*   Updated: 2022/04/05 11:58:49 by ifeelbored       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ void	print_texture(t_cub3d *cub, t_ray *ray, t_my_img *t_ig, t_my_img *c_ig)
 	}
 }
 
-int	ft_print_canvas(t_cub3d *cub)
+void	ft_print_canvas(t_cub3d *cub)
 {
 	double		x;
 	t_my_img	*canvas;
@@ -106,5 +106,4 @@ int	ft_print_canvas(t_cub3d *cub)
 	}
 	mlx_put_image_to_window(cub->mlx_ptr, cub->win_ptr, canvas->img_ptr, 0, 0);
 	cub->imgs->canvas = canvas;
-	return (0);
 }
