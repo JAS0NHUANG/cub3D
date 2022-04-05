@@ -6,7 +6,7 @@
 /*   By: ifeelbored <ifeelbored@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 14:55:08 by jahuang           #+#    #+#             */
-/*   Updated: 2022/04/05 12:38:44 by ifeelbored       ###   ########.fr       */
+/*   Updated: 2022/04/05 13:16:48 by jahuang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,6 @@ int	ft_get_info(int fd, t_cub3d **cub3d)
 	if (!info_array)
 		return (ERR_MALLOC);
 	index = 0;
-	line = NULL;
 	while (get_next_line(fd, &line) > 0 && index < 6)
 	{
 		if (line && line[0] != '\0')
@@ -133,8 +132,7 @@ int	ft_get_info(int fd, t_cub3d **cub3d)
 	if (line)
 		free(line);
 	info_array[index] = NULL;
-	if (ft_init_info(cub3d) || \
-		ft_put_info_in_cub3d(info_array, (*cub3d)->info))
+	if (ft_init_info(cub3d) || ft_put_info_in_cub3d(info_array, (*cub3d)->info))
 	{
 		ft_free_strarray(info_array);
 		return (ERR_INFO);

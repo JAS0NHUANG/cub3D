@@ -6,7 +6,7 @@
 /*   By: ifeelbored <ifeelbored@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/01 16:43:38 by ifeelbored        #+#    #+#             */
-/*   Updated: 2022/04/05 11:58:49 by ifeelbored       ###   ########.fr       */
+/*   Updated: 2022/04/05 13:23:36 by jahuang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,16 @@ void	print_texture(t_cub3d *cub, t_ray *ray, t_my_img *t_ig, t_my_img *c_ig)
 	}
 }
 
+void	ft_init_canvas(t_cub3d *cub)
+{
+	cub->imgs->canvas = malloc(sizeof(t_my_img));
+	cub->imgs->canvas->img_ptr = mlx_new_image(cub->mlx_ptr, S_W, S_H);
+	cub->imgs->canvas->img_addr = mlx_get_data_addr(cub->imgs->canvas->img_ptr, \
+		&(cub->imgs->canvas->bpp), &(cub->imgs->canvas->size), \
+		&(cub->imgs->canvas->endian));
+	return ;
+}
+
 void	ft_print_canvas(t_cub3d *cub)
 {
 	double		x;
@@ -85,14 +95,8 @@ void	ft_print_canvas(t_cub3d *cub)
 	t_my_img	*texture;
 
 	if (!(cub->imgs->canvas))
-	{
-		canvas = malloc(sizeof(t_my_img));
-		canvas->img_ptr = mlx_new_image(cub->mlx_ptr, S_W, S_H);
-		canvas->img_addr = mlx_get_data_addr(canvas->img_ptr, \
-			&(canvas->bpp), &(canvas->size), &(canvas->endian));
-	}
-	else
-		canvas = cub->imgs->canvas;
+		ft_init_canvas(cub);
+	canvas = cub->imgs->canvas;
 	x = 0.00;
 	while (x < S_W)
 	{

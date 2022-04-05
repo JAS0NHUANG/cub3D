@@ -6,7 +6,7 @@
 /*   By: ifeelbored <ifeelbored@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/02 21:21:49 by ifeelbored        #+#    #+#             */
-/*   Updated: 2022/04/05 12:09:02 by ifeelbored       ###   ########.fr       */
+/*   Updated: 2022/04/05 13:27:51 by jahuang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,15 +24,8 @@ void	free_dir_img(t_cub3d *cub, t_images *images)
 		mlx_destroy_image(cub->mlx_ptr, images->ea.img_ptr);
 }
 
-void	ft_free_images(t_cub3d *cub, t_images *imgs)
+void	free_minimap_imgs(t_cub3d *cub, t_images *imgs)
 {
-	if (!imgs)
-		return ;
-	if (imgs->canvas)
-	{
-		mlx_destroy_image(cub->mlx_ptr, imgs->canvas->img_ptr);
-		free(imgs->canvas);
-	}
 	if (imgs->plr)
 	{
 		mlx_destroy_image(cub->mlx_ptr, imgs->plr->img_ptr);
@@ -53,6 +46,19 @@ void	ft_free_images(t_cub3d *cub, t_images *imgs)
 		mlx_destroy_image(cub->mlx_ptr, imgs->flr->img_ptr);
 		free(imgs->flr);
 	}
+	return ;
+}
+
+void	ft_free_images(t_cub3d *cub, t_images *imgs)
+{
+	if (!imgs)
+		return ;
+	if (imgs->canvas)
+	{
+		mlx_destroy_image(cub->mlx_ptr, imgs->canvas->img_ptr);
+		free(imgs->canvas);
+	}
+	free_minimap_imgs(cub, imgs);
 	free_dir_img(cub, imgs);
 	free(imgs);
 	return ;
@@ -79,18 +85,12 @@ void	ft_free_info(t_info *info)
 	return ;
 }
 
-void	ft_free_map(char **map)
-{
-	if (map)
-		ft_free_strarray(map);
-	return ;
-}
-
 void	ft_free_cub3d(t_cub3d *cub3d)
 {
 	if (cub3d)
 	{
-		ft_free_map(cub3d->map);
+		if (cub3d->map)
+			ft_free_strarray(cub3d->map);
 		ft_free_info(cub3d->info);
 		if (cub3d->plr)
 			free(cub3d->plr);
@@ -99,7 +99,7 @@ void	ft_free_cub3d(t_cub3d *cub3d)
 			mlx_destroy_window(cub3d->mlx_ptr, cub3d->win_ptr);
 		if (cub3d->mlx_ptr)
 		{
-			if (OS)
+			if (OS == linux)
 				mlx_destroy_display(cub3d->mlx_ptr);
 			free(cub3d->mlx_ptr);
 		}
