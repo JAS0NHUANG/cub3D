@@ -6,7 +6,7 @@
 /*   By: ifeelbored <ifeelbored@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/02 21:21:49 by ifeelbored        #+#    #+#             */
-/*   Updated: 2022/04/03 23:51:58 by ifeelbored       ###   ########.fr       */
+/*   Updated: 2022/04/05 12:09:02 by ifeelbored       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,8 @@ void	ft_free_cub3d(t_cub3d *cub3d)
 			mlx_destroy_window(cub3d->mlx_ptr, cub3d->win_ptr);
 		if (cub3d->mlx_ptr)
 		{
-			mlx_destroy_display(cub3d->mlx_ptr);
+			if (OS)
+				mlx_destroy_display(cub3d->mlx_ptr);
 			free(cub3d->mlx_ptr);
 		}
 		free(cub3d);

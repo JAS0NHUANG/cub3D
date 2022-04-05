@@ -6,7 +6,7 @@
 /*   By: ifeelbored <ifeelbored@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 16:12:49 by jahuang           #+#    #+#             */
-/*   Updated: 2022/04/04 23:34:13 by ifeelbored       ###   ########.fr       */
+/*   Updated: 2022/04/05 12:01:30 by ifeelbored       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,29 +69,6 @@ int	ft_check_access(t_info *info)
 	return (0);
 }
 
-int	ft_check_colors(t_info *info)
-{
-	int	index;
-
-	index = 0;
-	while (index < 3)
-	{
-		if (info->c[index] < 0 || info->c[index] > 255)
-			return (1);
-		index++;
-	}
-	index = 0;
-	while (index < 3)
-	{
-		if (info->f[index] < 0 || info->f[index] > 255)
-			return (1);
-		index++;
-	}
-	if (info->c[index])
-		return (1);
-	return (0);
-}
-
 int	ft_check_info(t_info *info)
 {
 	if (!info->no || !info->so || !info->we || !info->ea || \
@@ -99,7 +76,5 @@ int	ft_check_info(t_info *info)
 		return (ERR_INFO);
 	if (ft_check_access(info) != 0)
 		return (ERR_ACCESS);
-	// if (ft_check_colors(info) != 0)
-	// 	return (ERR_INFO);
 	return (0);
 }

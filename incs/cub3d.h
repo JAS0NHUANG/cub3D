@@ -6,7 +6,7 @@
 /*   By: ifeelbored <ifeelbored@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 21:28:06 by ifeelbored        #+#    #+#             */
-/*   Updated: 2022/04/05 12:38:30 by jahuang          ###   ########.fr       */
+/*   Updated: 2022/04/05 12:59:05 by jahuang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int			convert_rgb_to_int(int *rgb);
 t_my_img	*select_texture(t_cub3d *cub, t_ray ray);
 void		dda(t_cub3d *cub, t_ray *ray, int map_x, int map_y);
 void		init_side_dist(t_cub3d *cub, t_ray *ray, int map_x, int map_y);
-int			ft_print_canvas(t_cub3d *cub);
+void		ft_print_canvas(t_cub3d *cub);
 
 /******************************************************************************/
 /* MLX Event functions														  */
