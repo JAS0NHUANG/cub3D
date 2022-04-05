@@ -56,6 +56,7 @@ int	*ft_get_colors(char **line)
 			!holder[0])
 		{
 			free(colors);
+			ft_free_strarray(holder);
 			return (NULL);
 		}
 		colors = ft_get_colors_lp(holder, colors, &colors_i);
@@ -118,14 +119,15 @@ int	ft_get_info(int fd, t_cub3d **cub3d)
 	if (!info_array)
 		return (ERR_MALLOC);
 	index = 0;
+	line = NULL;
 	while (get_next_line(fd, &line) > 0 && index < 6)
 	{
 		if (line && line[0] != '\0')
 		{
-			info_array[index] = ft_strdup(line);
+			info_array[index] = line;
 			index++;
 		}
-		if (line)
+		else if (line)
 			free(line);
 	}
 	if (line)

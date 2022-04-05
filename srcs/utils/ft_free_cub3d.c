@@ -99,7 +99,7 @@ void	ft_free_cub3d(t_cub3d *cub3d)
 			mlx_destroy_window(cub3d->mlx_ptr, cub3d->win_ptr);
 		if (cub3d->mlx_ptr)
 		{
-			//mlx_destroy_display(cub3d->mlx_ptr);
+			mlx_destroy_display(cub3d->mlx_ptr);
 			free(cub3d->mlx_ptr);
 		}
 		free(cub3d);
