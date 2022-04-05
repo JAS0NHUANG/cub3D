@@ -6,7 +6,7 @@
 /*   By: ifeelbored <ifeelbored@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 14:51:34 by jahuang           #+#    #+#             */
-/*   Updated: 2022/04/03 05:52:06 by ifeelbored       ###   ########.fr       */
+/*   Updated: 2022/04/05 16:06:09 by jahuang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,12 +53,17 @@ static int	ft_is_surrounded(char **map, int x, int y, int array_len)
 		if (map[x][y] != '1' && map[x][y] != ' ')
 			return (0);
 	}
-	if (map[x][y] == '0')
+	if (map[x][y] == '0' || map[x][y] == 'N' || map[x][y] == 'S' || \
+		map[x][y] == 'E' || map[x][y] == 'W')
 	{
-		if (!map[x + 1][y] || !map[x - 1] || !map[x][y + 1] || !map[x][y - 1])
+		if (!map[x + 1][y] || !map[x - 1] || !map[x][y + 1] || \
+			!map[x][y - 1] || !map[x + 1][y + 1] || !map[x + 1][y - 1] || \
+			!map[x - 1][y + 1] || !map[x - 1][y - 1])
 			return (0);
 		if (map[x + 1][y] == ' ' || map[x - 1][y] == ' ' || \
-				map[x][y + 1] == ' ' || map[x][y - 1] == ' ')
+			map[x][y + 1] == ' ' || map[x][y - 1] == ' ' || \
+			map[x + 1][y + 1] == ' ' || map[x + 1][y - 1] == ' ' || \
+			map[x - 1][y + 1] == ' ' || map[x - 1][y - 1] == ' ')
 			return (0);
 	}
 	return (1);

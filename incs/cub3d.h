@@ -6,7 +6,7 @@
 /*   By: ifeelbored <ifeelbored@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 21:28:06 by ifeelbored        #+#    #+#             */
-/*   Updated: 2022/04/05 12:59:05 by jahuang          ###   ########.fr       */
+/*   Updated: 2022/04/05 15:50:29 by jahuang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@
 /******************************************************************************/
 int			ft_parser(char *map_file, t_cub3d **cub3d);
 int			ft_get_info(int fd, t_cub3d **cub3d);
+int			ft_init_info(t_cub3d **cub3d);
 int			ft_check_info(t_info *info);
 int			ft_get_map(int fd, t_cub3d **cub3d);
 int			ft_check_map(char **map);

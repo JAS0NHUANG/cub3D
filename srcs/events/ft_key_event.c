@@ -6,7 +6,7 @@
 /*   By: ifeelbored <ifeelbored@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/01 00:02:56 by ifeelbored        #+#    #+#             */
-/*   Updated: 2022/04/03 23:37:18 by ifeelbored       ###   ########.fr       */
+/*   Updated: 2022/04/05 16:23:39 by jahuang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,10 @@ void	ft_move_w(t_cub3d *cub)
 
 	plr_t_x = cub->plr->p_x + cub->plr->d_x * MOVE_DIST;
 	plr_t_y = cub->plr->p_y + cub->plr->d_y * MOVE_DIST;
-	if (cub->map[(int)plr_t_x][(int)plr_t_y] != '1')
+	if (cub->map[(int)cub->plr->p_x][(int)plr_t_y] == '1' && \
+		cub->map[(int)plr_t_x][(int)cub->plr->p_y] == '1')
+		return ;
+	else if (cub->map[(int)plr_t_x][(int)plr_t_y] != '1')
 	{
 		cub->map[(int)cub->plr->p_x][(int)cub->plr->p_y] = '0';
 		cub->plr->p_x = plr_t_x;
@@ -38,7 +41,10 @@ void	ft_move_s(t_cub3d *cub)
 
 	plr_t_x = cub->plr->p_x - cub->plr->d_x * MOVE_DIST;
 	plr_t_y = cub->plr->p_y - cub->plr->d_y * MOVE_DIST;
-	if (cub->map[(int)plr_t_x][(int)plr_t_y] != '1')
+	if (cub->map[(int)cub->plr->p_x][(int)plr_t_y] == '1' && \
+		cub->map[(int)plr_t_x][(int)cub->plr->p_y] == '1')
+		return ;
+	else if (cub->map[(int)plr_t_x][(int)plr_t_y] != '1')
 	{
 		cub->map[(int)cub->plr->p_x][(int)cub->plr->p_y] = '0';
 		cub->plr->p_x = plr_t_x;
@@ -57,7 +63,10 @@ void	ft_move_a(t_cub3d *cub)
 
 	plr_t_x = cub->plr->p_x - cub->plr->d_y * MOVE_DIST;
 	plr_t_y = cub->plr->p_y + cub->plr->d_x * MOVE_DIST;
-	if (cub->map[(int)plr_t_x][(int)plr_t_y] != '1')
+	if (cub->map[(int)cub->plr->p_x][(int)plr_t_y] == '1' && \
+		cub->map[(int)plr_t_x][(int)cub->plr->p_y] == '1')
+		return ;
+	else if (cub->map[(int)plr_t_x][(int)plr_t_y] != '1')
 	{
 		cub->map[(int)cub->plr->p_x][(int)cub->plr->p_y] = '0';
 		cub->plr->p_x = plr_t_x;
@@ -76,7 +85,10 @@ void	ft_move_d(t_cub3d *cub)
 
 	plr_t_x = cub->plr->p_x + cub->plr->d_y * MOVE_DIST;
 	plr_t_y = cub->plr->p_y - cub->plr->d_x * MOVE_DIST;
-	if (cub->map[(int)plr_t_x][(int)plr_t_y] != '1')
+	if (cub->map[(int)cub->plr->p_x][(int)plr_t_y] == '1' && \
+		cub->map[(int)plr_t_x][(int)cub->plr->p_y] == '1')
+		return ;
+	else if (cub->map[(int)plr_t_x][(int)plr_t_y] != '1')
 	{
 		cub->map[(int)cub->plr->p_x][(int)cub->plr->p_y] = '0';
 		cub->plr->p_x = plr_t_x;

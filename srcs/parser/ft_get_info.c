@@ -6,7 +6,7 @@
 /*   By: ifeelbored <ifeelbored@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 14:55:08 by jahuang           #+#    #+#             */
-/*   Updated: 2022/04/05 13:16:48 by jahuang          ###   ########.fr       */
+/*   Updated: 2022/04/05 15:52:11 by jahuang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,17 +95,18 @@ int	ft_put_info_in_cub3d(char **info_array, t_info *info_struct)
 	return (0);
 }
 
-int	ft_init_info(t_cub3d **cub3d)
+int	ft_put_info(t_cub3d **cub3d, char **info_array)
 {
-	(*cub3d)->info = malloc(sizeof(t_info));
-	if (!(*cub3d)->info)
-		return (ERR_MALLOC);
-	(*cub3d)->info->no = NULL;
-	(*cub3d)->info->so = NULL;
-	(*cub3d)->info->we = NULL;
-	(*cub3d)->info->ea = NULL;
-	(*cub3d)->info->f = NULL;
-	(*cub3d)->info->c = NULL;
+	if (ft_init_info(cub3d))
+	{
+		ft_free_strarray(info_array);
+		return (ERR_INFO);
+	}
+	if (ft_put_info_in_cub3d(info_array, (*cub3d)->info))
+	{
+		ft_free_strarray(info_array);
+		return (ERR_INFO);
+	}
 	return (0);
 }
 
@@ -132,11 +133,8 @@ int	ft_get_info(int fd, t_cub3d **cub3d)
 	if (line)
 		free(line);
 	info_array[index] = NULL;
-	if (ft_init_info(cub3d) || ft_put_info_in_cub3d(info_array, (*cub3d)->info))
-	{
-		ft_free_strarray(info_array);
+	if (ft_put_info(cub3d, info_array))
 		return (ERR_INFO);
-	}
 	ft_free_strarray(info_array);
 	return (ft_check_info((*cub3d)->info));
 }
