@@ -6,7 +6,7 @@
 /*   By: ifeelbored <ifeelbored@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 21:28:06 by ifeelbored        #+#    #+#             */
-/*   Updated: 2022/04/03 23:24:07 by ifeelbored       ###   ########.fr       */
+/*   Updated: 2022/04/05 12:38:30 by jahuang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,6 @@
 # include "./defines.h"
 
 /******************************************************************************/
-/* General functions														  */
-/******************************************************************************/
-int			ft_return(int ret_code, t_cub3d *cub3d);
-void		ft_free_cub3d(t_cub3d *cub3d);
-
-/******************************************************************************/
 /* Parser functions															  */
 /******************************************************************************/
 int			ft_parser(char *map_file, t_cub3d **cub3d);
@@ -43,17 +37,17 @@ int			ft_get_map(int fd, t_cub3d **cub3d);
 int			ft_check_map(char **map);
 int			ft_set_player(t_cub3d *cub3d);
 int			ft_atoi_unsig(const char *str);
+
 /******************************************************************************/
-/* Debug functions															  */
+/* Draw functions	    													  */
 /******************************************************************************/
-void		ft_print_struct(t_cub3d *cub_3d);
-t_my_img	*ft_create_tile(t_cub3d *cub3d, unsigned int color, int size);
 int			ft_print_minimap(t_cub3d *cub_3d, t_images *ig);
 int			convert_rgb_to_int(int *rgb);
 t_my_img	*select_texture(t_cub3d *cub, t_ray ray);
 void		dda(t_cub3d *cub, t_ray *ray, int map_x, int map_y);
 void		init_side_dist(t_cub3d *cub, t_ray *ray, int map_x, int map_y);
 int			ft_print_canvas(t_cub3d *cub);
+
 /******************************************************************************/
 /* MLX Event functions														  */
 /******************************************************************************/
@@ -64,4 +58,15 @@ void		ft_move_w(t_cub3d *cub);
 void		ft_move_s(t_cub3d *cub);
 void		ft_move_a(t_cub3d *cub);
 void		ft_move_d(t_cub3d *cub);
+
+/******************************************************************************/
+/* Util functions    														  */
+/******************************************************************************/
+int			ft_return(int ret_code, t_cub3d *cub3d);
+void		ft_free_cub3d(t_cub3d *cub3d);
+
+/******************************************************************************/
+/* Debug functions															  */
+/******************************************************************************/
+void		ft_print_struct(t_cub3d *cub_3d);
 #endif
