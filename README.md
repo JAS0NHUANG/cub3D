@@ -27,7 +27,9 @@ planeX planeY	// camera plane
 
 for each x(in window's width)  
 - get the x point in the camera space (-1 ~ 1): cameraX = 2 * x / double(screen_width) - 1   
-then use this information to calculate the `rayDirection` vector: rayDirectionX = dirX + planeX * cameraX; rayDirectionY = dirY + planeY * cameraX;  
+then use this information to calculate the `rayDirection` vector:  
+rayDirectionX = dirX + planeX * cameraX;  
+rayDirectionY = dirY + planeY * cameraX;  
 
 
 ## Trigonometric Functions
