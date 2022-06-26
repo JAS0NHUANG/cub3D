@@ -21,9 +21,6 @@ DEBUG			=	-g3
 
 ifeq ($(OS), Linux)
 MLX_FLAGS		=	-Lmlx -lbsd -lXext -lX11 -lm
-CFLAGS			+=	-D OS=linux
-else
-MLX_FLAGS		+=	-D OS=mac
 endif
 
 # **************************************************************************** #
